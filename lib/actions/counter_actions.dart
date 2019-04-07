@@ -1,0 +1,3 @@
+class NextQuestionAction {}
+
+class PreviousQuestionAction {}
