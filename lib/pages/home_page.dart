@@ -1,6 +1,7 @@
 // pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/actions/counter_actions.dart';
 import 'package:funlab/models/app_state.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,16 +17,40 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(this.title), // new
       ),
-      body: Container(child: CustomText(),),
+      body: Container(
+        child: ListView(children: <Widget>[CustomText(), IncreseButton(), DecreseButton()]),
+      ),
       // FloatingActionButton is literally a button that floats above
       // all other page content.
       floatingActionButton: FloatingActionButton(
         // Pass it a callback to execute when tapped
-        onPressed: () => print('PRESSED!'), // new
+        onPressed: () => {}, // new
         // Pass it children to render in the button
         child: Icon(Icons.add), // new
       ),
     );
+  }
+}
+
+class IncreseButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, VoidCallback>(converter: (store) {
+      return () => store.dispatch(NextQuestionAction());
+    }, builder: (context, callback) {
+      return RaisedButton(child: Text('increse'), onPressed: callback);
+    });
+  }
+}
+
+class DecreseButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StoreConnector<AppState, VoidCallback>(converter: (store) {
+      return () => store.dispatch(PreviousQuestionAction());
+    }, builder: (context, callback) {
+      return RaisedButton(child: Text('decrese'), onPressed: callback);
+    });
   }
 }
 
