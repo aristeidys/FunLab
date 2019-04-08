@@ -10,7 +10,7 @@ class HttpService {
     return parsed.map<LabSession>((json) => LabSession.fromJson(json)).toList();
   }
 
-  Future<List<LabSession>> fetchLabSessions() async {
+  Future<List<LabSession>> getLabSessions() async {
     final response =
         await http.Client().get('http://localhost:3000/lab_sessions');
 
