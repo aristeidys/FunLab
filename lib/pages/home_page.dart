@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/actions/counter_actions.dart';
 import 'package:funlab/models/app_state.dart';
+import 'package:funlab/models/dataModel/lab_session.model.dart';
+import 'package:funlab/models/service.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -18,7 +21,11 @@ class HomePage extends StatelessWidget {
         title: Text(this.title), // new
       ),
       body: Container(
-        child: ListView(children: <Widget>[CustomText(), IncreseButton(), DecreseButton()]),
+        child: ListView(children: <Widget>[
+          CustomText(),
+          IncreseButton(),
+          buildFutureBuilder(HttpService().fetchLabSessions())
+        ]),
       ),
       // FloatingActionButton is literally a button that floats above
       // all other page content.
@@ -32,6 +39,43 @@ class HomePage extends StatelessWidget {
   }
 }
 
+Widget buildFutureBuilder(Future<List<LabSession>> method) {
+  return FutureBuilder<List<LabSession>>(
+    future: method,
+    builder: (context, snapshot) {
+      if (snapshot.hasError) print(snapshot.error);
+
+      return snapshot.hasData
+          ? ListViewPosts(labSessions: snapshot.data)
+          : Center(child: CircularProgressIndicator());
+    },
+  );
+}
+
+class ListViewPosts extends StatelessWidget {
+  final List<LabSession> labSessions;
+
+  ListViewPosts({Key key, this.labSessions}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            itemCount: labSessions.length,
+            padding: const EdgeInsets.all(15.0),
+            itemBuilder: (context, position) {
+              return Column(children: <Widget>[
+                Divider(height: 5.0),
+                ListTile(
+                    title: Text('${labSessions[position].title}'),
+                    subtitle: Text('${labSessions[position].finished}'))
+              ]);
+            }));
+  }
+}
+
 class IncreseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -39,17 +83,6 @@ class IncreseButton extends StatelessWidget {
       return () => store.dispatch(NextQuestionAction());
     }, builder: (context, callback) {
       return RaisedButton(child: Text('increse'), onPressed: callback);
-    });
-  }
-}
-
-class DecreseButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, VoidCallback>(converter: (store) {
-      return () => store.dispatch(PreviousQuestionAction());
-    }, builder: (context, callback) {
-      return RaisedButton(child: Text('decrese'), onPressed: callback);
     });
   }
 }
