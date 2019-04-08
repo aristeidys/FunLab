@@ -5,6 +5,7 @@ import 'package:funlab/actions/counter_actions.dart';
 import 'package:funlab/models/app_state.dart';
 import 'package:funlab/models/dataModel/lab_session.model.dart';
 import 'package:funlab/models/service.dart';
+import 'package:funlab/widgets/custom_form.dart';
 import 'package:funlab/widgets/custom_future_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,24 +13,24 @@ class HomePage extends StatelessWidget {
 
   HomePage(this.title);
 
+  final Function textInpuCallback = (_value) {
+    LabSession session = LabSession(title: _value, finished: false);
+    HttpService().postLabSession(session);
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),
       ),
-
       body: Container(
         child: ListView(children: <Widget>[
+          MyCustomForm(textInpuCallback, 'Enter Session Name'),
+          CustomFutureList<LabSession>(HttpService().getLabSessions()),
           CustomText(),
-          IncreseButton(),
-          CustomFutureList<LabSession>(HttpService().getLabSessions())
+          IncreseButton()
         ]),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        child: Icon(Icons.add),
       ),
     );
   }

@@ -4,17 +4,24 @@ import 'dart:async';
 import 'dart:convert';
 
 class HttpService {
-  List<LabSession> parseLabSessions(String responseBody) {
-    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
 
-    return parsed.map<LabSession>((json) => LabSession.fromJson(json)).toList();
-  }
+final url = 'http://localhost:3000';
 
   Future<List<LabSession>> getLabSessions() async {
     final response =
-        await http.Client().get('http://localhost:3000/lab_sessions');
+        await http.Client().get(url + '/lab_sessions');
 
-    // compute function to run parseLabSession in a separate isolate
-    return parseLabSessions(response.body);
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    return parsed.map<LabSession>((json) => LabSession.fromJson(json)).toList();
+  }
+
+  void postLabSession(LabSession session) async {
+    final body = jsonEncode(session);
+    final response =
+    await http.Client().post(url + '/lab_sessions', headers: {"Content-Type": "application/json"}, body: body);
+
+    if (response.statusCode != 201) {
+      print('Could not Post LabSession');
+    }
   }
 }

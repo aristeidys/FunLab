@@ -13,8 +13,14 @@ class LabSession implements Listable {
       finished: json['finished'] as bool,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'finished': finished,
+      };
+
   @override
   Widget buildListTile() {
     return ListTile(title: Text('$title'), subtitle: Text('$finished'));
-  } 
+  }
 }
