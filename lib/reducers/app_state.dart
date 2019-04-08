@@ -1,5 +1,6 @@
 // models/app_state.dart
-import 'package:funlab/models/dataModel/lab_session.model.dart';
+
+import 'package:funlab/models/lab_session.model.dart';
 
 class AppState {
   final int questionIndex;

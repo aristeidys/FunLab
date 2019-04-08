@@ -1,4 +1,4 @@
-import 'package:funlab/models/dataModel/lab_session.model.dart';
+import 'package:funlab/models/lab_session.model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';

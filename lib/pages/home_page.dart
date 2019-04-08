@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/actions/counter_actions.dart';
-import 'package:funlab/models/app_state.dart';
-import 'package:funlab/models/dataModel/lab_session.model.dart';
-import 'package:funlab/models/service.dart';
+import 'package:funlab/models/lab_session.model.dart';
+import 'package:funlab/reducers/app_state.dart';
+import 'package:funlab/services/service.dart';
 import 'package:funlab/widgets/custom_form.dart';
 import 'package:funlab/widgets/custom_future_list.dart';
 
