@@ -11,13 +11,13 @@ class Activity implements Listable {
   Activity fromJson(Map<String, dynamic> json) {
     return Activity(
       title: json['title'] as String,
-      id: json['id'] as int,
+      id: json['lab_session_id'] as int,
     );
   }
 
   Map<String, dynamic> toJson() => {
         'title': title,
-        'id': id,
+        'lab_session_id': id,
       };
 
   @override

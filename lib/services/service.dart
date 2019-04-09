@@ -11,10 +11,10 @@ class HttpService<T extends Listable> {
   final endpoint = '/lab_sessions/';
   final headers = {"Content-Type": "application/json"};
 
-  static final POST_SUCCESS = 201;
-  static final SUCCESS = 200; // PUT, GET
-  static final DELETE_SUCCESS = 204;
-  static final NOTFOUND = 404; // DELETE, GET, PUT
+  static final postSuccess = 201;
+  static final success = 200; // PUT, GET
+  static final deleteSuccess = 204;
+  static final notFound = 404; // DELETE, GET, PUT
 
   Future<List<LabSession>> getAllLabSessions() async {
     final response = await http.Client().get(url + endpoint);
@@ -28,7 +28,7 @@ class HttpService<T extends Listable> {
   Future<CustomResponse> getOne(int id) async {
     final response = await http.Client().get(url + endpoint);
 
-    bool isSuccessful = response.statusCode == SUCCESS ? true : false;
+    bool isSuccessful = response.statusCode == HttpService.success ? true : false;
 
     T payload = (T as Listable).fromJson(json.decode(response.body));
 
@@ -40,7 +40,7 @@ class HttpService<T extends Listable> {
     final response =
         await http.Client().post(url + endpoint, headers: headers, body: body);
 
-    bool isSuccessful = response.statusCode == POST_SUCCESS ? true : false;
+    bool isSuccessful = response.statusCode == postSuccess ? true : false;
     int newID = isSuccessful ? extractID(response) : -1;
     callback(isSuccessful, newID);
   }
@@ -48,7 +48,7 @@ class HttpService<T extends Listable> {
   Future<CustomResponse> deleteRequest(int id) async {
     final response = await http.Client().delete(url + endpoint + id.toString());
 
-    bool isSuccessful = response.statusCode == DELETE_SUCCESS ? true : false;
+    bool isSuccessful = response.statusCode == deleteSuccess ? true : false;
 
     return CustomResponse(0, isSuccessful);
   }
@@ -56,7 +56,7 @@ class HttpService<T extends Listable> {
   Future<CustomResponse> putRequest(int id) async {
     final response = await http.Client().put(url + endpoint);
 
-    bool success = response.statusCode == SUCCESS ? true : false;
+    bool success = response.statusCode == HttpService.success ? true : false;
 
     return CustomResponse(0, success);
   }
@@ -77,7 +77,5 @@ class CustomResponse<T> {
 
   CustomResponse(this.payload, this.success);
 }
-
-class HttpCode {}
 
 typedef void ResponceCallback(bool success, int newID);
