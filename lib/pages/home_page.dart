@@ -1,10 +1,9 @@
-// pages/home_page.dart
-import 'package:flutter/material.dart';
+
+import 'package:flutter/widgets.dart';
+import 'package:funlab/components/lab_session_form.dart';
 import 'package:funlab/models/lab_session.model.dart';
 import 'package:funlab/services/service.dart';
-import 'package:funlab/widgets/custom_form.dart';
 import 'package:funlab/widgets/custom_future_list.dart';
-import 'package:funlab/widgets/custom_toaster.dart';
 import 'package:funlab/widgets/my_page_indicator.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,19 +15,7 @@ class HomePage extends StatelessWidget {
       PageView(
         controller: pageController,
         children: <Widget>[
-          MyCustomForm((labSessionTitle) {
-            LabSession session =
-                LabSession(title: labSessionTitle, finished: false);
-            HttpService<LabSession>().postRequest(session, (success, id) {
-              if (success) {
-                CustomToaster().showToast(context, ToasterType.success,
-                    'Session Created Successfully');
-              } else {
-                CustomToaster().showToast(
-                    context, ToasterType.failure, 'Failure Creating Session');
-              }
-            });
-          }, 'Enter Session Name'),
+          new LabSessionForm(),
           CustomFutureList<LabSession>(
               HttpService<LabSession>().getAllLabSessions())
         ],
@@ -37,6 +24,8 @@ class HomePage extends StatelessWidget {
     ]);
   }
 }
+
+
 
 // class IncreseButton extends StatelessWidget {
 //   @override

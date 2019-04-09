@@ -1,3 +1,0 @@
-class NextQuestionAction {}
-
-class PreviousQuestionAction {}

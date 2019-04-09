@@ -16,6 +16,6 @@ class AppState {
 
   @override
   String toString() {
-    return 'AppState{current Question: $questionIndex, of total: $totalQuestions}';
+    return 'AppState{current LabSession ID ${currentLabId.toString()}';
   }
 }
