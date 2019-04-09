@@ -1,25 +1,21 @@
-// models/app_state.dart
-
-import 'package:funlab/models/lab_session.model.dart';
 
 class AppState {
   final int questionIndex;
   final int totalQuestions;
-  final LabSession labSession = LabSession();
-
+  final int currentLabId;
   AppState(
-      {this.questionIndex = 1, this.totalQuestions = 1, LabSession labSession});
+      {this.questionIndex = 1, this.totalQuestions = 1, this.currentLabId = -1});
 
   AppState copyWith(
-      {int questionIndex, bool totalQuestions, LabSession labSession}) {
+      {int questionIndex, bool totalQuestions, int currentLabId}) {
     return AppState(
         questionIndex: questionIndex ?? this.questionIndex,
         totalQuestions: totalQuestions ?? this.totalQuestions,
-        labSession: labSession ?? this.labSession);
+        currentLabId: currentLabId ?? this.currentLabId);
   }
 
   @override
   String toString() {
-    return 'AppState{current Question: $questionIndex, of total: $totalQuestions session $labSession}';
+    return 'AppState{current Question: $questionIndex, of total: $totalQuestions}';
   }
 }

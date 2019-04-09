@@ -1,38 +1,42 @@
 // pages/home_page.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/actions/counter_actions.dart';
 import 'package:funlab/models/lab_session.model.dart';
-import 'package:funlab/reducers/app_state.dart';
 import 'package:funlab/services/service.dart';
 import 'package:funlab/widgets/custom_form.dart';
 import 'package:funlab/widgets/custom_future_list.dart';
+import 'package:funlab/widgets/custom_toaster.dart';
+import 'package:funlab/widgets/my_page_indicator.dart';
 
-// class HomePage extends StatelessWidget {
-//   final String title;
+class HomePage extends StatelessWidget {
+  final pageController = new PageController();
 
-//   HomePage(this.title);
-
-//   final Function textInpuCallback = (_value) {
-//     LabSession session = LabSession(title: _value, finished: false);
-//     HttpService().postLabSession(session);
-//   };
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(this.title),
-//       ),
-//       body: Container(
-//         child: ListView(children: <Widget>[
-//           MyCustomForm(textInpuCallback, 'Enter Session Name'),
-//           CustomFutureList<LabSession>(HttpService().getLabSessions()),
-//         ]),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Stack(alignment: Alignment.bottomCenter, children: <Widget>[
+      PageView(
+        controller: pageController,
+        children: <Widget>[
+          MyCustomForm((labSessionTitle) {
+            LabSession session =
+                LabSession(title: labSessionTitle, finished: false);
+            HttpService<LabSession>().postRequest(session, (success, id) {
+              if (success) {
+                CustomToaster().showToast(context, ToasterType.success,
+                    'Session Created Successfully');
+              } else {
+                CustomToaster().showToast(
+                    context, ToasterType.failure, 'Failure Creating Session');
+              }
+            });
+          }, 'Enter Session Name'),
+          CustomFutureList<LabSession>(
+              HttpService<LabSession>().getAllLabSessions())
+        ],
+      ),
+      MyPageIndicator(pageController: pageController)
+    ]);
+  }
+}
 
 // class IncreseButton extends StatelessWidget {
 //   @override
