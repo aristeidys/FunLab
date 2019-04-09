@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/components/assignment_form.dart';
+import 'package:funlab/components/activity_form.dart';
 import 'package:funlab/components/lab_session_form.dart';
 
 class InstructorForms extends StatelessWidget {
