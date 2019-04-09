@@ -11,18 +11,16 @@ class MyPageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new 
-    Padding(
-                      padding: EdgeInsets.all(20),
-                      child: 
-    PageIndicator(
-      color: Colors.red,
-      activeColor: Colors.blue,
-      layout: PageIndicatorLayout.SLIDE,
-      size: 20.0,
-      controller: pageController,
-      space: 5.0,
-      count: 2,
-    ));
+    return new Padding(
+        padding: EdgeInsets.all(20),
+        child: PageIndicator(
+          color: Colors.red,
+          activeColor: Colors.blue,
+          layout: PageIndicatorLayout.SLIDE,
+          size: 20.0,
+          controller: pageController,
+          space: 5.0,
+          count: 2,
+        ));
   }
 }
