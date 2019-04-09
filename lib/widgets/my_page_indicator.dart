@@ -20,7 +20,7 @@ class MyPageIndicator extends StatelessWidget {
           size: 20.0,
           controller: pageController,
           space: 5.0,
-          count: 2,
+          count: 3,
         ));
   }
 }
