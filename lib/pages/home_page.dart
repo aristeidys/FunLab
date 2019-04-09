@@ -8,53 +8,51 @@ import 'package:funlab/services/service.dart';
 import 'package:funlab/widgets/custom_form.dart';
 import 'package:funlab/widgets/custom_future_list.dart';
 
-class HomePage extends StatelessWidget {
-  final String title;
+// class HomePage extends StatelessWidget {
+//   final String title;
 
-  HomePage(this.title);
+//   HomePage(this.title);
 
-  final Function textInpuCallback = (_value) {
-    LabSession session = LabSession(title: _value, finished: false);
-    HttpService().postLabSession(session);
-  };
+//   final Function textInpuCallback = (_value) {
+//     LabSession session = LabSession(title: _value, finished: false);
+//     HttpService().postLabSession(session);
+//   };
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(this.title),
-      ),
-      body: Container(
-        child: ListView(children: <Widget>[
-          MyCustomForm(textInpuCallback, 'Enter Session Name'),
-          CustomFutureList<LabSession>(HttpService().getLabSessions()),
-          CustomText(),
-          IncreseButton()
-        ]),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text(this.title),
+//       ),
+//       body: Container(
+//         child: ListView(children: <Widget>[
+//           MyCustomForm(textInpuCallback, 'Enter Session Name'),
+//           CustomFutureList<LabSession>(HttpService().getLabSessions()),
+//         ]),
+//       ),
+//     );
+//   }
+// }
 
-class IncreseButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, VoidCallback>(converter: (store) {
-      return () => store.dispatch(NextQuestionAction());
-    }, builder: (context, callback) {
-      return RaisedButton(child: Text('increse'), onPressed: callback);
-    });
-  }
-}
+// class IncreseButton extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StoreConnector<AppState, VoidCallback>(converter: (store) {
+//       return () => store.dispatch(NextQuestionAction());
+//     }, builder: (context, callback) {
+//       return RaisedButton(child: Text('increse'), onPressed: callback);
+//     });
+//   }
+// }
 
-class CustomText extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return StoreConnector<AppState, int>(
-      converter: (store) => store.state.questionIndex,
-      builder: (context, index) {
-        return Text(index.toString());
-      },
-    );
-  }
-}
+// class CustomText extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StoreConnector<AppState, int>(
+//       converter: (store) => store.state.questionIndex,
+//       builder: (context, index) {
+//         return Text(index.toString());
+//       },
+//     );
+//   }
+// }

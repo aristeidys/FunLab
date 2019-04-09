@@ -46,14 +46,16 @@ class MyCustomFormState extends State<MyCustomForm> {
               }
             },
           ),
-          RaisedButton(
-            onPressed: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                widget.callback(_value);
-              }
-            },
-            child: Text('Submit'),
+          Center(
+            child: RaisedButton(
+              onPressed: () {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  widget.callback(_value);
+                }
+              },
+              child: Text('Create'),
+            ),
           ),
         ],
       ),
