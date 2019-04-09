@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:funlab/components/lab_session_form.dart';
 import 'package:funlab/models/lab_session.model.dart';
@@ -15,7 +14,7 @@ class HomePage extends StatelessWidget {
       PageView(
         controller: pageController,
         children: <Widget>[
-          new LabSessionForm(),
+          LabSessionForm(),
           CustomFutureList<LabSession>(
               HttpService<LabSession>().getAllLabSessions())
         ],
@@ -24,8 +23,6 @@ class HomePage extends StatelessWidget {
     ]);
   }
 }
-
-
 
 // class IncreseButton extends StatelessWidget {
 //   @override

@@ -35,17 +35,14 @@ class HttpService<T extends Listable> {
     return CustomResponse(payload, isSuccessful);
   }
 
-  Future<CustomResponse> postRequest(
-      T entity, ResponceCallback callback) async {
+  postRequest(T entity, ResponceCallback callback) async {
     final body = jsonEncode(entity);
     final response =
         await http.Client().post(url + endpoint, headers: headers, body: body);
 
     bool isSuccessful = response.statusCode == POST_SUCCESS ? true : false;
-    int newID = isSuccessful ? extractID(response): -1;
+    int newID = isSuccessful ? extractID(response) : -1;
     callback(isSuccessful, newID);
-
-    return CustomResponse(0, isSuccessful);
   }
 
   Future<CustomResponse> deleteRequest(int id) async {

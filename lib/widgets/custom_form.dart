@@ -20,44 +20,48 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          TextFormField(
-            controller: _textFieldController,
-            decoration: InputDecoration(
-                labelText: widget.labelText,
-                filled: true,
-                fillColor: Colors.white,
-                suffixIcon: IconButton(
-                    icon: Icon(Icons.clear),
-                    onPressed: () {
-                      _textFieldController.clear();
-                    })),
-            onSaved: (String value) {
-              _value = value;
-              _textFieldController.clear();
-            },
-            validator: (String value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-            },
-          ),
-          Center(
-            child: RaisedButton(
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
-                  widget.callback(_value);
+    return Container(
+      padding: EdgeInsets.all(25),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            TextFormField(
+              controller: _textFieldController,
+              decoration: InputDecoration(
+                  labelText: widget.labelText,
+                  filled: true,
+                  fillColor: Colors.white,
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        _textFieldController.clear();
+                      })),
+              onSaved: (String value) {
+                _value = value;
+                _textFieldController.clear();
+              },
+              validator: (String value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
                 }
               },
-              child: Text('Create'),
             ),
-          ),
-        ],
+            Padding(padding: EdgeInsets.all(5),),
+            Center(
+              child: RaisedButton(
+                onPressed: () {
+                  if (_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                    widget.callback(_value);
+                  }
+                },
+                child: Text('Create'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
