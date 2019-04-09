@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+
+// Listable entities can be decoded and presented as a List
+
 abstract class Listable {
   Widget buildListTile();
+  Listable fromJson(Map<String, dynamic> json){}
 }
 
 class CustomListView<T extends Listable> extends StatelessWidget {

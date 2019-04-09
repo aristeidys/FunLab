@@ -35,10 +35,13 @@ class MainApp extends StatelessWidget {
                       MyCustomForm((labSessionTitle) {
                         LabSession session =
                             LabSession(title: labSessionTitle, finished: false);
-                        HttpService().postLabSession(session);
+                        HttpService<LabSession>().postRequest(session, (success) {
+                            if (success) {
+                              
+                            }
+                        });
                       }, 'Enter Session Name'),
-                      CustomFutureList<LabSession>(
-                          HttpService().getLabSessions())
+                      CustomFutureList<LabSession>(HttpService<LabSession>().getAllLabSessions())
                     ],
                   ),
                   MyPageIndicator(pageController: pageController)
