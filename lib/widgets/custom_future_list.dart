@@ -12,7 +12,6 @@ class CustomFutureList<T extends Listable> extends StatelessWidget {
     return FutureBuilder<List<T>>(
       future: callback,
       builder: (context, snapshot) {
-        if (snapshot.hasError) print(snapshot.error);
 
         return snapshot.hasData
             ? CustomListView(entries: snapshot.data)

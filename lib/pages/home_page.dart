@@ -18,9 +18,8 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           InstructorForms(),
           CustomFutureList<LabSession>(
-              HttpService<LabSession>().getAllLabSessions()),
-              CustomFutureList<Activity>(
-              ActivityService().getAllActivities()),
+              HttpService<LabSession>().getAllLabSessions(context)),
+          CustomFutureList<Activity>(ActivityService().getAllActivities()),
         ],
       ),
       MyPageIndicator(pageController: pageController)

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:funlab/models/lab_session.model.dart';
 import 'package:funlab/widgets/custom_list_view.dart';
+import 'package:funlab/widgets/custom_toaster.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -16,19 +18,23 @@ class HttpService<T extends Listable> {
   static final deleteSuccess = 204;
   static final notFound = 404; // DELETE, GET, PUT
 
-  Future<List<LabSession>> getAllLabSessions() async {
-    final response = await http.Client().get(url + endpoint);
-
-    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-    return parsed
-        .map<LabSession>((json) => LabSession().fromJson(json))
-        .toList();
-  }
+  Future<List<LabSession>> getAllLabSessions(BuildContext context) async =>
+      await http.Client().get(url + endpoint).then((response) {
+        final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+        return parsed
+            .map<LabSession>((json) => LabSession().fromJson(json))
+            .toList();
+      }).catchError((e) {
+        print("Got error: $e");
+        NoInternetToaster().show(context);
+        return List<LabSession>();
+      });
 
   Future<CustomResponse> getOne(int id) async {
     final response = await http.Client().get(url + endpoint);
 
-    bool isSuccessful = response.statusCode == HttpService.success ? true : false;
+    bool isSuccessful =
+        response.statusCode == HttpService.success ? true : false;
 
     T payload = (T as Listable).fromJson(json.decode(response.body));
 
@@ -78,4 +84,5 @@ class CustomResponse<T> {
   CustomResponse(this.payload, this.success);
 }
 
+typedef void RequestFailureCallback();
 typedef void ResponceCallback(bool success, int newID);
