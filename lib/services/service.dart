@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:funlab/models/lab_session.model.dart';
 import 'package:funlab/widgets/custom_list_view.dart';
@@ -26,8 +28,11 @@ class HttpService<T extends Listable> {
             .toList();
       }).catchError((e) {
         print("Got error: $e");
-        NoInternetToaster().show(context);
-        return List<LabSession>();
+        if (e is SocketException) {
+          ServerErrorToaster().show(context);
+        } else {
+          NoInternetToaster().show(context);
+        }
       });
 
   Future<CustomResponse> getOne(int id) async {
