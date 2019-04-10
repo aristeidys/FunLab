@@ -4,6 +4,7 @@ import 'package:funlab/models/assignment.model.dart';
 import 'package:funlab/reducers/app_state.dart';
 import 'package:funlab/services/activity.service.dart';
 import 'package:funlab/widgets/custom_form.dart';
+import 'package:funlab/widgets/custom_texts.dart';
 import 'package:funlab/widgets/custom_toaster.dart';
 
 class ActivityForm extends StatelessWidget {
@@ -14,7 +15,7 @@ class ActivityForm extends StatelessWidget {
         builder: (context, id) {
           return id < 0
               ? Container(
-                  child: Text('Create a Session First'),
+                  child: new QuatedText('Create a Session First.'),
                 )
               : MyCustomForm((labSessionTitle) {
                   Activity activity = Activity(title: labSessionTitle, id: id);
