@@ -10,7 +10,7 @@ class QuatedText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontSize: 16, fontStyle: FontStyle.italic, color: Colors.grey),
+          fontSize: 16, fontStyle: FontStyle.italic),
     );
   }
 }

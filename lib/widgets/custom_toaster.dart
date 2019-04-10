@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:funlab/widgets/custom_texts.dart';
 
 class NoInternetToaster {
   void show(BuildContext context) {
@@ -21,9 +22,10 @@ class CustomToaster {
       SnackBar(
         backgroundColor:
             type == ToasterType.success ? Colors.green : Colors.red,
-        content: Text(message),
-        //action: SnackBarAction(
-        //  label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+        content: QuatedText(message),
+        action: SnackBarAction(
+          textColor: Colors.white,
+         label: 'Close', onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }
