@@ -17,7 +17,7 @@ class MyPageIndicator extends StatelessWidget {
           color: Colors.red,
           activeColor: Colors.blue,
           layout: PageIndicatorLayout.SLIDE,
-          size: 20.0,
+          size: 15.0,
           controller: pageController,
           space: 5.0,
           count: 3,

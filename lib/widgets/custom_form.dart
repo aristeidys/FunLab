@@ -1,5 +1,6 @@
 // Create a Form Widget
 import 'package:flutter/material.dart';
+import 'package:funlab/widgets/create_button.dart';
 
 class MyCustomForm extends StatefulWidget {
   final Function callback;
@@ -50,15 +51,13 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Padding(padding: EdgeInsets.all(5),),
             Center(
-              child: RaisedButton(
-                onPressed: () {
-                  if (_formKey.currentState.validate()) {
+              child: 
+              CreateButton('Create', (){
+                if (_formKey.currentState.validate()) {
                     _formKey.currentState.save();
                     widget.callback(_value);
                   }
-                },
-                child: Text('Create'),
-              ),
+              })
             ),
           ],
         ),

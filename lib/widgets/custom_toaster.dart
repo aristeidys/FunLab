@@ -7,6 +7,13 @@ class NoInternetToaster {
   }
 }
 
+class ServerErrorToaster {
+  void show(BuildContext context) {
+    CustomToaster().showToast(
+        context, ToasterType.failure, 'Server not Available');
+  }
+}
+
 class CustomToaster {
   void showToast(BuildContext context, ToasterType type, String message) {
     final scaffold = Scaffold.of(context);
