@@ -27,6 +27,11 @@ dependencies:
   redux_logging: "0.3.0"
   http: ^0.12.0+2
   flutter_page_indicator: "0.0.3"
+  
+  # Firebase Core Flutter SDK
+  firebase_core: ^0.4.0+8
+
+  firebase_messaging: ^5.1.3
 
 dev_dependencies:
   flutter_test:
