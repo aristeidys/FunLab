@@ -11,7 +11,8 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class HttpService<T extends Listable> {
-  final url = 'http://localhost:3000';
+  final scheme = 'http';
+  final url = '10.0.2.2';
   final endpoint = '/lab_sessions/';
   final headers = {"Content-Type": "application/json"};
 
@@ -21,7 +22,7 @@ class HttpService<T extends Listable> {
   static final notFound = 404; // DELETE, GET, PUT
 
   Future<List<LabSession>> getAllLabSessions(BuildContext context) async =>
-      await http.Client().get(url + endpoint).then((response) {
+      await http.Client().get(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint)).then((response) {
         final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
         return parsed
             .map<LabSession>((json) => LabSession().fromJson(json))
@@ -36,7 +37,7 @@ class HttpService<T extends Listable> {
       });
 
   Future<CustomResponse> getOne(int id) async {
-    final response = await http.Client().get(url + endpoint);
+    final response = await http.Client().get(Uri(scheme: scheme, host: url, port: 3000, path: endpoint));
 
     bool isSuccessful =
         response.statusCode == HttpService.success ? true : false;
@@ -49,7 +50,7 @@ class HttpService<T extends Listable> {
   postRequest(T entity, ResponceCallback callback) async {
     final body = jsonEncode(entity);
     final response =
-        await http.Client().post(url + endpoint, headers: headers, body: body);
+        await http.Client().post(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint), headers: headers, body: body);
 
     bool isSuccessful = response.statusCode == postSuccess ? true : false;
     int newID = isSuccessful ? extractID(response) : -1;
@@ -57,7 +58,7 @@ class HttpService<T extends Listable> {
   }
 
   Future<CustomResponse> deleteRequest(int id) async {
-    final response = await http.Client().delete(url + endpoint + id.toString());
+    final response = await http.Client().delete(new Uri.http(url, endpoint + id.toString()));
 
     bool isSuccessful = response.statusCode == deleteSuccess ? true : false;
 
@@ -65,7 +66,7 @@ class HttpService<T extends Listable> {
   }
 
   Future<CustomResponse> putRequest(int id) async {
-    final response = await http.Client().put(url + endpoint);
+    final response = await http.Client().put(new Uri.http(url, endpoint));
 
     bool success = response.statusCode == HttpService.success ? true : false;
 

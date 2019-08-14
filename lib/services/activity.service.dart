@@ -14,7 +14,7 @@ class ActivityService extends HttpService {
   }
 
     Future<List<Activity>> getAllActivities() async {
-    final response = await http.Client().get(url + endpoint);
+    final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint));
 
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed
