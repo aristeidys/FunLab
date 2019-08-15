@@ -74,7 +74,7 @@ class HttpService<T extends Listable> {
     callback(isSuccessful, newID);
   }
 
-  putRequest(int id, Map<String, String> entity, ResponceCallback callback) async {
+  putRequest(T entity, int id, ResponceCallback callback) async {
     final body = jsonEncode(entity);
     final response =
         await http.Client().put(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint + id.toString()), headers: headers, body: body);

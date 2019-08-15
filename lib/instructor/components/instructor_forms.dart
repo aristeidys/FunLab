@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/services/lab_session.service.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
@@ -12,10 +13,10 @@ class InstructorForms extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, int>(
-        converter: (store) => store.state.currentLabId,
-        builder: (context, id) {
-          return id < 0 ? 
+    return StoreConnector<AppState, LabSession>(
+        converter: (store) => store.state.currentLabSession,
+        builder: (context, labSession) {
+          return labSession == null ? 
           
           LabSessionForm() : 
           
@@ -23,19 +24,34 @@ class InstructorForms extends StatelessWidget {
           
             ActivityForm(),
 
-            EditButton('Publish Lab Session', (){
-              Map<String, String> labSession = {'draft': 'false'};
-                HttpService().putRequest(id, labSession, (success, id) {
-                  if (success) {
-                    CustomToaster().showToast(context, ToasterType.success,
-                        'Lab Session with id=$id draft=true successful');
-                  } else {
-                    CustomToaster().showToast(context, ToasterType.failure,
-                        'Lab Session with id=$id draft=true failed');
-                  }
-                });
-            }) 
+            EditLabSessionButton(labSession: labSession,)
           ]);
         });
+  }
+}
+
+class EditLabSessionButton extends StatelessWidget {
+  const EditLabSessionButton({
+    Key key, this.labSession,
+  }) : super(key: key);
+
+  final labSession;
+  
+  @override
+  Widget build(BuildContext context) {
+    return EditButton('Publish Lab Session', (){
+
+      LabSession newSession = LabSession(title: labSession.title, id: labSession.id, draft: true);
+
+        HttpService().putRequest(newSession, newSession.id, (success, id) {
+          if (success) {
+            CustomToaster().showToast(context, ToasterType.success,
+                'Lab Session is published');
+          } else {
+            CustomToaster().showToast(context, ToasterType.failure,
+                'Lab Session publish failed');
+          }
+        });
+    });
   }
 }

@@ -11,14 +11,16 @@ class LabSessionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-      return (id) => store.dispatch(ReplaceCurrentLabIDAction(id));
+      return (labSession) => store.dispatch(ReplaceCurrentLabAction(labSession));
     }, builder: (context, callback) {
       return MyCustomForm((labSessionTitle) {
-        LabSession session =
+        LabSession labSession =
             LabSession(title: labSessionTitle, finished: false, draft: true);
-        HttpService<LabSession>().postRequest(session, (success, id) {
+        HttpService<LabSession>().postRequest(labSession, (success, id) {
           if (success) {
-            callback(id);
+
+            labSession.id = id;
+            callback(labSession);
             CustomToaster().showToast(
                 context, ToasterType.success, 'Session Created Successfully');
           } else {

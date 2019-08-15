@@ -6,7 +6,7 @@ class LabSession implements Listable {
   final bool finished;
   final bool draft;
   int id;
-
+  
   LabSession({this.title, this.finished, this.id, this.draft});
 
   @override

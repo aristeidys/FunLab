@@ -1,16 +1,18 @@
 
-class ReplaceCurrentLabIDAction {
-  final int currentLabId;
+import 'package:funlab/common/models/lab_session.model.dart';
 
-  ReplaceCurrentLabIDAction(this.currentLabId);
+class ReplaceCurrentLabAction {
+  final LabSession currentLabSession;
+
+  ReplaceCurrentLabAction(this.currentLabSession);
 }
 
 typedef OnStateChanged = Function(dynamic);
 
-int labSessionReducer(int currentLabId, action) {
-  if (action is ReplaceCurrentLabIDAction) {
-    return action.currentLabId;
+LabSession labSessionReducer(LabSession currentLabSession, action) {
+  if (action is ReplaceCurrentLabAction) {
+    return action.currentLabSession;
   } else {
-    return currentLabId;
+    return currentLabSession;
   }
 }

@@ -6,6 +6,6 @@ AppState appReducer(AppState state, action) {
   return AppState(
       totalQuestions: 1,
       questionIndex: questionReducer(state.questionIndex, action),
-      currentLabId: labSessionReducer(state.currentLabId, action),
+      currentLabSession: labSessionReducer(state.currentLabSession, action),
   );
 }
