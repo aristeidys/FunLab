@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/components/activity_form.dart';
-import 'package:funlab/components/lab_session_form.dart';
-import 'package:funlab/reducers/app_state.dart';
+import 'package:funlab/common/reducers/app_state.dart';
+import 'package:funlab/instructor/components/activity_form.dart';
+import 'package:funlab/instructor/components/lab_session_form.dart';
 
 class InstructorForms extends StatelessWidget {
   final pageController = new PageController();

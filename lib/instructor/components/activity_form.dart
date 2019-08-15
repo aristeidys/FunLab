@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/models/assignment.model.dart';
-import 'package:funlab/reducers/app_state.dart';
-import 'package:funlab/services/activity.service.dart';
-import 'package:funlab/widgets/custom_form.dart';
-import 'package:funlab/widgets/custom_texts.dart';
-import 'package:funlab/widgets/custom_toaster.dart';
+import 'package:funlab/common/models/assignment.model.dart';
+import 'package:funlab/common/reducers/app_state.dart';
+import 'package:funlab/common/services/activity.service.dart';
+import 'package:funlab/common/widgets/custom_form.dart';
+import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class ActivityForm extends StatelessWidget {
   @override

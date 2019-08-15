@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/models/lab_session.model.dart';
-import 'package:funlab/reducers/app_state.dart';
-import 'package:funlab/reducers/current_lab_session_Id.dart';
-import 'package:funlab/services/service.dart';
-import 'package:funlab/widgets/custom_form.dart';
-import 'package:funlab/widgets/custom_toaster.dart';
+import 'package:funlab/common/models/lab_session.model.dart';
+import 'package:funlab/common/reducers/app_state.dart';
+import 'package:funlab/common/reducers/current_lab_session_Id.dart';
+import 'package:funlab/common/services/service.dart';
+import 'package:funlab/common/widgets/custom_form.dart';
+import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class LabSessionForm extends StatelessWidget {
   @override

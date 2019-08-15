@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:funlab/pages/instructor_home_page.dart';
-import 'package:funlab/pages/student_home_page.dart';
+import 'package:funlab/instructor/pages/instructor_home_page.dart';
+import 'package:funlab/student/pages/student_home_page.dart';
 
 class RoleSelectionPage extends StatelessWidget {
   @override

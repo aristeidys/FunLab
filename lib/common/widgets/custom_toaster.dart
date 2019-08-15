@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/widgets/custom_texts.dart';
+import 'package:funlab/common/widgets/custom_texts.dart';
 
 class NoInternetToaster {
   void show(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/widgets/custom_list_view.dart';
+import 'package:funlab/common/widgets/custom_list_view.dart';
 
 class CustomFutureList<T extends Listable> extends StatelessWidget {
 

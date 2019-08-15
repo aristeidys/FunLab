@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:funlab/models/lab_session.model.dart';
-import 'package:funlab/widgets/custom_list_view.dart';
-import 'package:funlab/widgets/custom_toaster.dart';
+import 'package:funlab/common/models/lab_session.model.dart';
+import 'package:funlab/common/widgets/custom_list_view.dart';
+import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/pages/role_selection_page.dart';
-import 'package:funlab/store.dart';
+import 'package:funlab/common/pages/role_selection_page.dart';
+import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 

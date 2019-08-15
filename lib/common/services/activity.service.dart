@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:funlab/models/assignment.model.dart';
-import 'package:funlab/services/service.dart';
+import 'package:funlab/common/models/assignment.model.dart';
+import 'package:funlab/common/services/service.dart';
 import 'package:http/http.dart' as http;
 
 class ActivityService extends HttpService {
