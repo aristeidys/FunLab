@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:funlab/common/widgets/custom_texts.dart';
 import 'package:funlab/instructor/pages/instructor_home_page.dart';
 import 'package:funlab/student/pages/student_home_page.dart';
 
@@ -11,10 +12,14 @@ class RoleSelectionPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Center(
+          child: TitleText('Select your role'),
+        ),
+        Padding(padding: EdgeInsets.only(top: 40.0)),
+        Center(
           child: FlatButton.icon(
             color: Colors.yellow,
             icon: Icon(Icons.book),
-            label: Text('As Instructor'),
+            label: Text('Instructor'),
             onPressed: () {
               Navigator.push(
                 context,
@@ -27,7 +32,7 @@ class RoleSelectionPage extends StatelessWidget {
           child: FlatButton.icon(
             color: Colors.red,
             icon: Icon(Icons.child_care),
-            label: Text('As Student'),
+            label: Text('Student'),
             onPressed: () {
               Navigator.push(
                 context,
