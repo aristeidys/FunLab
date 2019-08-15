@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
-import 'package:funlab/common/services/service.dart';
+import 'package:funlab/common/services/lab_session.service.dart';
 import 'package:funlab/common/widgets/custom_form.dart';
 import 'package:funlab/common/widgets/custom_future_list.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';

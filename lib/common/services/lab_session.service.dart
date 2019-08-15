@@ -74,20 +74,22 @@ class HttpService<T extends Listable> {
     callback(isSuccessful, newID);
   }
 
+  putRequest(int id, Map<String, String> entity, ResponceCallback callback) async {
+    final body = jsonEncode(entity);
+    final response =
+        await http.Client().put(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint + id.toString()), headers: headers, body: body);
+
+    bool isSuccessful = response.statusCode == success ? true : false;
+    int newID = isSuccessful ? extractID(response) : -1;
+    callback(isSuccessful, newID);
+  }
+
   Future<CustomResponse> deleteRequest(int id) async {
     final response = await http.Client().delete(new Uri.http(url, endpoint + id.toString()));
 
     bool isSuccessful = response.statusCode == deleteSuccess ? true : false;
 
     return CustomResponse(0, isSuccessful);
-  }
-
-  Future<CustomResponse> putRequest(int id) async {
-    final response = await http.Client().put(new Uri.http(url, endpoint));
-
-    bool success = response.statusCode == HttpService.success ? true : false;
-
-    return CustomResponse(0, success);
   }
 
   int extractID(Response response) {
