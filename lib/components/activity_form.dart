@@ -13,11 +13,7 @@ class ActivityForm extends StatelessWidget {
     return StoreConnector<AppState, int>(
         converter: (store) => store.state.currentLabId,
         builder: (context, id) {
-          return id < 0
-              ? Container(
-                  child: new QuatedText('Create a Session First.'),
-                )
-              : MyCustomForm((labSessionTitle) {
+          return MyCustomForm((labSessionTitle) {
                   Activity activity = Activity(title: labSessionTitle, id: id);
                   ActivityService().createActivity(activity, (success, id) {
                     if (success) {
