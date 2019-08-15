@@ -36,6 +36,23 @@ class HttpService<T extends Listable> {
         }
       });
 
+  Future<List<LabSession>> getLabSessionsWithTitle(BuildContext context, String title) async => 
+  
+    await http.Client().get(new Uri(scheme: scheme, host: url, port: 3000, queryParameters: {'title':title}, path: endpoint)).then((response) {
+        final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+        return parsed
+            .map<LabSession>((json) => LabSession().fromJson(json))
+            .toList();
+      }).catchError((e) {
+        print("Got error: $e");
+        if (e is SocketException) {
+          ServerErrorToaster().show(context);
+        } else {
+          NoInternetToaster().show(context);
+        }
+      });
+
+
   Future<CustomResponse> getOne(int id) async {
     final response = await http.Client().get(Uri(scheme: scheme, host: url, port: 3000, path: endpoint));
 

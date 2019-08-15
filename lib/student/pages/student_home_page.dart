@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:funlab/student/components/find_lab_session_form.dart';
 
 class StudentHomePage extends StatelessWidget {
   final pageController = new PageController();
@@ -11,7 +12,7 @@ class StudentHomePage extends StatelessWidget {
           title: Text('Student'),
         ),
         body: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-          
+          FindLabSessionForm()
         ]));
   }
 }
