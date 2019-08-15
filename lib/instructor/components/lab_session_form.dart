@@ -4,7 +4,7 @@ import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/reducers/current_lab_session_Id.dart';
 import 'package:funlab/common/services/lab_session.service.dart';
-import 'package:funlab/common/widgets/custom_form.dart';
+import 'package:funlab/common/widgets/form_with_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class LabSessionForm extends StatelessWidget {
@@ -13,7 +13,7 @@ class LabSessionForm extends StatelessWidget {
     return StoreConnector<AppState, OnStateChanged>(converter: (store) {
       return (labSession) => store.dispatch(ReplaceCurrentLabAction(labSession));
     }, builder: (context, callback) {
-      return MyCustomForm((labSessionTitle) {
+      return FormWithButton('Enter Session Name', 'Create Draft Session', (labSessionTitle) {
         LabSession labSession =
             LabSession(title: labSessionTitle, finished: false, draft: true);
         HttpService<LabSession>().postRequest(labSession, (success, id) {
@@ -28,7 +28,7 @@ class LabSessionForm extends StatelessWidget {
                 context, ToasterType.failure, 'Failure Creating Session');
           }
         });
-      }, 'Enter Session Name');
+      });
     });
   }
 }
