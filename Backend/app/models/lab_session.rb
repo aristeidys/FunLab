@@ -1,6 +1,8 @@
 class LabSession < ApplicationRecord
   has_many :activities
-  
+  has_many :enrollments
+  has_many :students, :through => :enrollments
+
   scope :title, -> (title) { where title: title }
   
   # Search
