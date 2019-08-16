@@ -1,4 +1,0 @@
-#Fri Aug 16 11:46:43 EEST 2019
-base.0=/Users/apanagio/Documents/Projects/FunLab/FunLab-Student/build/app/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex
