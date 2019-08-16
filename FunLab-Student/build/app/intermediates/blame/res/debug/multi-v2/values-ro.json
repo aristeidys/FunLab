@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/apanagio/Documents/Projects/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ro/values-ro.xml",
+            "outputFile": "/Users/apanagio/Documents/Projects/FunLab/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ro/values-ro.xml",
             "map": [
                 {
                     "source": "/Users/apanagio/.gradle/caches/transforms-1/files-1.1/firebase-messaging-18.0.0.aar/0138fd017f9fb066f6d7b820dd572206/res/values-ro/values.xml",

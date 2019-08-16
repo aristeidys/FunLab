@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/apanagio/Documents/Projects/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
+            "outputFile": "/Users/apanagio/Documents/Projects/FunLab/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v21/values-v21.xml",
             "map": [
                 {
                     "source": "/Users/apanagio/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.1.0.aar/9827eeade3c9ae87f2b9f23245041c17/res/values-v21/values-v21.xml",

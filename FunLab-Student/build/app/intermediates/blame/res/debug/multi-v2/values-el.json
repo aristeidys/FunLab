@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/apanagio/Documents/Projects/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-el/values-el.xml",
+            "outputFile": "/Users/apanagio/Documents/Projects/FunLab/FunLab-Student/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-el/values-el.xml",
             "map": [
                 {
                     "source": "/Users/apanagio/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.2.0.aar/2c8bfe52b655fe5a8c457417986d0ff0/res/values-el/values.xml",
