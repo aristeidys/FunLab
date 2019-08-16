@@ -15,7 +15,7 @@ class InstructorHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Instructor'),
+          title: Text('Create a Session'),
         ),
         body: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
           PageView(

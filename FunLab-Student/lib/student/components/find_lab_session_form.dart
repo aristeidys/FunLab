@@ -17,7 +17,7 @@ class _FindLabSessionFormState extends State<FindLabSessionForm> {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      FormWithButton('Session Name', 'Enter Session', (labSessionTitle) async {
+      FormWithButton( 'Session Name', 'Join', (labSessionTitle) async {
         var result = await LabSessionService()
             .getLabSessionsWithTitle(context, labSessionTitle);
 

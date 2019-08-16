@@ -14,7 +14,7 @@ class ActivityForm extends StatelessWidget {
         converter: (store) => store.state.currentLabSession,
         builder: (context, labSession) {
           return FormWithButton('Enter Activity Name', 'Add Activity', (labSessionTitle) {
-                  Activity activity = Activity(title: labSessionTitle, id: labSession.id);
+                  Activity activity = Activity(title: labSessionTitle, labSessionId: labSession.id);
                   ActivityService().createActivity(activity, (success, id) {
                     if (success) {
                       CustomToaster().showToast(context, ToasterType.success,

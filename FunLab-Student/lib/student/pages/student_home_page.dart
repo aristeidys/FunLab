@@ -9,7 +9,7 @@ class StudentHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Student'),
+          title: Text('Join a Session'),
         ),
         body: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
           FindLabSessionForm()

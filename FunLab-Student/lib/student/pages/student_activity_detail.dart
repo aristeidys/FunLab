@@ -4,19 +4,19 @@ import 'package:funlab/common/models/assignment.model.dart';
 import 'package:funlab/common/services/activity.service.dart';
 import 'package:funlab/common/widgets/custom_future_list.dart';
 
-class StudentActivityList extends StatelessWidget {
+class StudentActivityDetail extends StatelessWidget {
 
-  final int sessionIndex;
+  final Activity activity;
 
-  StudentActivityList({Key key, @required this.sessionIndex}) : super(key: key);
+  StudentActivityDetail({Key key, @required this.activity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('All Activities'),
+          title: Text('${activity.title}'),
         ),
-        body: CustomFutureList<Activity>(ActivityService().getActivitiesWithSessionID(sessionIndex))
+        body: Text('Activity title: ${activity.title}')
         );
   }
 }

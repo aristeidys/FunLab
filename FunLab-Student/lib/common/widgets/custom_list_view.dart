@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Listable entities can be decoded and presented as a List
 
 abstract class Listable {
-  Widget buildListTile();
+  Widget buildListTile(BuildContext context);
   Listable fromJson(Map<String, dynamic> json){}
 }
 
@@ -22,10 +22,7 @@ class CustomListView<T extends Listable> extends StatelessWidget {
             itemCount: entries.length,
             padding: const EdgeInsets.all(15.0),
             itemBuilder: (context, position) {
-              return Column(children: <Widget>[
-                Divider(height: 5.0),
-                entries[position].buildListTile()
-              ]);
+              return entries[position].buildListTile(context);
             }));
   }
 }
