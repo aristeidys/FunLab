@@ -16,7 +16,7 @@ class LabSessionForm extends StatelessWidget {
       return FormWithButton('Enter Session Name', 'Create Draft Session', (labSessionTitle) {
         LabSession labSession =
             LabSession(title: labSessionTitle, finished: false, draft: true);
-        HttpService<LabSession>().postRequest(labSession, (success, id) {
+        LabSessionService().postRequest(labSession, (success, id) {
           if (success) {
 
             labSession.id = id;

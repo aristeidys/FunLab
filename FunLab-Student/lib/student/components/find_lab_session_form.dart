@@ -18,10 +18,10 @@ class _FindLabSessionFormState extends State<FindLabSessionForm> {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       FormWithButton('Session Name', 'Enter Session', (labSessionTitle) async {
-        var result = await HttpService<LabSession>()
+        var result = await LabSessionService()
             .getLabSessionsWithTitle(context, labSessionTitle);
 
-        if (result.length > 0) {
+        if (result.length > 0 && result.last.draft == false) {
           print('index ${result.last.id}');
 
           Navigator.push(

@@ -47,7 +47,7 @@ class EditLabSessionButton extends StatelessWidget {
         LabSession newSession =
             LabSession(title: labSession.title, id: labSession.id, draft: false, finished: labSession.finished);
 
-        HttpService().putRequest(newSession, newSession.id, (success, id) {
+        LabSessionService().putRequest(newSession, newSession.id, (success, id) {
           if (success) {
             callback(newSession);
             CustomToaster().showToast(

@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:funlab/common/models/assignment.model.dart';
-import 'package:funlab/common/services/lab_session.service.dart';
+import 'package:funlab/common/services/base.service.dart';
 import 'package:http/http.dart' as http;
 
-class ActivityService extends HttpService {
+class ActivityService extends HttpService<Activity> {
   
   @override
   final endpoint = '/activities/';
@@ -14,7 +14,7 @@ class ActivityService extends HttpService {
   }
 
   Future<List<Activity>> getAllActivities() async {
-    final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: 3000, path: endpoint));
+    final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: port, path: endpoint));
 
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed
@@ -24,7 +24,6 @@ class ActivityService extends HttpService {
 
   Future<List<Activity>> getActivitiesWithSessionID(int sessionId) async {
     final response = await http.Client().get(new Uri(scheme: scheme, queryParameters: {'lab_session_id': '$sessionId'}, host: url, port: 3000, path: endpoint));
-  print('inside the http call $sessionId');
     final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
     return parsed
         .map<Activity>((json) => Activity().fromJson(json))

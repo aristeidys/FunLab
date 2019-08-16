@@ -23,7 +23,7 @@ class InstructorHomePage extends StatelessWidget {
             children: <Widget>[
               InstructorForms(),
               CustomFutureList<LabSession>(
-                  HttpService<LabSession>().getAllLabSessions(context)),
+                  LabSessionService().getAllLabSessions(context)),
               CustomFutureList<Activity>(ActivityService().getAllActivities()),
             ],
           ),
