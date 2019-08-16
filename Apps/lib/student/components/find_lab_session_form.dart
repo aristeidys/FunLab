@@ -28,7 +28,7 @@ class _FindLabSessionFormState extends State<FindLabSessionForm> {
             context,
             MaterialPageRoute(
               builder: (context) => StudentActivityList(
-                sessionIndex: result.last.id,
+                labSession: result.last,
               )
             ),
           );

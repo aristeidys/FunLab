@@ -4,8 +4,6 @@ import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-
 void main() => runApp(MainApp());
 
 class MainApp extends StatelessWidget {
@@ -14,7 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
   
-    //configureFirebase();
+    configureFirebase();
     // Wrap your MaterialApp in a StoreProvider
     return StoreProvider(
         store: createStore(),

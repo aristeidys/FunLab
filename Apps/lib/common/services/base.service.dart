@@ -18,7 +18,7 @@ class HttpService<T extends Listable> {
   static final deleteSuccess = 204;
   static final notFound = 404; // DELETE, GET, PUT
 
-  postRequest(T entity, ResponceCallback callback) async {
+  postRequest(T entity, ResponceCallback<int> callback) async {
     final body = jsonEncode(entity);
     final response = await http.Client().post(
         new Uri(scheme: scheme, host: url, port: port, path: endpoint),
@@ -30,7 +30,7 @@ class HttpService<T extends Listable> {
     callback(isSuccessful, newID);
   }
 
-  putRequest(T entity, int id, ResponceCallback callback) async {
+  putRequest(T entity, int id, ResponceCallback<int> callback) async {
     final body = jsonEncode(entity);
     final response = await http.Client().put(
         new Uri(
@@ -73,4 +73,4 @@ class CustomResponse<T> {
 }
 
 typedef void RequestFailureCallback();
-typedef void ResponceCallback(bool success, int newID);
+typedef void ResponceCallback<T>(bool success, T payload);

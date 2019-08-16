@@ -1,6 +1,6 @@
 // Create a Form Widget
 import 'package:flutter/material.dart';
-import 'package:funlab/common/widgets/create_button.dart';
+import 'package:funlab/common/widgets/buttons/create_button.dart';
 
 class FormWithButton extends StatefulWidget {
   final Function callback;
