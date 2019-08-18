@@ -5,12 +5,12 @@ import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:funlab/student/components/find_lab_session_form.dart';
 import 'package:funlab/student/pages/student_activity_list.dart';
 
-class StudentHomePage extends StatefulWidget {
+class StudentSessionSearchPage extends StatefulWidget {
   @override
-  _StudentHomePageState createState() => _StudentHomePageState();
+  _StudentSessionSearchPageState createState() => _StudentSessionSearchPageState();
 }
 
-class _StudentHomePageState extends State<StudentHomePage> {
+class _StudentSessionSearchPageState extends State<StudentSessionSearchPage> {
   final pageController = new PageController();
 
   final List<LabSession> sessions = [];

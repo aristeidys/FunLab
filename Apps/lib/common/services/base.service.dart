@@ -1,11 +1,10 @@
-import 'package:funlab/common/widgets/custom_list_view.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart';
 
-class HttpService<T extends Listable> {
+class HttpService<T> {
   final scheme = 'http';
   final url = '10.0.2.2';
   final endpoint = '/';

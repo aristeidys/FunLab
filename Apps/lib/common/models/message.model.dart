@@ -7,6 +7,6 @@ class Message {
 
   Message({
     @required this.title,
-    @required this.body
+    @required this.body,
   });
 }

@@ -9,10 +9,6 @@ class ActivityService extends HttpService<Activity> {
   @override
   final endpoint = '/activities/';
 
-  createActivity(Activity entity, ResponceCallback callback) {
-    postRequest(entity, callback);
-  }
-
   Future<List<Activity>> getAllActivities() async {
     final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: port, path: endpoint));
 

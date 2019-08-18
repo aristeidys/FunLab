@@ -7,8 +7,6 @@ class ReplaceCurrentLabAction {
   ReplaceCurrentLabAction(this.currentLabSession);
 }
 
-typedef OnStateChanged = Function(dynamic);
-
 LabSession labSessionReducer(LabSession currentLabSession, action) {
   if (action is ReplaceCurrentLabAction) {
     return action.currentLabSession;

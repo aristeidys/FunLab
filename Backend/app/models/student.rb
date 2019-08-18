@@ -1,4 +1,4 @@
 class Student < ApplicationRecord
     has_many :enrollments
-    has_many :labSessions, :through => :enrollments
+    has_many :students, :through => :enrollments  
 end

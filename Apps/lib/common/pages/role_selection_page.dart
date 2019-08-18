@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/widgets/custom_texts.dart';
 import 'package:funlab/instructor/pages/home.dart';
-import 'package:funlab/student/pages/student_find_activity.dart';
+import 'package:funlab/instructor/pages/session_dashboard.dart';
+import 'package:funlab/student/pages/student_enter_name.dart';
 
 class RoleSelectionPage extends StatelessWidget {
   @override
@@ -29,16 +30,16 @@ class RoleSelectionPage extends StatelessWidget {
           ),
         ),
         Center(
-          child: FlatButton.icon(
-            color: Colors.red,
-            icon: Icon(Icons.child_care),
-            label: Text('Student'),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => StudentHomePage()),
-              );
-            },
+            child: FlatButton.icon(
+          color: Colors.red,
+          icon: Icon(Icons.child_care),
+          label: Text('Student'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StudentEnterNamePage()),
+            );
+          },
         ))
       ],
     );
