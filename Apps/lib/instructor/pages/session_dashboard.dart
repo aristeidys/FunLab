@@ -2,14 +2,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/message.model.dart';
 
-class MessagingPage extends StatelessWidget {
+class SessionDashboardPage extends StatelessWidget {
   final pageController = new PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Messages'),
+          title: Text('Instructor: Session Dashboard'),
         ),
         body: Stack(alignment: Alignment.bottomCenter, children: <Widget>[
           MessagingWidget()
@@ -31,7 +31,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: messages.map(buildMessage).toList());
+    return messages.length == 0 ? Text('Student messages will appear here') : ListView(children: messages.map(buildMessage).toList());
   }
 
   Widget buildMessage(Message message) {

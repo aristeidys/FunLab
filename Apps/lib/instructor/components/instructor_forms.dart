@@ -8,6 +8,7 @@ import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/instructor/components/activity_form.dart';
 import 'package:funlab/instructor/components/lab_session_form.dart';
+import 'package:funlab/instructor/pages/session_dashboard.dart';
 
 class InstructorForms extends StatelessWidget {
   final pageController = new PageController();
@@ -50,8 +51,10 @@ class EditLabSessionButton extends StatelessWidget {
         LabSessionService().putRequest(newSession, newSession.id, (success, id) {
           if (success) {
             callback(newSession);
-            CustomToaster().showToast(
-                context, ToasterType.success, 'Lab Session is published');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SessionDashboardPage()),
+              );
           } else {
             CustomToaster().showToast(
                 context, ToasterType.failure, 'Lab Session publish failed');
