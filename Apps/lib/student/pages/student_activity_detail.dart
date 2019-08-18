@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/models/assignment.model.dart';
-import 'package:funlab/common/services/activity.service.dart';
-import 'package:funlab/common/widgets/custom_future_list.dart';
+import 'package:funlab/common/services/googleApi.service.dart';
+import 'package:funlab/common/widgets/buttons/create_button.dart';
 
 class StudentActivityDetail extends StatelessWidget {
 
@@ -14,9 +14,25 @@ class StudentActivityDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('${activity.title}'),
+          title: Text('Student: ${activity.title}'),
         ),
-        body: Text('Activity title: ${activity.title}')
+        body: Column(children: <Widget>[
+          Text('Activity title: ${activity.title}'), 
+          CreateButton('Help', (){
+            sendNotification(context);
+          })],) 
         );
+  }
+
+  Future sendNotification(BuildContext context) async {
+    final response = await Messaging().sendToAll(
+      title: 'Help', 
+      body: 'I need help with ${activity.title}');
+  print(response);
+    if (response.statusCode != 200) {
+      print('${response.statusCode} Failure');
+    } else {
+      print('Success');
+    }
   }
 }

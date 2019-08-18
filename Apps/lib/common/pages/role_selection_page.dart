@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:funlab/common/pages/messages_view_page.dart';
 import 'package:funlab/common/widgets/custom_texts.dart';
+import 'package:funlab/common/widgets/messaging_widget.dart';
 import 'package:funlab/instructor/pages/instructor_home_page.dart';
-import 'package:funlab/student/pages/student_home_page.dart';
 
 class RoleSelectionPage extends StatelessWidget {
   @override
@@ -39,7 +40,20 @@ class RoleSelectionPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => StudentHomePage()),
               );
             },
-        ))
+        )),
+        Center(
+          child: FlatButton.icon(
+            color: Colors.blue,
+            icon: Icon(Icons.message),
+            label: Text('Messages'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MessagingPage()),
+              );
+            },
+        )),
+        
       ],
     );
   }

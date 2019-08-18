@@ -15,7 +15,7 @@ class StudentActivityList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Activities For Session ${labSession.title}'),
+          title: Text('Student: Inside Session ${labSession.title}'),
         ),
         body: CustomFutureList<Activity>(ActivityService().getActivitiesWithSessionID(labSession.id))
         );
