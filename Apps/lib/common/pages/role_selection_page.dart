@@ -31,8 +31,8 @@ class RoleSelectionPage extends StatelessWidget {
         ),
         Center(
             child: FlatButton.icon(
-          color: Colors.red,
-          icon: Icon(Icons.child_care),
+          color: Colors.green,
+          icon: Icon(Icons.school),
           label: Text('Student'),
           onPressed: () {
             Navigator.push(

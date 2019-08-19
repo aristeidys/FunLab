@@ -7,7 +7,8 @@ import 'package:funlab/student/pages/student_activity_list.dart';
 
 class StudentSessionSearchPage extends StatefulWidget {
   @override
-  _StudentSessionSearchPageState createState() => _StudentSessionSearchPageState();
+  _StudentSessionSearchPageState createState() =>
+      _StudentSessionSearchPageState();
 }
 
 class _StudentSessionSearchPageState extends State<StudentSessionSearchPage> {
@@ -26,7 +27,7 @@ class _StudentSessionSearchPageState extends State<StudentSessionSearchPage> {
             callback: handleSessionResult,
           ),
           sessions.length == 0
-              ? Text('Student messages will appear here')
+              ? Text('Findings will appear here')
               : Expanded(
                   child: ListView.builder(
                       scrollDirection: Axis.vertical,
@@ -37,6 +38,7 @@ class _StudentSessionSearchPageState extends State<StudentSessionSearchPage> {
                           title: sessions[index].title,
                           subTitle:
                               '${sessions[index].finished ? 'Finished' : 'Not Finished'}',
+                          icon: Icons.add_to_queue,
                           onTapCallback: () {
                             Navigator.push(
                               context,

@@ -1,9 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/reducers/app_state.dart';
-import 'package:funlab/common/reducers/firebase_identifier_reducer.dart';
+import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 
 class SessionDashboardPage extends StatelessWidget {
   final pageController = new PageController();
@@ -32,9 +30,33 @@ class _MessagingWidgetState extends State<MessagingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return messages.length == 0
-        ? Text('Student messages will appear here')
-        : ListView(children: messages.map(buildMessage).toList());
+    return Column(children: <Widget>[
+      messages.length == 0
+          ? Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Center(
+                child: Text('Student messages will appear here',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )),
+              ))
+          : Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: messages.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return new ListTileWithArrow(
+                      title: messages[index].title,
+                      subTitle: messages[index].body,
+                      icon: Icons.live_help,
+                      onTapCallback: () {
+                        //
+                      },
+                    );
+                  }))
+    ]);
   }
 
   Widget buildMessage(Message message) {
@@ -44,12 +66,11 @@ class _MessagingWidgetState extends State<MessagingWidget> {
   @override
   void initState() {
     super.initState();
-        _firebaseMessaging.subscribeToTopic('all');
-        this.configureFirebase();
+    _firebaseMessaging.subscribeToTopic('all');
+    this.configureFirebase();
   }
 
   void configureFirebase() {
-
     _firebaseMessaging.configure(
       onLaunch: (Map<String, dynamic> message) {
         print('onLaunch called $message');
@@ -59,10 +80,13 @@ class _MessagingWidgetState extends State<MessagingWidget> {
       },
       onMessage: (Map<String, dynamic> message) {
         print('onMessage called $message');
-        final notification = message['notification'];
+        print(message['data']['senderFCMID']);
+        String id = message['data']['senderFCMID'];
+        String activityTitle = message['notification']['title'];
+        String activityBody = message['notification']['body'];
+
         setState(() {
-          messages.add(Message(
-              title: notification['title'], body: notification['body']));
+          messages.add(Message(title: activityTitle, body: activityBody));
         });
       },
     );

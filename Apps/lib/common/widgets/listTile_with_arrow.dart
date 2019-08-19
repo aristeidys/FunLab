@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class ListTileWithArrow extends StatelessWidget {
+  final String title;
+  final String subTitle;
+  final Function onTapCallback;
+  final IconData icon;
+
   const ListTileWithArrow({
     Key key,
     @required this.title,
     @required this.subTitle,
     @required this.onTapCallback,
+    @required this.icon,
   }) : super(key: key);
-
-  final String title;
-  final String subTitle;
-  final Function onTapCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class ListTileWithArrow extends StatelessWidget {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(Icons.art_track, color: Colors.white),
+            child: Icon(icon, color: Colors.white),
           ),
           title: Text(
             title,
@@ -35,8 +37,8 @@ class ListTileWithArrow extends StatelessWidget {
           ),
           subtitle: Row(
             children: <Widget>[
-              Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(subTitle, style: TextStyle(color: Colors.white))
+              //  Icon(Icons.linear_scale, color: Colors.yellowAccent),
+              Expanded(child: Text(subTitle, maxLines: 2, style: TextStyle(color: Colors.white)),) 
             ],
           ),
           trailing:
