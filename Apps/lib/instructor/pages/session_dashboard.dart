@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
+import 'package:funlab/common/services/googleApi.service.dart';
 
 class SessionDashboardPage extends StatelessWidget {
   final pageController = new PageController();
@@ -50,7 +51,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                     return new ListTileWithArrow(
                       title: messages[index].title,
                       subTitle: messages[index].body,
-                      icon: Icons.live_help,
+                      type: messages[index].type,
                       onTapCallback: () {
                         //
                       },
@@ -66,7 +67,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
   @override
   void initState() {
     super.initState();
-    _firebaseMessaging.subscribeToTopic('all');
+    _firebaseMessaging.subscribeToTopic(Messaging.instructorChannel);
     this.configureFirebase();
   }
 
@@ -81,12 +82,18 @@ class _MessagingWidgetState extends State<MessagingWidget> {
       onMessage: (Map<String, dynamic> message) {
         print('onMessage called $message');
         print(message['data']['senderFCMID']);
-        String id = message['data']['senderFCMID'];
+        
+        // uncomment to use fcm id of student
+        //  String id = message['data']['senderFCMID'];
         String activityTitle = message['notification']['title'];
+        
+        String stringType = message['data'][Messaging.messageTypeKey];
+        ListTileType messageType = stringType == Messaging.studentDoneValue ? ListTileType.doneTyle : ListTileType.helpTile;
+        
         String activityBody = message['notification']['body'];
 
         setState(() {
-          messages.add(Message(title: activityTitle, body: activityBody));
+          messages.add(Message(title: activityTitle, body: activityBody, type: messageType));
         });
       },
     );

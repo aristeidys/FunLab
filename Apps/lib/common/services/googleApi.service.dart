@@ -10,18 +10,20 @@ class Messaging {
   static const String serverKey =
       'AAAAJ9-AIHc:APA91bHDQHh9ymEKv2vzivi2dYB9Dl6ij5UmgG1uRt9MK99Cr7TpRK7WPWcPbqC5uLu2ozYrkAoacHkzuom1ckpHBC8ye-mUuDzYHGBerMX9I09DCfruyDmX8IEihPz5ToRTzuQxJI_a';
 
-  Future<Response> sendToAll(
-      {@required String title,
-      @required String body,
-      @required String senderFCMID,
-      @required String username}) {
-    return sendToTopic(
-        title: title, body: body, senderFCMID: senderFCMID, username: username, topic: 'all');
-  }
+
+  // channels
+  static const studentChannel = 'studentChannel';
+  static const instructorChannel = 'instructorChannel';
+
+  static const messageTypeKey = 'type';
+  static const studentDoneValue = 'student_done';
+  
+  static const studentHelpValue = 'student_help';
 
   Future<Response> sendToTopic({
     @required String title,
     @required String body,
+    @required String type,
     @required String senderFCMID,
     @required String username,
     @required String topic,
@@ -29,17 +31,19 @@ class Messaging {
     return sendTo(
         title: title,
         body: body,
+        type: type,
         senderFCMID: senderFCMID,
         username: username,
-        fcmToken: '/topics/$topic');
+        topic: '/topics/$topic');
   }
 
   Future<Response> sendTo({
     @required String title,
     @required String body,
+    @required String type,
     @required String senderFCMID,
     @required String username,
-    @required String fcmToken,
+    @required String topic,
   }) {
     print('Post to Google Maps');
     return http.Client().post('https://fcm.googleapis.com/fcm/send',
@@ -50,10 +54,13 @@ class Messaging {
             'click_action': 'FLUTTER_NOTIFICATION_CLICK',
             'id': '1',
             'status': 'done',
-            'senderFCMID': senderFCMID,
-            'senderUsername': username
+            
+            // sent data here
+            'senderFCMID': senderFCMID, // sender fcm id
+            'senderUsername': username, // sender username
+            messageTypeKey:type // type of the notification
           },
-          'to': '$fcmToken',
+          'to': '$topic',
         }),
         headers: {
           'Content-Type': 'application/json',

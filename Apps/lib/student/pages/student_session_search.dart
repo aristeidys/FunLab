@@ -38,7 +38,7 @@ class _StudentSessionSearchPageState extends State<StudentSessionSearchPage> {
                           title: sessions[index].title,
                           subTitle:
                               '${sessions[index].finished ? 'Finished' : 'Not Finished'}',
-                          icon: Icons.add_to_queue,
+                          type: ListTileType.doneTyle,
                           onTapCallback: () {
                             Navigator.push(
                               context,

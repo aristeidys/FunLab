@@ -31,7 +31,7 @@ class StudentActivityList extends StatelessWidget {
                         title: snapshot.data[position].title,
                         subTitle:
                             snapshot.data[position].labSessionId.toString(),
-                        icon: Icons.work,
+                        type: ListTileType.doneTyle,
                         onTapCallback: () {
                           Navigator.push(
                               context,
