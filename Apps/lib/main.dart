@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funlab/common/pages/role_selection_page.dart';
+import 'package:funlab/common/services/check_connectivity_service.dart';
 import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
@@ -20,6 +21,6 @@ class MainApp extends StatelessWidget {
                 appBar: AppBar(
                   title: Text(this.title),
                 ),
-                body: new RoleSelectionPage())));
+                body: Column(children: <Widget>[CheckConnectivityService(), RoleSelectionPage()]) )));
   }
 }
