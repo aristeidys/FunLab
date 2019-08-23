@@ -8,6 +8,7 @@ import 'package:funlab/common/services/googleApi.service.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
+import 'package:http/http.dart';
 
 class StudentActivityDetail extends StatefulWidget {
   final Activity activity;
@@ -37,52 +38,60 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
               appBar: AppBar(
                 title: Text('Student: ${widget.activity.title}'),
               ),
-              body: Container(
-                  margin: EdgeInsets.only(top: 30),
-                  child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        CreateButton('I need Help!', () {
-                          sendHelpNotification(context, username);
-                        }),
-                        EditButton('I am Done!', () {
-                          sendDoneNotification(context, username);
-                        })
-                      ],
-                    ),
-                  )));
+              body: Builder(
+                  builder: (context) => Container(
+                      margin: EdgeInsets.only(top: 30),
+                      child: Center(
+                        child: Column(
+                          children: <Widget>[
+                            CreateButton('I need Help!', () async {
+                              Response response =
+                                  await sendHelpNotification(context, username);
+
+                              showDefaultToast(response, context);
+                            }),
+                            EditButton('I am Done!', () async {
+                              Response response =
+                                  await sendDoneNotification(context, username);
+
+                              showDefaultToast(response, context);
+                            })
+                          ],
+                        ),
+                      ))));
         });
   }
 
-Future sendHelpNotification(BuildContext context, String username) async {
-    final response = await Messaging().sendToTopic(
+  void showDefaultToast(Response response, BuildContext context) {
+         if (response.statusCode != 200) {
+      CustomToaster().showToast(
+          context,
+          ToasterType.failure,
+          'Error sending Request. Try again.');
+    } else {
+      CustomToaster().showToast(context,
+          ToasterType.success, 'Sent successfully!');
+    }
+  }
+
+  Future<Response> sendHelpNotification(
+      BuildContext context, String username) async {
+    return await Messaging().sendToTopic(
         title: 'A Student needs your Help',
         body: '$username needs help with activity: ${widget.activity.title}',
         type: Messaging.studentHelpValue,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
         username: username);
-    print(response);
-    if (response.statusCode != 200) {
-      CustomToaster().showToast(context, ToasterType.failure, 'Error sending Help request. Try again.');
-    } else {
-      CustomToaster().showToast(context, ToasterType.success, 'Sent successfully!');
-    }
   }
 
   Future sendDoneNotification(BuildContext context, String username) async {
-    final response = await Messaging().sendToTopic(
+    return await Messaging().sendToTopic(
         title: 'A Student finished an Activity',
         body: '$username finished activity: ${widget.activity.title}',
         type: Messaging.studentDoneValue,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
         username: username);
-    print(response);
-    if (response.statusCode != 200) {
-      CustomToaster().showToast(context, ToasterType.failure, 'Error sending Help request. Try again.');
-    } else {
-      CustomToaster().showToast(context, ToasterType.success, 'Sent successfully!');
-    }
   }
 }
