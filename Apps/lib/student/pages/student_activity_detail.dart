@@ -48,30 +48,18 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
                               Response response =
                                   await sendHelpNotification(context, username);
 
-                              showDefaultToast(response, context);
+                              CustomToaster().showDefaultToast(response, context);
                             }),
                             EditButton('I am Done!', () async {
                               Response response =
                                   await sendDoneNotification(context, username);
 
-                              showDefaultToast(response, context);
+                              CustomToaster().showDefaultToast(response, context);
                             })
                           ],
                         ),
                       ))));
         });
-  }
-
-  void showDefaultToast(Response response, BuildContext context) {
-         if (response.statusCode != 200) {
-      CustomToaster().showToast(
-          context,
-          ToasterType.failure,
-          'Error sending Request. Try again.');
-    } else {
-      CustomToaster().showToast(context,
-          ToasterType.success, 'Sent successfully!');
-    }
   }
 
   Future<Response> sendHelpNotification(

@@ -1,8 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/message.model.dart';
+import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:funlab/common/services/googleApi.service.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:http/http.dart';
 
 class SessionDashboardPage extends StatelessWidget {
   final pageController = new PageController();
@@ -48,13 +51,64 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                   shrinkWrap: true,
                   itemCount: messages.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return new ListTileWithArrow(
-                      title: messages[index].title,
-                      subTitle: messages[index].body,
-                      type: messages[index].type,
-                      onTapCallback: () {
-                        //
-                      },
+                    return Slidable(
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.25,
+                      child: Container(
+                          color: Colors.white,
+                          child: ListTileWithArrow(
+                            title: messages[index].title,
+                            subTitle: messages[index].body,
+                            type: messages[index].type,
+                            onTapCallback: () {
+                              // on tap
+                            },
+                          )),
+                      secondaryActions: <Widget>[
+                        IconSlideAction(
+                            caption: 'Confirm',
+                            color: Colors.green,
+                            icon: Icons.done,
+                            onTap: () async {
+                              Response response = await Messaging().sendToTopic(
+                                  type: '',
+                                  title: 'Activity rejected',
+                                  body:
+                                      'Your Instrucor rejected your activity.',
+                                  topic: Messaging.studentChannel,
+                                  username: '',
+                                  senderFCMID: '');
+
+                              if (response.statusCode == 200) {
+                                setState(() {
+                                  messages.removeAt(index);
+                                });
+                              }
+                              CustomToaster()
+                                  .showDefaultToast(response, context);
+                            }),
+                        IconSlideAction(
+                          caption: 'Reject',
+                          color: Colors.red,
+                          icon: Icons.cancel,
+                          onTap: () async {
+                            Response response = await Messaging().sendToTopic(
+                                type: '',
+                                title: 'Activity rejected',
+                                body: 'Your Instrucor rejected your activity.',
+                                topic: Messaging.studentChannel,
+                                username: '',
+                                senderFCMID: '');
+
+                            if (response.statusCode == 200) {
+                              setState(() {
+                                messages.removeAt(index);
+                              });
+                            }
+                            CustomToaster().showDefaultToast(response, context);
+                          },
+                        ),
+                      ],
                     );
                   }))
     ]);
@@ -82,18 +136,21 @@ class _MessagingWidgetState extends State<MessagingWidget> {
       onMessage: (Map<String, dynamic> message) {
         print('onMessage called $message');
         print(message['data']['senderFCMID']);
-        
+
         // uncomment to use fcm id of student
         //  String id = message['data']['senderFCMID'];
         String activityTitle = message['notification']['title'];
-        
+
         String stringType = message['data'][Messaging.messageTypeKey];
-        ListTileType messageType = stringType == Messaging.studentDoneValue ? ListTileType.doneTyle : ListTileType.helpTile;
-        
+        ListTileType messageType = stringType == Messaging.studentDoneValue
+            ? ListTileType.doneTyle
+            : ListTileType.helpTile;
+
         String activityBody = message['notification']['body'];
 
         setState(() {
-          messages.add(Message(title: activityTitle, body: activityBody, type: messageType));
+          messages.add(Message(
+              title: activityTitle, body: activityBody, type: messageType));
         });
       },
     );

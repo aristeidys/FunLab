@@ -8,6 +8,7 @@ import 'package:funlab/common/services/lab_session.service.dart';
 import 'package:funlab/common/widgets/custom_future_list.dart';
 import 'package:funlab/common/widgets/my_page_indicator.dart';
 import 'package:funlab/instructor/components/instructor_forms.dart';
+import 'package:funlab/instructor/pages/session_dashboard.dart';
 
 class InstructorHomePage extends StatelessWidget {
   final pageController = new PageController();
@@ -24,6 +25,7 @@ class InstructorHomePage extends StatelessWidget {
           PageView(
             controller: pageController,
             children: <Widget>[
+              //SessionDashboardPage()
               InstructorForms(),
               CustomFutureList<LabSession>(
                   LabSessionService().getAllLabSessions(context)),
