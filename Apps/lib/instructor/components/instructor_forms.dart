@@ -45,11 +45,11 @@ class EditLabSessionButton extends StatelessWidget {
       return (labSession) =>
           store.dispatch(ReplaceCurrentLabAction(labSession));
     }, builder: (context, callback) {
-      return EditButton('Publish Lab Session', () {
+      return EditButton(text: 'Publish Lab Session', callback: () {
         LabSession newSession =
             LabSession(title: labSession.title, id: labSession.id, draft: false, finished: labSession.finished);
 
-        LabSessionService().putRequest(newSession, newSession.id, (success, id) {
+        LabSessionService().putRequest(newSession, newSession.id, (success, id, errorMessage) {
           if (success) {
             callback(newSession);
               Navigator.push(

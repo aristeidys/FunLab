@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/student/components/enter_name_form.dart';
+import 'package:funlab/student/pages/student_session_search.dart';
 
 class StudentEnterNamePage extends StatelessWidget {
   final pageController = new PageController();
@@ -11,6 +12,12 @@ class StudentEnterNamePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Create User'),
         ),
-        body: EnterNameForm());
+        body: EnterNameForm(buttonCallback: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => StudentSessionSearchPage()),
+            );
+        },));
   }
 }

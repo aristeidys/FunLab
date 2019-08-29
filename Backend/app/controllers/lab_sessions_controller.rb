@@ -14,7 +14,7 @@ class LabSessionsController < ApplicationController
 
       LabSession.all
     end
-    @labSessions = @labSessions.title(params[:title]) if params[:title].present?
+    @labSessions = @labSessions.findByTitle(params[:title]) if params[:title].present?
     
     render json: @labSessions
   end

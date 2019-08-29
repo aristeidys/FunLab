@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class EditButton extends StatelessWidget {
   final String text;
   final Function callback;
-  EditButton(this.text, this.callback);
+  EditButton({this.text, this.callback});
 
   @override
   Widget build(BuildContext context) {

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/widgets/custom_texts.dart';
 import 'package:funlab/instructor/pages/home.dart';
-import 'package:funlab/instructor/pages/session_dashboard.dart';
-import 'package:funlab/student/pages/student_enter_name.dart';
+import 'package:funlab/student/pages/student_home.dart';
 
 class RoleSelectionPage extends StatelessWidget {
   @override
@@ -37,7 +36,7 @@ class RoleSelectionPage extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => StudentEnterNamePage()),
+              MaterialPageRoute(builder: (context) => StudentHomePage()),
             );
           },
         ))

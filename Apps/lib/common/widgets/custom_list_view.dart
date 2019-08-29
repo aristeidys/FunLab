@@ -12,7 +12,7 @@ class CustomListView<T extends Listable> extends StatelessWidget {
   final List<T> entries;
 
   CustomListView({Key key, this.entries}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(

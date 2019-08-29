@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/services/lab_session.service.dart';
 import 'package:funlab/common/widgets/form_with_button.dart';
-import 'package:funlab/common/widgets/custom_future_list.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class FindLabSessionForm extends StatefulWidget {
@@ -15,7 +14,7 @@ class FindLabSessionForm extends StatefulWidget {
 }
 
 class _FindLabSessionFormState extends State<FindLabSessionForm> {
-  CustomFutureList<LabSession> list;
+  FutureBuilder<List<LabSession>> list;
 
   @override
   Widget build(BuildContext context) {

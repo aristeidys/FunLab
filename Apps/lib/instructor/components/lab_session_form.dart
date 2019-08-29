@@ -17,14 +17,14 @@ class LabSessionForm extends StatelessWidget {
       return FormWithButton('Enter Session Name', 'Create Draft Session', (labSessionTitle) {
         LabSession labSession =
             LabSession(title: labSessionTitle, finished: false, draft: true);
-        LabSessionService().postRequest(labSession, (success, id) {
+        LabSessionService().postRequest(labSession, (success, id, errorMessage) {
           if (success) {
 
             labSession.id = id;
             callback(labSession);
           } else {
             CustomToaster().showToast(
-                context, ToasterType.failure, 'Failure Creating Session');
+                context, ToasterType.failure, 'Failure Creating Session. $errorMessage');
           }
         });
       });

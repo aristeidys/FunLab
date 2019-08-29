@@ -25,7 +25,7 @@ class HttpService<T> {
 
     bool isSuccessful = response.statusCode == postSuccess ? true : false;
     int newID = isSuccessful ? extractID(response) : -1;
-    callback(isSuccessful, newID);
+    callback(isSuccessful, newID, response.statusCode == 422 ? 'Name has already been taken' : '');
   }
 
   putRequest(T entity, int id, ResponceCallback<int> callback) async {
@@ -41,7 +41,7 @@ class HttpService<T> {
 
     bool isSuccessful = response.statusCode == success ? true : false;
     int newID = isSuccessful ? extractID(response) : -1;
-    callback(isSuccessful, newID);
+    callback(isSuccessful, newID, '');
   }
 
   Future<CustomResponse> deleteRequest(int id) async {
@@ -50,7 +50,7 @@ class HttpService<T> {
 
     bool isSuccessful = response.statusCode == deleteSuccess ? true : false;
 
-    return CustomResponse(0, isSuccessful);
+    return CustomResponse(0, isSuccessful, '');
   }
 
   int extractID(Response response) {
@@ -66,9 +66,14 @@ class HttpService<T> {
 class CustomResponse<T> {
   T payload;
   bool success;
+  String errorMessage;
 
-  CustomResponse(this.payload, this.success);
+  CustomResponse(this.payload, this.success, this.errorMessage);
+}
+
+class ErrorBody {
+  List<String> name;
 }
 
 typedef void RequestFailureCallback();
-typedef void ResponceCallback<T>(bool success, T payload);
+typedef void ResponceCallback<T>(bool success, T payload, String errorMessage);

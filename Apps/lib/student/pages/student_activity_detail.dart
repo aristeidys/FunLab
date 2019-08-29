@@ -50,7 +50,7 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
 
                               CustomToaster().showDefaultToast(response, context);
                             }),
-                            EditButton('I am Done!', () async {
+                            EditButton(text: 'I am Done!', callback: () async {
                               Response response =
                                   await sendDoneNotification(context, username);
 
