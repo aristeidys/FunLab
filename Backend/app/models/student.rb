@@ -2,8 +2,8 @@ class Student < ApplicationRecord
 
     validates :name, uniqueness: true
 
-    has_many :enrollments
-    has_many :students, :through => :enrollments  
+    has_many :enrolments
+    has_many :labSessions, :through => :enrolments  
 
     # Search
     scope :findByName, -> (name) { where name: name }

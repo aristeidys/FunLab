@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/models/student.model.dart';
+import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:funlab/student/components/find_student_form.dart';
-import 'package:funlab/student/pages/student_activity_list.dart';
 import 'package:funlab/student/pages/student_enter_name.dart';
 import 'package:funlab/student/pages/student_session_search.dart';
 
@@ -23,6 +22,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Styles.studentMainColor,
           title: Text('Log In'),
         ),
         body: Column(children: <Widget>[

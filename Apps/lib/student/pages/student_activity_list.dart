@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:funlab/common/models/assignment.model.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/services/activity.service.dart';
+import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:funlab/student/pages/student_activity_detail.dart';
 
@@ -15,6 +16,7 @@ class StudentActivityList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Styles.studentMainColor,
           title: Text('Student: Inside Session ${labSession.title}'),
         ),
         body: FutureBuilder<List<Activity>>(

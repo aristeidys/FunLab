@@ -23,13 +23,13 @@ ActiveRecord::Schema.define(version: 2019_08_16_214735) do
     t.index ["lab_session_id"], name: "index_activities_on_lab_session_id"
   end
 
-  create_table "enrollments", force: :cascade do |t|
+  create_table "enrolments", force: :cascade do |t|
     t.bigint "lab_session_id"
     t.bigint "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["lab_session_id"], name: "index_enrollments_on_lab_session_id"
-    t.index ["student_id"], name: "index_enrollments_on_student_id"
+    t.index ["lab_session_id"], name: "index_enrolments_on_lab_session_id"
+    t.index ["student_id"], name: "index_enrolments_on_student_id"
   end
 
   create_table "lab_sessions", force: :cascade do |t|

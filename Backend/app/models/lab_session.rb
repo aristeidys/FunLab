@@ -2,8 +2,8 @@ class LabSession < ApplicationRecord
   validates :title, uniqueness: true
 
   has_many :activities
-  has_many :enrollments
-  has_many :students, :through => :enrollments
+  has_many :enrolments
+  has_many :students, :through => :enrolments
 
   
   # Search

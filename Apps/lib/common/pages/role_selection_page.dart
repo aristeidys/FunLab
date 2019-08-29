@@ -17,7 +17,7 @@ class RoleSelectionPage extends StatelessWidget {
         Padding(padding: EdgeInsets.only(top: 40.0)),
         Center(
           child: FlatButton.icon(
-            color: Colors.yellow,
+            color: Colors.red,
             icon: Icon(Icons.book),
             label: Text('Instructor'),
             onPressed: () {

@@ -29,7 +29,7 @@ class FindStudentForm extends StatelessWidget {
             buttonCallback();
           } else {
             CustomToaster().showToast(context, ToasterType.failure,
-                'No Session with name $studentName');
+                'No Student with name $studentName');
           }
         }),
       ]);

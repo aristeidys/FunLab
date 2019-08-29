@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:funlab/common/styling.dart';
 import 'package:funlab/instructor/components/instructor_forms.dart';
 
 class InstructorHomePage extends StatelessWidget {
@@ -11,6 +12,7 @@ class InstructorHomePage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Styles.instructorColor,
           title: Text('Create a Session'),
         ),
         body: Stack(alignment: Alignment.bottomCenter, children: <Widget>[

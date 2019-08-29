@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/assignment.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/services/googleApi.service.dart';
+import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
@@ -36,6 +37,7 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
         builder: (context, username) {
           return Scaffold(
               appBar: AppBar(
+                backgroundColor: Styles.studentMainColor,
                 title: Text('Student: ${widget.activity.title}'),
               ),
               body: Builder(
