@@ -1,3 +1,4 @@
+import 'package:funlab/common/reducers/activities_reducer.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/reducers/counter_reducer.dart';
 import 'package:funlab/common/reducers/current_lab_session_Id.dart';
@@ -9,5 +10,6 @@ AppState appReducer(AppState state, action) {
     questionIndex: questionReducer(state.questionIndex, action),
     currentLabSession: labSessionReducer(state.currentLabSession, action),
     username: usernameReducer(state.username, action),
+    currentActivities: activitiesReducer(state.currentActivities, action),
   );
 }
