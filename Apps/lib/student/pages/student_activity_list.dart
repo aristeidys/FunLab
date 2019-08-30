@@ -17,7 +17,7 @@ class StudentActivityList extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Styles.studentMainColor,
-          title: Text('Student: Inside Session ${labSession.title}'),
+          title: Text('Session: ${labSession.title}'),
         ),
         body: FutureBuilder<List<Activity>>(
           future: ActivityService().getActivitiesWithSessionID(labSession.id),

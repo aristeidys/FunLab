@@ -21,7 +21,7 @@ class FindStudentForm extends StatelessWidget {
       return Column(children: <Widget>[
         FormWithButton('Username', 'Log in', (studentName) async {
           var result =
-              await StudentService().getStudentsWithName(context, studentName);
+              await StudentService().getStudentsByName(context, studentName);
 
           if (result.length > 0) {
             callback(result.first.name);

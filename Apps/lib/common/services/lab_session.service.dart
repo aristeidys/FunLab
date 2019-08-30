@@ -1,10 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/services/base.service.dart';
-import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:http/http.dart' as http;
 
 class LabSessionService extends HttpService<LabSession> {
@@ -19,13 +16,6 @@ class LabSessionService extends HttpService<LabSession> {
         return parsed
             .map<LabSession>((json) => LabSession().fromJson(json))
             .toList();
-      }).catchError((e) {
-        print("Got error: $e");
-        if (e is SocketException) {
-          ServerErrorToaster().show(context);
-        } else {
-          NoInternetToaster().show(context);
-        }
       });
 
   Future<List<LabSession>> getLabSessionsWithTitle(
@@ -42,12 +32,5 @@ class LabSessionService extends HttpService<LabSession> {
         return parsed
             .map<LabSession>((json) => LabSession().fromJson(json))
             .toList();
-      }).catchError((e) {
-        print("Got error: $e");
-        if (e is SocketException) {
-          ServerErrorToaster().show(context);
-        } else {
-          NoInternetToaster().show(context);
-        }
       });
 }
