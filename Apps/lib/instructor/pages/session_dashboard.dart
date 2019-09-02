@@ -152,7 +152,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
         String activityTitle = message['notification']['title'];
 
         String stringType = message['data'][Messaging.messageTypeKey];
-        int activityId = message['data'][Messaging.activityIdKey];
+        int activityId = int.parse(message['data'][Messaging.activityIdKey]);
 
         ListTileType messageType = stringType == Messaging.messageTypeStudentDone
             ? ListTileType.doneTyle
