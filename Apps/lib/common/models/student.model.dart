@@ -17,13 +17,4 @@ class Student implements Listable {
     Map<String, dynamic> toJson() => {
         'name': name
       };
-
-  @override
-  Widget buildListTile(BuildContext context) {
-     return ListTile(title: Text('Name: $name'), 
-                    subtitle: Text(''),
-                    onTap: (){
-                      
-                  });
-  }
 }

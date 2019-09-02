@@ -69,19 +69,21 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
     return await Messaging().sendToTopic(
         title: 'A Student needs your Help',
         body: '$username needs help with activity: ${widget.activity.title}',
-        type: Messaging.studentHelpValue,
+        type: Messaging.messageTypeStudentHelp,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
-        username: username);
+        username: username,
+        activityId: widget.activity.id);
   }
 
   Future sendDoneNotification(BuildContext context, String username) async {
     return await Messaging().sendToTopic(
         title: 'A Student finished an Activity',
         body: '$username finished activity: ${widget.activity.title}',
-        type: Messaging.studentDoneValue,
+        type: Messaging.messageTypeStudentDone,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
-        username: username);
+        username: username,
+        activityId: widget.activity.id);
   }
 }

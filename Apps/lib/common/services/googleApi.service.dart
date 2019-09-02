@@ -16,9 +16,12 @@ class Messaging {
   static const instructorChannel = 'instructorChannel';
 
   static const messageTypeKey = 'type';
-  static const studentDoneValue = 'student_done';
-  
-  static const studentHelpValue = 'student_help';
+  static const activityIdKey = 'activityId';
+
+  static const messageTypeStudentDone = 'student_done';
+  static const messageTypeStudentHelp = 'student_help';
+  static const messageTypeInstructorConfirm = 'instructor_confirm';
+  static const messageTypeInstructorReject = 'instructor_reject';
 
   Future<Response> sendToTopic({
     @required String title,
@@ -27,23 +30,7 @@ class Messaging {
     @required String senderFCMID,
     @required String username,
     @required String topic,
-  }) {
-    return sendTo(
-        title: title,
-        body: body,
-        type: type,
-        senderFCMID: senderFCMID,
-        username: username,
-        topic: '/topics/$topic');
-  }
-
-  Future<Response> sendTo({
-    @required String title,
-    @required String body,
-    @required String type,
-    @required String senderFCMID,
-    @required String username,
-    @required String topic,
+    @required int activityId
   }) {
     print('Post to Google Maps');
     return http.Client().post('https://fcm.googleapis.com/fcm/send',
@@ -58,9 +45,10 @@ class Messaging {
             // sent data here
             'senderFCMID': senderFCMID, // sender fcm id
             'senderUsername': username, // sender username
-            messageTypeKey:type // type of the notification
+            'type':type, // type of the notification
+            'activityId': activityId
           },
-          'to': '$topic',
+          'to': '/topics/$topic',
         }),
         headers: {
           'Content-Type': 'application/json',

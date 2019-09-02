@@ -25,13 +25,4 @@ class LabSession implements Listable {
         'draft': draft,
         'id': id
       };
-
-  @override
-  Widget buildListTile(BuildContext context) {
-    return ListTile(title: Text('Session title: $title'), 
-                    subtitle: Text('draft: $draft'),
-                    onTap: (){
-                      
-                  });
-  }
 }

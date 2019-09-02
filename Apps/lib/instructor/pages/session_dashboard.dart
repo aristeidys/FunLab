@@ -41,11 +41,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
           ? Container(
               margin: EdgeInsets.only(top: 30),
               child: Center(
-                child: Text('Student messages will appear here',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    )),
+                child: Text('Student messages will appear here'),
               ))
           : Expanded(
               child: ListView.builder(
@@ -72,14 +68,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                             color: Colors.green,
                             icon: Icons.done,
                             onTap: () async {
-                              Response response = await Messaging().sendToTopic(
-                                  type: '',
-                                  title: 'Activity rejected',
-                                  body:
-                                      'Your Instrucor rejected your activity.',
-                                  topic: Messaging.studentChannel,
-                                  username: '',
-                                  senderFCMID: '');
+                              Response response = await sendActivityConfirmed(index);
 
                               if (response.statusCode == 200) {
                                 setState(() {
@@ -94,13 +83,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                           color: Colors.red,
                           icon: Icons.cancel,
                           onTap: () async {
-                            Response response = await Messaging().sendToTopic(
-                                type: '',
-                                title: 'Activity rejected',
-                                body: 'Your Instrucor rejected your activity.',
-                                topic: Messaging.studentChannel,
-                                username: '',
-                                senderFCMID: '');
+                            Response response = await sendActivityReject(index);
 
                             if (response.statusCode == 200) {
                               setState(() {
@@ -114,6 +97,31 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                     );
                   }))
     ]);
+  }
+
+  Future<Response> sendActivityConfirmed(int index) async {
+    Response response = await Messaging().sendToTopic(
+        type: Messaging.messageTypeInstructorConfirm,
+        title: 'Activity confirmed',
+        body:
+            'Your Instrucor Confirmed your activity.',
+        topic: Messaging.studentChannel,
+        username: '',
+        senderFCMID: '',
+        activityId: messages[index].activityId);
+    return response;
+  }
+
+  Future<Response> sendActivityReject(int index) async {
+    Response response = await Messaging().sendToTopic(
+        type: Messaging.messageTypeInstructorReject,
+        title: 'Activity rejected',
+        body: 'Your Instrucor rejected your activity.',
+        topic: Messaging.studentChannel,
+        username: '',
+        senderFCMID: '',
+        activityId: messages[index].activityId);
+    return response;
   }
 
   Widget buildMessage(Message message) {
@@ -144,7 +152,9 @@ class _MessagingWidgetState extends State<MessagingWidget> {
         String activityTitle = message['notification']['title'];
 
         String stringType = message['data'][Messaging.messageTypeKey];
-        ListTileType messageType = stringType == Messaging.studentDoneValue
+        int activityId = message['data'][Messaging.activityIdKey];
+
+        ListTileType messageType = stringType == Messaging.messageTypeStudentDone
             ? ListTileType.doneTyle
             : ListTileType.helpTile;
 
@@ -152,7 +162,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
 
         setState(() {
           messages.add(Message(
-              title: activityTitle, body: activityBody, type: messageType));
+              title: activityTitle, body: activityBody, type: messageType, activityId: activityId));
         });
       },
     );
