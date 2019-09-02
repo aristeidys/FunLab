@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/widgets/custom_texts.dart';
-import 'package:funlab/instructor/pages/home.dart';
+import 'package:funlab/instructor/pages/instructor_home.dart';
 import 'package:funlab/student/pages/student_home.dart';
 
 class RoleSelectionPage extends StatelessWidget {

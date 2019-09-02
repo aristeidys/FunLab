@@ -10,6 +10,6 @@ AppState appReducer(AppState state, action) {
     questionIndex: questionReducer(state.questionIndex, action),
     currentLabSession: labSessionReducer(state.currentLabSession, action),
     username: usernameReducer(state.username, action),
-    currentActivities: activitiesReducer(state.currentActivities, action),
+    currentMessages: messagesReducer(state.currentMessages, action),
   );
 }

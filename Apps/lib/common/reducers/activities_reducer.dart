@@ -1,33 +1,32 @@
+import 'package:funlab/common/models/message.model.dart';
 
-import 'package:funlab/common/models/assignment.model.dart';
+class ReplaceMessagesAction {
+  final List<StudentMessage> messages;
 
-class ReplaceActivitiesAction {
-  final List<Activity> activities;
-
-  ReplaceActivitiesAction(this.activities);
+  ReplaceMessagesAction(this.messages);
 }
 
-class ToggleActivityStateAction {
-  final Activity activity;
+class ToggleMessagesStateAction {
+  final StudentMessage messages;
 
-  ToggleActivityStateAction(this.activity);
+  ToggleMessagesStateAction(this.messages);
 }
 
 typedef OnStateChanged = Function(dynamic);
 
-List<Activity> activitiesReducer(List<Activity> activities, action) {
-  if (action is ReplaceActivitiesAction) {
-    return action.activities;
+List<StudentMessage> messagesReducer(List<StudentMessage> messages, action) {
+  if (action is ReplaceMessagesAction) {
+    return action.messages;
   } else {
-    return activities;
+    return messages;
   }
 }
 
-List<Activity> toggleActivityState(
-    List<Activity> items, ToggleActivityStateAction action) {
-  List<Activity> itemsNew = items
-      .map((activity) =>
-          activity.title == action.activity.title ? action.activity : activity)
+List<StudentMessage> toggleMessagesState(
+    List<StudentMessage> items, ToggleMessagesStateAction action) {
+  List<StudentMessage> itemsNew = items
+      .map((messages) =>
+          messages.title == action.messages.title ? action.messages : messages)
       .toList();
   return itemsNew;
 }

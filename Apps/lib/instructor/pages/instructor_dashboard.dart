@@ -9,8 +9,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:http/http.dart';
 
 class SessionDashboardPage extends StatelessWidget {
-  final pageController = new PageController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +30,7 @@ class MessagingWidget extends StatefulWidget {
 class _MessagingWidgetState extends State<MessagingWidget> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-  final List<Message> messages = [];
+  final List<StudentMessage> messages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -54,21 +52,23 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                       actionExtentRatio: 0.25,
                       child: Container(
                           color: Colors.white,
-                          child: ListTileWithArrow(
-                            title: messages[index].title,
-                            subTitle: messages[index].body,
-                            type: messages[index].type,
-                            onTapCallback: () {
-                              // on tap
-                            },
-                          )),
+                          child: messages[index].type == ListTileType.doneTile
+                              ? InstructorDoneListTile(
+                                  title: messages[index].title,
+                                  subTitle: messages[index].body,
+                                )
+                              : InstructorHelpListTile(
+                                  title: messages[index].title,
+                                  subTitle: messages[index].body,
+                                )),
                       secondaryActions: <Widget>[
                         IconSlideAction(
                             caption: 'Confirm',
                             color: Colors.green,
                             icon: Icons.done,
                             onTap: () async {
-                              Response response = await sendActivityConfirmed(index);
+                              Response response =
+                                  await sendActivityConfirmed(index);
 
                               if (response.statusCode == 200) {
                                 setState(() {
@@ -100,31 +100,26 @@ class _MessagingWidgetState extends State<MessagingWidget> {
   }
 
   Future<Response> sendActivityConfirmed(int index) async {
-    Response response = await Messaging().sendToTopic(
+    Response response = await Messaging().sendToToken(
         type: Messaging.messageTypeInstructorConfirm,
         title: 'Activity confirmed',
-        body:
-            'Your Instrucor Confirmed your activity.',
-        topic: Messaging.studentChannel,
-        username: '',
-        senderFCMID: '',
+        body: 'Your Instrucor Confirmed your activity.',
+        token: messages[index].studentToken,
         activityId: messages[index].activityId);
     return response;
   }
 
   Future<Response> sendActivityReject(int index) async {
-    Response response = await Messaging().sendToTopic(
+    Response response = await Messaging().sendToToken(
         type: Messaging.messageTypeInstructorReject,
         title: 'Activity rejected',
         body: 'Your Instrucor rejected your activity.',
-        topic: Messaging.studentChannel,
-        username: '',
-        senderFCMID: '',
+        token: messages[index].studentToken,
         activityId: messages[index].activityId);
     return response;
   }
 
-  Widget buildMessage(Message message) {
+  Widget buildMessage(StudentMessage message) {
     return ListTile(title: Text(message.title), subtitle: Text(message.body));
   }
 
@@ -133,6 +128,12 @@ class _MessagingWidgetState extends State<MessagingWidget> {
     super.initState();
     _firebaseMessaging.subscribeToTopic(Messaging.instructorChannel);
     this.configureFirebase();
+  }
+
+  @override
+  void dispose() {
+    _firebaseMessaging.unsubscribeFromTopic(Messaging.instructorChannel);
+    super.dispose();
   }
 
   void configureFirebase() {
@@ -144,25 +145,30 @@ class _MessagingWidgetState extends State<MessagingWidget> {
         print('onResume called $message');
       },
       onMessage: (Map<String, dynamic> message) {
-        print('onMessage called $message');
-        print(message['data']['senderFCMID']);
+        print('onMessage called for Instructor $message');
 
         // uncomment to use fcm id of student
         //  String id = message['data']['senderFCMID'];
         String activityTitle = message['notification']['title'];
 
         String stringType = message['data'][Messaging.messageTypeKey];
+        String studentToken = message['data'][Messaging.messageStudentTokenKey];
         int activityId = int.parse(message['data'][Messaging.activityIdKey]);
 
-        ListTileType messageType = stringType == Messaging.messageTypeStudentDone
-            ? ListTileType.doneTyle
-            : ListTileType.helpTile;
+        ListTileType messageType =
+            stringType == Messaging.messageTypeStudentDone
+                ? ListTileType.doneTile
+                : ListTileType.helpTile;
 
         String activityBody = message['notification']['body'];
 
         setState(() {
-          messages.add(Message(
-              title: activityTitle, body: activityBody, type: messageType, activityId: activityId));
+          messages.add(StudentMessage(
+              title: activityTitle,
+              body: activityBody,
+              studentToken: studentToken,
+              type: messageType,
+              activityId: activityId));
         });
       },
     );

@@ -9,7 +9,7 @@ import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/instructor/components/activity_form.dart';
 import 'package:funlab/instructor/components/lab_session_form.dart';
-import 'package:funlab/instructor/pages/session_dashboard.dart';
+import 'package:funlab/instructor/pages/instructor_dashboard.dart';
 
 class InstructorForms extends StatelessWidget {
   final pageController = new PageController();
