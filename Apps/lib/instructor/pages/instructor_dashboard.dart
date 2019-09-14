@@ -138,13 +138,13 @@ class _MessagingWidgetState extends State<MessagingWidget> {
 
   void configureFirebase() {
     _firebaseMessaging.configure(
-      onLaunch: (Map<String, dynamic> message) async {
+      onLaunch: (Map<String, dynamic> message) {
         print('onLaunch called $message');
       },
-      onResume: (Map<String, dynamic> message) async {
+      onResume: (Map<String, dynamic> message) {
         print('onResume called $message');
       },
-      onMessage: (Map<String, dynamic> message) async {
+      onMessage: (Map<String, dynamic> message) {
         print('onMessage called for Instructor $message');
 
         // uncomment to use fcm id of student
