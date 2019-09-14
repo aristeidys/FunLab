@@ -45,9 +45,7 @@ class FormWithButtonState extends State<FormWithButton> {
                 _textFieldController.clear();
               },
               validator: (String value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
+                return value.isEmpty ? 'Please enter some text': "";
               },
             ),
             Padding(padding: EdgeInsets.all(5),),
