@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:funlab/common/widgets/custom_list_view.dart';
 
 class LabSession implements Listable {
