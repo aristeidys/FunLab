@@ -105,13 +105,13 @@ class _StudentActivityListState extends State<StudentActivityList> {
 
   void configureFirebase() {
     _firebaseMessaging.configure(
-      onLaunch: (Map<String, dynamic> message) {
+      onLaunch: (Map<String, dynamic> message) async {
         print('onLaunch called $message');
       },
-      onResume: (Map<String, dynamic> message) {
+      onResume: (Map<String, dynamic> message) async {
         print('onResume called $message');
       },
-      onMessage: (Map<String, dynamic> message) {
+      onMessage: (Map<String, dynamic> message) async {
         print('onMessage called for Student $message');
 
         // uncomment to use fcm id of student
