@@ -1,6 +1,4 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:funlab/common/widgets/custom_list_view.dart';
 
 class Student implements Listable {

@@ -1,4 +1,4 @@
 
 abstract class Listable {
-  Listable fromJson(Map<String, dynamic> json){}
+  void fromJson(Map<String, dynamic> json){}
 }
