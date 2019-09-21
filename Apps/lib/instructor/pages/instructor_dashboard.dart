@@ -61,55 +61,91 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                                   title: messages[index].title,
                                   subTitle: messages[index].body,
                                 )),
-                      secondaryActions: <Widget>[
-                        IconSlideAction(
-                            caption: 'Confirm',
-                            color: Colors.green,
-                            icon: Icons.done,
-                            onTap: () async {
-                              Response response =
-                                  await sendTaskConfirmed(index);
+                      secondaryActions:
+                          messages[index].type == ListTileType.doneTile
+                              ? <Widget>[
+                                  IconSlideAction(
+                                      caption: 'Confirm',
+                                      color: Colors.green,
+                                      icon: Icons.done,
+                                      onTap: () async {
+                                        Response response =
+                                            await sendTaskConfirmed(index);
 
-                              if (response.statusCode == 200) {
-                                setState(() {
-                                  messages.removeAt(index);
-                                });
-                              }
-                              CustomToaster()
-                                  .showDefaultToast(response, context);
-                            }),
-                        IconSlideAction(
-                          caption: 'Reject',
-                          color: Colors.red,
-                          icon: Icons.cancel,
-                          onTap: () async {
-                            Response response = await sendTaskReject(index);
+                                        onResponse(index, response);
+                                      }),
+                                  IconSlideAction(
+                                    caption: 'Pass',
+                                    color: Colors.yellow,
+                                    icon: Icons.sim_card_alert,
+                                    onTap: () async {
+                                      Response response =
+                                          await sendTaskConfirmed(index);
 
-                            if (response.statusCode == 200) {
-                              setState(() {
-                                messages.removeAt(index);
-                              });
-                            }
-                            CustomToaster().showDefaultToast(response, context);
-                          },
-                        ),
-                      ],
+                                      onResponse(index, response);
+                                    },
+                                  ),
+                                  IconSlideAction(
+                                    caption: 'Reject',
+                                    color: Colors.red,
+                                    icon: Icons.cancel,
+                                    onTap: () async {
+                                      Response response =
+                                          await sendTaskReject(index);
+
+                                      onResponse(index, response);
+                                    },
+                                  ),
+                                ]
+                              : <Widget>[
+                                  IconSlideAction(
+                                      caption: 'Good',
+                                      color: Colors.green,
+                                      icon: Icons.assignment_turned_in,
+                                      onTap: () async {
+                                        Response response =
+                                            await sendTaskAnswered(index);
+
+                                        onResponse(index, response);
+                                      }),
+                                  IconSlideAction(
+                                    caption: 'Ok',
+                                    color: Colors.yellow,
+                                    icon: Icons.assignment,
+                                    onTap: () async {
+                                      Response response =
+                                          await sendTaskAnswered(index);
+
+                                      onResponse(index, response);
+                                    },
+                                  ),
+                                  IconSlideAction(
+                                    caption: 'Should know',
+                                    color: Colors.red,
+                                    icon: Icons.assignment_late,
+                                    onTap: () async {
+                                      Response response =
+                                          await sendTaskAnswered(index);
+
+                                      onResponse(index, response);
+                                    },
+                                  ),
+                                ],
                     );
                   }))
     ]);
   }
 
-  Future<Response> sendTaskConfirmed(int index) async {
-    Response response = await Messaging().sendToToken(
-        type: Messaging.messageTypeInstructorConfirm,
-        title: 'Task confirmed',
-        body: 'Your Instrucor Confirmed your task.',
-        token: messages[index].studentToken,
-        taskId: messages[index].taskId);
-    return response;
+  void onResponse(int index, Response response) {
+    if (response.statusCode == 200) {
+      setState(() {
+        messages.removeAt(index);
+      });
+    }
+    CustomToaster().showDefaultToast(response, context);
   }
 
-    Future<Response> sendTaskPass(int index) async {
+  Future<Response> sendTaskConfirmed(int index) async {
     Response response = await Messaging().sendToToken(
         type: Messaging.messageTypeInstructorConfirm,
         title: 'Task confirmed',
@@ -124,6 +160,16 @@ class _MessagingWidgetState extends State<MessagingWidget> {
         type: Messaging.messageTypeInstructorReject,
         title: 'Task rejected',
         body: 'Your Instrucor rejected your task.',
+        token: messages[index].studentToken,
+        taskId: messages[index].taskId);
+    return response;
+  }
+
+  Future<Response> sendTaskAnswered(int index) async {
+    Response response = await Messaging().sendToToken(
+        type: Messaging.messageTypeInstructorAnswer,
+        title: 'Task answered',
+        body: 'Your Instrucor answered your question.',
         token: messages[index].studentToken,
         taskId: messages[index].taskId);
     return response;

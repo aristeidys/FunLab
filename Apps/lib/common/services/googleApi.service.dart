@@ -21,6 +21,7 @@ class Messaging {
   static const messageTypeStudentHelp = 'student_help';
   static const messageTypeInstructorConfirm = 'instructor_confirm';
   static const messageTypeInstructorReject = 'instructor_reject';
+  static const messageTypeInstructorAnswer = 'instructor_answer';
 
   static const messageStudentTokenKey = 'senderFCMID';
 
