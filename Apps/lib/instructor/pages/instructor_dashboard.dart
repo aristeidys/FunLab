@@ -14,7 +14,7 @@ class SessionDashboardPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Styles.instructorColor,
-          title: Text('Instructor: Session Dashboard'),
+          title: Text('Dashboard'),
         ),
         body: Stack(
             alignment: Alignment.bottomCenter,
