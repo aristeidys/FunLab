@@ -1,30 +1,30 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:funlab/common/models/assignment.model.dart';
+import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/services/activity.service.dart';
+import 'package:funlab/common/services/task.service.dart';
 import 'package:funlab/common/services/googleApi.service.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
-import 'package:funlab/student/pages/student_activity_detail.dart';
+import 'package:funlab/student/pages/student_task_detail.dart';
 
-class StudentActivityList extends StatefulWidget {
+class StudentTaskList extends StatefulWidget {
   final LabSession labSession;
 
-  StudentActivityList({Key key, @required this.labSession}) : super(key: key);
+  StudentTaskList({Key key, @required this.labSession}) : super(key: key);
 
   @override
-  _StudentActivityListState createState() => _StudentActivityListState();
+  _StudentTaskListState createState() => _StudentTaskListState();
 }
 
-class _StudentActivityListState extends State<StudentActivityList> {
+class _StudentTaskListState extends State<StudentTaskList> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   List<StudentTileViewModel> viewModels = [];
 
-  Future<List<Activity>> _listFuture;
+  Future<List<Task>> _listFuture;
 
   @override
   void initState() {
@@ -35,13 +35,13 @@ class _StudentActivityListState extends State<StudentActivityList> {
     _listFuture = updateAndGetList();
   }
 
-  Future<List<Activity>> updateAndGetList() async {
-    return ActivityService()
-        .getActivitiesWithSessionID(widget.labSession.id)
-        .then((List<Activity> values) {
+  Future<List<Task>> updateAndGetList() async {
+    return TaskService()
+        .getTasksWithSessionID(widget.labSession.id)
+        .then((List<Task> values) {
       values.forEach((value) {
         viewModels.add(StudentTileViewModel(
-            activityId: value.id,
+            taskId: value.id,
             title: value.title,
             body: '',
             type: ListTileType.defaultTile));
@@ -57,7 +57,7 @@ class _StudentActivityListState extends State<StudentActivityList> {
           backgroundColor: Styles.studentMainColor,
           title: Text('Session: ${widget.labSession.title}'),
         ),
-        body: FutureBuilder<List<Activity>>(
+        body: FutureBuilder<List<Task>>(
             future: _listFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -88,13 +88,13 @@ class _StudentActivityListState extends State<StudentActivityList> {
             }));
   }
 
-  void onTileTap(BuildContext context, AsyncSnapshot<List<Activity>> snapshot,
+  void onTileTap(BuildContext context, AsyncSnapshot<List<Task>> snapshot,
       int position) {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) =>
-                StudentActivityDetail(activity: snapshot.data[position])));
+                StudentTaskDetail(task: snapshot.data[position])));
   }
 
   @override
@@ -116,22 +116,22 @@ class _StudentActivityListState extends State<StudentActivityList> {
 
         // uncomment to use fcm id of student
         //  String id = message['data']['senderFCMID'];
-        String activityTitle = message['notification']['title'];
+        String taskTitle = message['notification']['title'];
 
         String stringType = message['data'][Messaging.messageTypeKey];
 
-        int activityId = int.parse(message['data'][Messaging.activityIdKey]);
+        int taskId = int.parse(message['data'][Messaging.taskIdKey]);
 
         String messageType = stringType;
 
-        String activityBody = message['notification']['body'];
+        String taskBody = message['notification']['body'];
 
         // setState(() {
         //   model.add(StudentTileViewModel(
-        //       title: activityTitle,
-        //       body: activityBody,
+        //       title: taskTitle,
+        //       body: taskBody,
         //       type: messageType,
-        //       activityId: activityId));
+        //       taskId: taskId));
         // });
       },
     );

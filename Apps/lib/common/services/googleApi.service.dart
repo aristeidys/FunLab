@@ -15,7 +15,7 @@ class Messaging {
   static const instructorChannel = 'instructorChannel';
 
   static const messageTypeKey = 'type';
-  static const activityIdKey = 'activityId';
+  static const taskIdKey = 'taskId';
 
   static const messageTypeStudentDone = 'student_done';
   static const messageTypeStudentHelp = 'student_help';
@@ -29,7 +29,7 @@ class Messaging {
       @required String body,
       @required String type,
       @required String token,
-      @required int activityId}) {
+      @required int taskId}) {
     print('Post to Google Maps');
     return http.Client().post('https://fcm.googleapis.com/fcm/send',
         body: jsonEncode({
@@ -42,7 +42,7 @@ class Messaging {
 
             // sent data here
             'type': type, // type of the notification
-            'activityId': activityId
+            'taskId': taskId
           },
           'to': token,
         }),
@@ -59,7 +59,7 @@ class Messaging {
       @required String senderFCMID,
       @required String username,
       @required String topic,
-      @required int activityId}) {
+      @required int taskId}) {
     print('Post to Google Maps');
     return http.Client().post('https://fcm.googleapis.com/fcm/send',
         body: jsonEncode({
@@ -74,7 +74,7 @@ class Messaging {
             'senderFCMID': senderFCMID, // sender fcm id
             'senderUsername': username, // sender username
             'type': type, // type of the notification
-            'activityId': activityId
+            'taskId': taskId
           },
           'to': '/topics/$topic',
         }),

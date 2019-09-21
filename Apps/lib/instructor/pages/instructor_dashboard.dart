@@ -68,7 +68,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                             icon: Icons.done,
                             onTap: () async {
                               Response response =
-                                  await sendActivityConfirmed(index);
+                                  await sendTaskConfirmed(index);
 
                               if (response.statusCode == 200) {
                                 setState(() {
@@ -83,7 +83,7 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                           color: Colors.red,
                           icon: Icons.cancel,
                           onTap: () async {
-                            Response response = await sendActivityReject(index);
+                            Response response = await sendTaskReject(index);
 
                             if (response.statusCode == 200) {
                               setState(() {
@@ -99,23 +99,33 @@ class _MessagingWidgetState extends State<MessagingWidget> {
     ]);
   }
 
-  Future<Response> sendActivityConfirmed(int index) async {
+  Future<Response> sendTaskConfirmed(int index) async {
     Response response = await Messaging().sendToToken(
         type: Messaging.messageTypeInstructorConfirm,
-        title: 'Activity confirmed',
-        body: 'Your Instrucor Confirmed your activity.',
+        title: 'Task confirmed',
+        body: 'Your Instrucor Confirmed your task.',
         token: messages[index].studentToken,
-        activityId: messages[index].activityId);
+        taskId: messages[index].taskId);
     return response;
   }
 
-  Future<Response> sendActivityReject(int index) async {
+    Future<Response> sendTaskPass(int index) async {
+    Response response = await Messaging().sendToToken(
+        type: Messaging.messageTypeInstructorConfirm,
+        title: 'Task confirmed',
+        body: 'Your Instrucor Confirmed your task.',
+        token: messages[index].studentToken,
+        taskId: messages[index].taskId);
+    return response;
+  }
+
+  Future<Response> sendTaskReject(int index) async {
     Response response = await Messaging().sendToToken(
         type: Messaging.messageTypeInstructorReject,
-        title: 'Activity rejected',
-        body: 'Your Instrucor rejected your activity.',
+        title: 'Task rejected',
+        body: 'Your Instrucor rejected your task.',
         token: messages[index].studentToken,
-        activityId: messages[index].activityId);
+        taskId: messages[index].taskId);
     return response;
   }
 
@@ -149,26 +159,26 @@ class _MessagingWidgetState extends State<MessagingWidget> {
 
         // uncomment to use fcm id of student
         //  String id = message['data']['senderFCMID'];
-        String activityTitle = message['notification']['title'];
+        String taskTitle = message['notification']['title'];
 
         String stringType = message['data'][Messaging.messageTypeKey];
         String studentToken = message['data'][Messaging.messageStudentTokenKey];
-        int activityId = int.parse(message['data'][Messaging.activityIdKey]);
+        int taskId = int.parse(message['data'][Messaging.taskIdKey]);
 
         ListTileType messageType =
             stringType == Messaging.messageTypeStudentDone
                 ? ListTileType.doneTile
                 : ListTileType.helpTile;
 
-        String activityBody = message['notification']['body'];
+        String taskBody = message['notification']['body'];
 
         setState(() {
           messages.add(StudentMessage(
-              title: activityTitle,
-              body: activityBody,
+              title: taskTitle,
+              body: taskBody,
               studentToken: studentToken,
               type: messageType,
-              activityId: activityId));
+              taskId: taskId));
         });
       },
     );

@@ -2,7 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/common/models/assignment.model.dart';
+import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/services/googleApi.service.dart';
 import 'package:funlab/common/styling.dart';
@@ -11,16 +11,16 @@ import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:http/http.dart';
 
-class StudentActivityDetail extends StatefulWidget {
-  final Activity activity;
+class StudentTaskDetail extends StatefulWidget {
+  final Task task;
 
-  StudentActivityDetail({Key key, @required this.activity}) : super(key: key);
+  StudentTaskDetail({Key key, @required this.task}) : super(key: key);
 
   @override
-  _StudentActivityDetailState createState() => _StudentActivityDetailState();
+  _StudentTaskDetailState createState() => _StudentTaskDetailState();
 }
 
-class _StudentActivityDetailState extends State<StudentActivityDetail> {
+class _StudentTaskDetailState extends State<StudentTaskDetail> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   String firebaseID;
@@ -38,7 +38,7 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Styles.studentMainColor,
-                title: Text('Student: ${widget.activity.title}'),
+                title: Text('Task: ${widget.task.title}'),
               ),
               body: Builder(
                   builder: (context) => Container(
@@ -68,22 +68,22 @@ class _StudentActivityDetailState extends State<StudentActivityDetail> {
       BuildContext context, String username) async {
     return await Messaging().sendToTopic(
         title: 'A Student needs your Help',
-        body: '$username needs help with activity: ${widget.activity.title}',
+        body: '$username needs help on ${widget.task.title}',
         type: Messaging.messageTypeStudentHelp,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
         username: username,
-        activityId: widget.activity.id);
+        taskId: widget.task.id);
   }
 
   Future sendDoneNotification(BuildContext context, String username) async {
     return await Messaging().sendToTopic(
-        title: 'A Student finished an Activity',
-        body: '$username finished activity: ${widget.activity.title}',
+        title: 'A Student finished a Task',
+        body: '$username finished ${widget.task.title}',
         type: Messaging.messageTypeStudentDone,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
         username: username,
-        activityId: widget.activity.id);
+        taskId: widget.task.id);
   }
 }

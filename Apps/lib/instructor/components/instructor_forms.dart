@@ -7,7 +7,7 @@ import 'package:funlab/common/reducers/username_reducer.dart';
 import 'package:funlab/common/services/lab_session.service.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
-import 'package:funlab/instructor/components/activity_form.dart';
+import 'package:funlab/instructor/components/task_form.dart';
 import 'package:funlab/instructor/components/lab_session_form.dart';
 import 'package:funlab/instructor/pages/instructor_dashboard.dart';
 
@@ -22,7 +22,7 @@ class InstructorForms extends StatelessWidget {
           return labSession == null
               ? LabSessionForm()
               : Column(children: <Widget>[
-                  ActivityForm(),
+                  TaskForm(),
                   EditLabSessionButton(
                     labSession: labSession,
                   )

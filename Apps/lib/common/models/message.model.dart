@@ -7,25 +7,25 @@ class StudentMessage {
   final String body;
   final String studentToken;
   final ListTileType type;
-  final int activityId;
+  final int taskId;
 
   StudentMessage(
       {@required this.title,
       @required this.body,
       @required this.studentToken,
       @required this.type,
-      @required this.activityId});
+      @required this.taskId});
 }
 
 class StudentTileViewModel {
   final String title;
   final String body;
   final ListTileType type;
-  final int activityId;
+  final int taskId;
 
   StudentTileViewModel(
       {@required this.title,
       @required this.body,
       @required this.type,
-      @required this.activityId});
+      @required this.taskId});
 }
