@@ -12,19 +12,21 @@ class LabSessionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-      return (labSession) => store.dispatch(ReplaceCurrentLabAction(labSession));
+      return (labSession) =>
+          store.dispatch(ReplaceCurrentLabAction(labSession));
     }, builder: (context, callback) {
-      return FormWithButton('Enter Session Name', 'Create Draft Session', (labSessionTitle) {
+      return FormWithButton('Enter Session Name', 'Create Draft Session',
+          (labSessionTitle) {
         LabSession labSession =
             LabSession(title: labSessionTitle, finished: false, draft: true);
-        LabSessionService().postRequest(labSession, (success, id, errorMessage) {
+        LabSessionService().postRequest(labSession,
+            (success, id, errorMessage) {
           if (success) {
-
             labSession.id = id;
             callback(labSession);
           } else {
-            CustomToaster().showToast(
-                context, ToasterType.failure, 'Failure Creating Session. $errorMessage');
+            CustomToaster().showToast(context, ToasterType.failure,
+                'Failure Creating Session. $errorMessage');
           }
         });
       });

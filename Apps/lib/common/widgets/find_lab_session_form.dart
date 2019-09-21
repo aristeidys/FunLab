@@ -14,7 +14,7 @@ class FindLabSessionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      FormWithButton( 'Session Name', 'Enroll', (labSessionTitle) async {
+      FormWithButton( 'EnterSession Name', 'Find', (labSessionTitle) async {
         var result = await LabSessionService().getLabSessionsWithTitle(context, labSessionTitle);
 
         if (result.length > 0 && result.last.draft == false) {

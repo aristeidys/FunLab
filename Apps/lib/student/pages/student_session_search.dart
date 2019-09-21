@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/styling.dart';
-import 'package:funlab/student/components/find_lab_session_form.dart';
+import 'package:funlab/common/widgets/find_lab_session_form.dart';
 import 'package:funlab/student/pages/student_task_list.dart';
 
 class StudentSessionJoinPage extends StatefulWidget {
