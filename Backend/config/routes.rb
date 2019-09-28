@@ -3,15 +3,12 @@ Rails.application.routes.draw do
   resources :sessions, defaults: {format: :json}  do
     resources :tasks
   end
-
-  resources :tasks, defaults: {format: :json}
-  
+  resources :modules, defaults: {format: :json}
   resources :students, defaults: {format: :json}  do
     resources :task_results
     resources :session_results
   end
-  resources :, defaults: {format: :json}  do
-    resources :task_results
+  resources :instructors, defaults: {format: :json} do 
+    resources :modules
   end
-  resources :instructors, defaults: {format: :json}
 end
