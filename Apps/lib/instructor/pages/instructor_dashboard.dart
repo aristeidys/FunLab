@@ -71,7 +71,6 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                                       onTap: () async {
                                         Response response =
                                             await sendTaskConfirmed(index);
-
                                         onResponse(index, response);
                                       }),
                                   IconSlideAction(
@@ -81,7 +80,6 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                                     onTap: () async {
                                       Response response =
                                           await sendTaskConfirmed(index);
-
                                       onResponse(index, response);
                                     },
                                   ),
@@ -92,7 +90,6 @@ class _MessagingWidgetState extends State<MessagingWidget> {
                                     onTap: () async {
                                       Response response =
                                           await sendTaskReject(index);
-
                                       onResponse(index, response);
                                     },
                                   ),

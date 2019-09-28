@@ -12,11 +12,9 @@ class StudentDefaultListTile extends ListTileWithArrow {
     Key key,
     @required title,
     @required subTitle,
-    @required onTapCallback,
   }) : super(
             title: title,
             subTitle: subTitle,
-            onTapCallback: onTapCallback,
             colour: Styles.studentDefaultTileColour,
             icon: Icons.assignment);
 }
@@ -26,11 +24,9 @@ class StudentRejectedListTile extends ListTileWithArrow {
     Key key,
     @required title,
     @required subTitle,
-    @required onTapCallback,
   }) : super(
             title: title,
             subTitle: subTitle,
-            onTapCallback: onTapCallback,
             colour: Styles.studentRejectedTileColour,
             icon: Icons.assignment_late);
 }
@@ -40,11 +36,9 @@ class StudentCompletedListTile extends ListTileWithArrow {
     Key key,
     @required title,
     @required subTitle,
-    @required onTapCallback,
   }) : super(
             title: title,
             subTitle: subTitle,
-            onTapCallback: onTapCallback,
             colour: Styles.studentDoneTileColour,
             icon: Icons.assignment_turned_in);
 }
