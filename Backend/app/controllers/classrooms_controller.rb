@@ -1,26 +1,26 @@
-class ClassroomsController < ApplicationController    
+class ClassroomsController < ApplicationController   
+
   before_action :set_classroom, only: [:show, :update, :destroy]
   
-  #GET /classrooms
   def index
 
-    # GET /classrooms?name=helloworld
+    # FIND
     @classrooms = if params[:name]
       Classroom.findByName(params[:name])
     else
 
-    # GET /classrooms
+    # GET ALL
     Classroom.all
     end
     render json: @classrooms
   end
 
-  # GET /classrooms/1
+  # GET ONE
   def show
     render json: @classroom.to_json(only: [:id, :name])
   end
 
-  # POST /classrooms
+  # POST
   def create
     @classroom = Classroom.new(classroom_params)
     if @classroom.save
@@ -30,7 +30,7 @@ class ClassroomsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /classrooms/1
+  # UPDATE
   def update
     if @classroom.update(classroom_params)
       render json: @classroom
@@ -39,17 +39,15 @@ class ClassroomsController < ApplicationController
     end
   end
 
-  # DELETE /classrooms/1
+  # DELETE
   def destroy
     @classroom.destroy
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_classroom
     @classroom = Classroom.find(params[:id])
   end
-  # Only allow a trusted parameter "white list" through.
   def classroom_params
     params.fetch(:classroom).permit(:name, :instructor_id)
   end
