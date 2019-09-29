@@ -1,7 +1,7 @@
 class Session < ApplicationRecord
   validates :title, uniqueness: true
   
-  belongs_to :module
+  belongs_to :classroom
   
   has_many :tasks
   

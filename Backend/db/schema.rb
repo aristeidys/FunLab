@@ -15,16 +15,16 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "classrooms", force: :cascade do |t|
+    t.bigint "instructor_id"
+    t.string "name"
+    t.index ["instructor_id"], name: "index_classrooms_on_instructor_id"
+  end
+
   create_table "instructors", force: :cascade do |t|
     t.string "name"
     t.string "username"
     t.string "password"
-  end
-
-  create_table "modules", force: :cascade do |t|
-    t.bigint "instructor_id"
-    t.string "name"
-    t.index ["instructor_id"], name: "index_modules_on_instructor_id"
   end
 
   create_table "session_results", force: :cascade do |t|
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.bigint "module_id"
+    t.bigint "classroom_id"
     t.string "name"
     t.boolean "isActive"
-    t.index ["module_id"], name: "index_sessions_on_module_id"
+    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 
   create_table "students", force: :cascade do |t|
