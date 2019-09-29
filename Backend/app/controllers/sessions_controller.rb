@@ -1,17 +1,23 @@
 class SessionsController < ApplicationController
   
   before_action :set_session, only: [:show, :update, :destroy]
-  
+  before_action :get_classroom, only: [:show, :create]
+
   def index
 
-    # FIND
-    @sessions = if params[:name]
-      Session.findByName(params[:name])
+    @sessions = if params[:classroom_id]
+      @classroom.sessions
     else
 
       # GET ALL
       Session.all
     end
+
+      # FIND
+      if params[:name]
+        @sessions = @sessions.findByName(params[:name])
+      end
+
     render json: @sessions
   end
   
@@ -50,5 +56,10 @@ class SessionsController < ApplicationController
   end
   def session_params
     params.require(:session).permit(:name, :isActive, :classroom_id)
+  end
+  def get_classroom
+    if params[:classroom_id]
+      @classroom = Classroom.find(params[:classroom_id])
+    end
   end
 end

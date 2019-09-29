@@ -1,7 +1,7 @@
 class ClassroomsController < ApplicationController   
 
   before_action :set_classroom, only: [:show, :update, :destroy]
-  before_action :get_instructor
+  before_action :get_instructor, only: [:show, :create]
   
   def index
 
@@ -12,6 +12,7 @@ class ClassroomsController < ApplicationController
       # GET ALL
       Classroom.all
     end 
+    
     # FIND
     if params[:name]
       @classrooms = @classrooms.findByName(params[:name])
