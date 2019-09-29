@@ -5,43 +5,42 @@ class TasksController < ApplicationController
 
   def index
 
-      # GET /task?lab_session_id=34
-
-    @tasks = if params[:lab_session_id]
-      Task.search_by_lab_session_id(params[:lab_session_id])
+    # FIND
+    @tasks = if params[:name]
+      Task.findByName(params[:name])
     else
-        # GET /tasks
-
-      Task.all
-    end
-    @tasks = @tasks.title(params[:title]) if params[:title].present?
     
+      # GET ALL
+      Task.all
+    end    
     render json: @tasks
   end
   
-  # GET /tasks/21
+  # GET ONE
   def show
-    render json: @task
+    render json: @task.to_json()
   end
   
-  # POST /tasks
+  # POST
   def create
     @task = Task.new(task_params)
     if @task.save
-      render :show, status: :created, location: @task
+      render json: @task.to_json(), status: :created
     else
       render json: @task.errors, status: :unprocessable_entity
     end
   end
   
+  # UPDATE
   def update
     if @task.update(task_params)
-      render :show, status: :ok, location: @task
+      render json: @task
     else 
       render json: @task.errors, status: :unprocessable_entity
     end
   end
   
+  # DELETE
   def destroy
     @task.destroy
   end
@@ -51,6 +50,6 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
       end
       def task_params
-        params.require(:task).permit(:title, :lab_session_id)
+        params.require(:task).permit(:name, :session_id, :difficulty)
       end
 end

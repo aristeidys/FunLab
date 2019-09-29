@@ -17,23 +17,23 @@ class SessionsController < ApplicationController
   
   # GET ONE
   def show
-    render json: @sessions
+    render json: @session
   end
 
   # POST
   def create
-    @sessions = Sessions.new(session_params)
-    if @sessions.save
-      render json: @classroom.to_json(only: [:id]), status: :created
+    @session = Session.new(session_params)
+    if @session.save
+      render json: @session.to_json(only: [:id]), status: :created
     else
-      render json: @sessions.errors, status: :unprocessable_entity
+      render json: @session.errors, status: :unprocessable_entity
     end
   end
   
   # UPDATE
   def update
     if @session.update(session_params)
-      render json: @classroom
+      render json: @session
     else 
       render json: @session.errors, status: :unprocessable_entity
     end

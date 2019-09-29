@@ -3,6 +3,12 @@ class Session < ApplicationRecord
   # Validations
   validates :name, uniqueness: true
   
+  after_initialize :init
+
+  def init
+    self.isActive = false if self.isActive.nil?
+  end
+
   # Relations
   belongs_to :classroom
   has_many :tasks

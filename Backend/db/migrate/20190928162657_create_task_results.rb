@@ -5,8 +5,8 @@ class CreateTaskResults < ActiveRecord::Migration[5.2]
       t.belongs_to :task
       t.boolean :completed
       t.boolean :succeeded
-      t.decimal :numberOfGoodHelp
-      t.decimal :numberOfBadHelp
+      t.integer :numberOfGoodHelp
+      t.integer :numberOfBadHelp
     end
   end
 end

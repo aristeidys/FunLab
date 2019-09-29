@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
     t.bigint "session_id"
     t.bigint "student_id"
     t.boolean "completed"
-    t.decimal "totalScore"
+    t.integer "totalScore"
     t.index ["session_id"], name: "index_session_results_on_session_id"
     t.index ["student_id"], name: "index_session_results_on_student_id"
   end
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
     t.bigint "task_id"
     t.boolean "completed"
     t.boolean "succeeded"
-    t.decimal "numberOfGoodHelp"
-    t.decimal "numberOfBadHelp"
+    t.integer "numberOfGoodHelp"
+    t.integer "numberOfBadHelp"
     t.index ["student_id"], name: "index_task_results_on_student_id"
     t.index ["task_id"], name: "index_task_results_on_task_id"
   end
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
   create_table "tasks", force: :cascade do |t|
     t.bigint "session_id"
     t.string "name"
-    t.decimal "difficulty"
+    t.integer "difficulty"
     t.index ["session_id"], name: "index_tasks_on_session_id"
   end
 
