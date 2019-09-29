@@ -1,60 +1,56 @@
-class StudentsController < ApplicationController
+class StudentsController < ApplicationController    
+  before_action :set_student, only: [:show, :update, :destroy]
   
-    before_action :set_labSession, only: [:show, :update, :destroy]
-    
-
-      
+  #GET /students
   def index
-    # GET /students?name=hello
 
-    @students = if params[:name]
-      Student.search_by_name(params[:name])
+    # GET /students?username=helloworld
+    @students = if params[:username]
+      Student.findByUsername(params[:username])
     else
-        # GET /students
 
-        Student.all
+    # GET /students
+    Student.all
     end
-    @students = @students.findByName(params[:name]) if params[:name].present?
-    
     render json: @students
   end
 
-  # GET /students/23
+  # GET /students/1
   def show
-    render json: @student
+    render json: @student.to_json(only: [:id, :name, :username, :password])
   end
 
   # POST /students
   def create
-
-    # else 
-      @student = Student.new(student_params)
-      if @student.save
-        render :show, status: :created, location: @student
-      else
-        render json: @student.errors, status: :unprocessable_entity
-      end
-    # end
-  end
-  
-  def update
-    if @student.update(student_params)
-      render :show, status: :ok, location: @student
-    else 
+    @student = Student.new(student_params)
+    if @student.save
+      render json: @student.to_json(only: [:id]), status: :created
+    else
       render json: @student.errors, status: :unprocessable_entity
     end
   end
-  
+
+  # PATCH/PUT /students/1
+  def update
+    if @student.update(student_params)
+      render json: @student
+    else
+      render json: @student.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /students/1
   def destroy
     @student.destroy
   end
-  
+
   private
-      def set_student
-        @student = Student.find(params[:id])
-      end
-      def student_params
-        params.require(:student).permit(:name)
-      end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
   end
-  
+  # Only allow a trusted parameter "white list" through.
+  def student_params
+    params.fetch(:student).permit(:name, :username, :password)
+  end
+end

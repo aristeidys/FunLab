@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
   end
   
   def update
-    if @session.update(labSession_params)
+    if @session.update(session_params)
       render :show, status: :ok, location: @session
     else 
       render json: @session.errors, status: :unprocessable_entity
