@@ -11,8 +11,8 @@ class Student < ApplicationRecord
   scope :findByUsername, -> (username) { where username: username }
 
   # Relations
-  has_many :session_results
-  has_many :sessions, through: :session_results
+  has_many :labsession_results
+  has_many :labsessions, through: :labsession_results
 
   has_many :task_results
   has_many :tasks, through: :task_results

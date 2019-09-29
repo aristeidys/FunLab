@@ -1,4 +1,4 @@
-class Session < ApplicationRecord
+class Labsession < ApplicationRecord
   
   # Validations
   validates :name, uniqueness: true
@@ -7,8 +7,8 @@ class Session < ApplicationRecord
   belongs_to :classroom
   has_many :tasks
   
-  has_many :session_results
-  has_many :students, through: :session_results
+  has_many :labsession_results
+  has_many :students, through: :labsession_results
 
   # Search
   scope :findByName, -> (name) { where name: name }
