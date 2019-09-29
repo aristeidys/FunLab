@@ -11,5 +11,5 @@ class Classroom < ApplicationRecord
   # Relations
   belongs_to :instructor
     
-  has_many :labsessions
+  has_many :sessions
 end

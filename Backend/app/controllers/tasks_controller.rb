@@ -5,10 +5,10 @@ class TasksController < ApplicationController
 
   def index
 
-      # GET /task?lab_labsession_id=34
+      # GET /task?lab_session_id=34
 
-    @tasks = if params[:lab_labsession_id]
-      Task.search_by_lab_labsession_id(params[:lab_labsession_id])
+    @tasks = if params[:lab_session_id]
+      Task.search_by_lab_session_id(params[:lab_session_id])
     else
         # GET /tasks
 
@@ -51,6 +51,6 @@ class TasksController < ApplicationController
         @task = Task.find(params[:id])
       end
       def task_params
-        params.require(:task).permit(:title, :lab_labsession_id)
+        params.require(:task).permit(:title, :lab_session_id)
       end
 end

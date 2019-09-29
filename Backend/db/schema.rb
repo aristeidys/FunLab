@@ -27,20 +27,20 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
     t.string "password"
   end
 
-  create_table "labsession_results", force: :cascade do |t|
-    t.bigint "labsession_id"
+  create_table "session_results", force: :cascade do |t|
+    t.bigint "session_id"
     t.bigint "student_id"
     t.boolean "completed"
     t.decimal "totalScore"
-    t.index ["labsession_id"], name: "index_labsession_results_on_labsession_id"
-    t.index ["student_id"], name: "index_labsession_results_on_student_id"
+    t.index ["session_id"], name: "index_session_results_on_session_id"
+    t.index ["student_id"], name: "index_session_results_on_student_id"
   end
 
-  create_table "labsessions", force: :cascade do |t|
+  create_table "sessions", force: :cascade do |t|
     t.bigint "classroom_id"
     t.string "name"
     t.boolean "isActive"
-    t.index ["classroom_id"], name: "index_labsessions_on_classroom_id"
+    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -61,10 +61,10 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.bigint "labsession_id"
+    t.bigint "session_id"
     t.string "name"
     t.decimal "difficulty"
-    t.index ["labsession_id"], name: "index_tasks_on_labsession_id"
+    t.index ["session_id"], name: "index_tasks_on_session_id"
   end
 
 end
