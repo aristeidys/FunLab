@@ -9,13 +9,14 @@ class Session < ApplicationRecord
     self.isActive = false if self.isActive.nil?
   end
 
+  # Search
+  scope :findByName, -> (name) { where name: name }
+  scope :findByParentID, -> (classroom_id) { where classroom_id: classroom_id }
+
   # Relations
   belongs_to :classroom
   has_many :tasks
   
   has_many :session_results
   has_many :students, through: :session_results
-
-  # Search
-  scope :findByName, -> (name) { where name: name }
 end

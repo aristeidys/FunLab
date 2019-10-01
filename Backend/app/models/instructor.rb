@@ -1,9 +1,9 @@
 class Instructor < ApplicationRecord
       
   # Validations
-  validates :name, :length => { :in => 3..15 }
-  validates :username, :length => { :in => 6..15 }
-  validates :password, :length => { :in => 8..15 }
+  validates :name, :length => { :in => 3..25 }
+  validates :username, :length => { :in => 6..20 }
+  validates :password, :length => { :in => 8..20 }
   validates :username, uniqueness: true
   validates :name, :username, :password, presence: true
 

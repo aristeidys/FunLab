@@ -7,6 +7,7 @@ class Classroom < ApplicationRecord
 
   # Search
   scope :findByName, -> (name) { where name: name }
+  scope :findByParentID, -> (instructor_id) { where instructor_id: instructor_id }
 
   # Relations
   belongs_to :instructor

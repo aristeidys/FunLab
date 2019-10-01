@@ -1,0 +1,2 @@
+# Logfile created on 2019-10-02 00:22:54 +0300 by logger.rb/56815
+I, [2019-10-02T00:23:42.062452 #3163]  INFO -- : Started POST "/classrooms/8/sessions" for ::1 at 2019-10-02 00:23:42 +0300

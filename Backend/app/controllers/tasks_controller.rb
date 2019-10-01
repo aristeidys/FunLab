@@ -2,17 +2,19 @@ class TasksController < ApplicationController
   
   before_action :set_task, only: [:show, :update, :destroy]
   
-
   def index
 
+    @tasks = Task.all
+    if params[:session_id]
+      @tasks = Task.findByParentID(params[:session_id])
+    end
+
     # FIND
-    @tasks = if params[:name]
-      Task.findByName(params[:name])
-    else
+    if params[:name]
+      @tasks = @tasks.findByName(params[:name])
+    end
     
-      # GET ALL
-      Task.all
-    end    
+    
     render json: @tasks
   end
   

@@ -1,23 +1,18 @@
 class ClassroomsController < ApplicationController   
 
   before_action :set_classroom, only: [:show, :update, :destroy]
-  before_action :get_instructor, only: [:show, :create]
   
   def index
 
-    @classrooms = if params[:instructor_id]
-      @instructor.classrooms
-    else
-
-      # GET ALL
-      Classroom.all
+    @classrooms = Classroom.all
+    if params[:instructor_id]
+      @classrooms = Classroom.findByParentID(params[:instructor_id])
     end 
     
     # FIND
     if params[:name]
       @classrooms = @classrooms.findByName(params[:name])
     end
-
 
     render json: @classrooms
   end
@@ -31,7 +26,6 @@ class ClassroomsController < ApplicationController
   def create
     @classrooms = if params[:instructor_id]
       @classroom = @instructor.classrooms.build(classroom_params)
-
       if @classroom.save
         render json: @classroom.to_json(), status: :created
       else
@@ -60,10 +54,5 @@ class ClassroomsController < ApplicationController
   end
   def classroom_params
     params.fetch(:classroom).permit(:name, :instructor_id)
-  end
-  def get_instructor
-    if params[:instructor_id]
-      @instructor = Instructor.find(params[:instructor_id])
-    end
   end
 end

@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
       Student.findByUsername(params[:username])
     else
 
-    # GET /students
+    # FIND
     Student.all
     end
     render json: @students

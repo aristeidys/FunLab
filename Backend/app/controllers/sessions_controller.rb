@@ -1,22 +1,18 @@
 class SessionsController < ApplicationController
   
   before_action :set_session, only: [:show, :update, :destroy]
-  before_action :get_classroom, only: [:show, :create]
 
   def index
 
-    @sessions = if params[:classroom_id]
-      @classroom.sessions
-    else
-
-      # GET ALL
-      Session.all
+    @sessions = Session.all
+    if params[:classroom_id]
+      @sessions = Session.findByParentID(params[:classroom_id])
     end
 
-      # FIND
-      if params[:name]
-        @sessions = @sessions.findByName(params[:name])
-      end
+    # FIND
+    if params[:name]
+      @sessions = @sessions.findByName(params[:name])
+    end
 
     render json: @sessions
   end
@@ -28,11 +24,13 @@ class SessionsController < ApplicationController
 
   # POST
   def create
-    @session = Session.new(session_params)
-    if @session.save
-      render json: @session.to_json(only: [:id]), status: :created
-    else
-      render json: @session.errors, status: :unprocessable_entity
+    @session = if params[:classroom_id]
+      @session = @classroom.sessions.build(session_params)
+      if @session.save
+        render json: @session.to_json(only: [:id]), status: :created
+      else
+        render json: @session.errors, status: :unprocessable_entity
+      end
     end
   end
   
@@ -56,10 +54,5 @@ class SessionsController < ApplicationController
   end
   def session_params
     params.require(:session).permit(:name, :isActive, :classroom_id)
-  end
-  def get_classroom
-    if params[:classroom_id]
-      @classroom = Classroom.find(params[:classroom_id])
-    end
   end
 end
