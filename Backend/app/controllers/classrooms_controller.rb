@@ -24,14 +24,13 @@ class ClassroomsController < ApplicationController
 
   # POST
   def create
-    @classrooms = if params[:instructor_id]
-      @classroom = @instructor.classrooms.build(classroom_params)
+      @classroom = Classroom.new(classroom_params)
+      @classroom.instructor_id = params[:instructor_id]
       if @classroom.save
         render json: @classroom.to_json(), status: :created
       else
         render json: @classroom.errors, status: :unprocessable_entity
       end
-    end
   end
 
   # UPDATE

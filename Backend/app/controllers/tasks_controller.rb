@@ -13,8 +13,6 @@ class TasksController < ApplicationController
     if params[:name]
       @tasks = @tasks.findByName(params[:name])
     end
-    
-    
     render json: @tasks
   end
   

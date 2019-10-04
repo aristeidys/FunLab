@@ -24,13 +24,12 @@ class SessionsController < ApplicationController
 
   # POST
   def create
-    @session = if params[:classroom_id]
-      @session = @classroom.sessions.build(session_params)
-      if @session.save
-        render json: @session.to_json(only: [:id]), status: :created
-      else
-        render json: @session.errors, status: :unprocessable_entity
-      end
+    @session = Session.new(session_params)
+    @session.classroom_id = params[:classroom_id]
+    if @session.save
+      render json: @session.to_json(only: [:id]), status: :created
+    else
+      render json: @session.errors, status: :unprocessable_entity
     end
   end
   
