@@ -7,11 +7,13 @@ class TaskResultsController < ApplicationController
     end
     
     # GET ONE
+
     def show
       render json: @tr.to_json()
     end
     
     # POST
+
     def create
         @tr = TaskResult.new(task_result_params)
         @tr.task_id = params[:task_id]
@@ -24,6 +26,7 @@ class TaskResultsController < ApplicationController
     end
     
     # UPDATE
+    
     def update
       if @tr.update(task_params)
         render json: @task
