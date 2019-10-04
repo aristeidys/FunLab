@@ -10,42 +10,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_30_141425) do
+ActiveRecord::Schema.define(version: 2019_09_28_162657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "activities", force: :cascade do |t|
-    t.string "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "lab_session_id"
-    t.index ["lab_session_id"], name: "index_activities_on_lab_session_id"
+  create_table "classrooms", force: :cascade do |t|
+    t.bigint "instructor_id"
+    t.string "name"
+    t.index ["instructor_id"], name: "index_classrooms_on_instructor_id"
   end
 
-  create_table "enrolments", force: :cascade do |t|
-    t.bigint "lab_session_id"
+  create_table "instructors", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "password"
+  end
+
+  create_table "session_results", force: :cascade do |t|
+    t.bigint "session_id"
     t.bigint "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "points"
-    t.index ["lab_session_id"], name: "index_enrolments_on_lab_session_id"
-    t.index ["student_id"], name: "index_enrolments_on_student_id"
+    t.boolean "completed"
+    t.integer "totalScore"
+    t.index ["session_id"], name: "index_session_results_on_session_id"
+    t.index ["student_id"], name: "index_session_results_on_student_id"
   end
 
-  create_table "lab_sessions", force: :cascade do |t|
-    t.string "title"
-    t.boolean "finished"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "draft"
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "classroom_id"
+    t.string "name"
+    t.boolean "isActive"
+    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "username"
+    t.string "password"
   end
 
-  add_foreign_key "activities", "lab_sessions"
+  create_table "task_results", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "task_id"
+    t.boolean "completed"
+    t.boolean "succeeded"
+    t.integer "numberOfGoodHelp"
+    t.integer "numberOfBadHelp"
+    t.index ["student_id"], name: "index_task_results_on_student_id"
+    t.index ["task_id"], name: "index_task_results_on_task_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "session_id"
+    t.string "name"
+    t.integer "difficulty"
+    t.index ["session_id"], name: "index_tasks_on_session_id"
+  end
+
 end

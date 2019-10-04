@@ -1,5 +1,5 @@
-class Student < ApplicationRecord
-  
+class Instructor < ApplicationRecord
+      
   # Validations
   validates :name, :length => { :in => 3..25 }
   validates :username, :length => { :in => 6..20 }
@@ -11,9 +11,5 @@ class Student < ApplicationRecord
   scope :findByUsername, -> (username) { where username: username }
 
   # Relations
-  has_many :session_results
-  has_many :sessions, through: :session_results
-
-  has_many :task_results
-  has_many :tasks, through: :task_results
+  has_many :classrooms
 end
