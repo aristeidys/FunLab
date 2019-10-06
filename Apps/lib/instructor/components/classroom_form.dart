@@ -9,7 +9,7 @@ class ClassroomForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormWithButton('Enter Classroom Name', 'Create Classroom', (name) {
       Classroom classroom = Classroom(name: name);
-      ClassroomService().createClassroom(classroom).then((response) {
+      ClassroomService().create(classroom, 1).then((response) {
         if (response.statusCode == 201) {
           CustomToaster().showToast(context, ToasterType.failure,
               'Failure Creating Classroom. ${response.body}');

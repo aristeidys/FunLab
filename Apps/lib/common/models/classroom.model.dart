@@ -22,17 +22,25 @@ String allClassroomsToJson(List<Classroom> data) {
 }
 
 class Classroom {
+  String id;
   String name;
+  String instructorID;
 
   Classroom({
-    this.name
+    this.id,
+    this.name,
+    this.instructorID
   });
 
   factory Classroom.fromJson(Map<String, dynamic> json) => new Classroom(
+    id: json["id"],
     name: json["name"],
+    instructorID: json["instructor_id"],
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "name": name,
+    "instructor_id": instructorID,
   };
 }

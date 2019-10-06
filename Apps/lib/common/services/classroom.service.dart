@@ -7,18 +7,13 @@ class ClassroomService {
 
   String endpoint = Config.host + 'classrooms';
 
-  Future<List<Classroom>> getAllClassrooms() async {
+  Future<List<Classroom>> getAll() async {
     final response = await http.get(endpoint);
     print(response.body);
     return allClassroomsFromJson(response.body);
   }
 
-  Future<Classroom> getClassroom() async{
-    final response = await http.get('$endpoint/1');
-    return classroomFromJson(response.body);
-  }
-
-  Future<http.Response> createClassroom(Classroom classroom, int instructorID) async{
+  Future<http.Response> create(Classroom classroom, int instructorID) async{
     final response = await http.post(Config.getClassroomsPath(instructorID),
         headers: Config.headers,
         body: classroomToJson(classroom)

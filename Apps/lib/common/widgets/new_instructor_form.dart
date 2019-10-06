@@ -9,7 +9,7 @@ class NewInstructorForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormWithButton('Enter Instructor Username', 'Create Instructor', (username) {
       User lecturer = User(username: username);
-      InstructorService().createInstructor(lecturer).then((response) {
+      InstructorService().create(lecturer).then((response) {
         if (response.statusCode == 201) {
           CustomToaster().showToast(context, ToasterType.success,
               'Instructor Created.');

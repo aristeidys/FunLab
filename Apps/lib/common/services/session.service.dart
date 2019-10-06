@@ -7,23 +7,18 @@ class SessionService {
 
   String endpoint = Config.host + 'sessions';
 
-  Future<List<Session>> getAllSession() async {
+  Future<List<Session>> getAll() async {
     final response = await http.get(endpoint);
     print(response.body);
     return allSessionsFromJson(response.body);
   }
 
-  Future<Session> getSession() async{
-    final response = await http.get('$endpoint/1');
+  Future<Session> getByName(String name) async{
+    final response = await http.get('$endpoint?name=$name');
     return sessionFromJson(response.body);
   }
 
-  Future<Session> getSessionBySessionname(String username) async{
-    final response = await http.get('$endpoint?usename=$username');
-    return sessionFromJson(response.body);
-  }
-
-  Future<http.Response> createSession(Session post) async{
+  Future<http.Response> create(Session post) async{
     final response = await http.post('$endpoint',
         headers: Config.headers,
         body: sessionToJson(post)

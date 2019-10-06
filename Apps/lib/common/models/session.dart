@@ -22,17 +22,24 @@ String allSessionsToJson(List<Session> data) {
 }
 
 class Session {
+  String id;
   String name;
+  String classroomID;
 
   Session({
-    this.name
+    this.id,
+    this.name,
+    this.classroomID
   });
 
   factory Session.fromJson(Map<String, dynamic> json) => new Session(
+    id: json["id"],
     name: json["name"],
+    classroomID: json["classroom_id"],
   );
 
   Map<String, dynamic> toJson() => {
     "name": name,
+    "classroom_id": classroomID,
   };
 }

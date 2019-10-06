@@ -7,23 +7,18 @@ class StudentService {
 
   String endpoint = Config.host + 'students';
 
-  Future<List<User>> getAllStudent() async {
+  Future<List<User>> getAll() async {
     final response = await http.get(endpoint);
     print(response.body);
     return allUsersFromJson(response.body);
   }
 
-  Future<User> getStudent() async{
-    final response = await http.get('$endpoint/1');
-    return userFromJson(response.body);
-  }
-
-  Future<User> getStudentByUsername(String username) async{
+  Future<User> getByUsername(String username) async{
     final response = await http.get('$endpoint?usename=$username');
     return userFromJson(response.body);
   }
 
-  Future<http.Response> createStudent(User post) async{
+  Future<http.Response> create(User post) async{
     final response = await http.post('$endpoint',
         headers: Config.headers,
         body: userToJson(post)

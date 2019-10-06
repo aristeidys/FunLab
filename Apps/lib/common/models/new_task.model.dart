@@ -22,17 +22,25 @@ String allTasksToJson(List<NewTask> data) {
 }
 
 class NewTask {
+  String id;
   String name;
-
+  String sessionID;
+  
   NewTask({
-    this.name
+    this.id,
+    this.name,
+    this.sessionID
   });
 
   factory NewTask.fromJson(Map<String, dynamic> json) => new NewTask(
+    id: json["id"],
     name: json["name"],
+    sessionID: json["session_id"],
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "name": name,
+    "session_id": sessionID,
   };
 }
