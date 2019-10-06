@@ -1,9 +1,9 @@
 import 'package:funlab/common/models/task_result.model.dart';
-import 'package:funlab/common/services/api.client.config.dart';
+import 'package:funlab/common/services/special/api.client.config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class NewTaskService {
+class TaskResultService {
 
   Future<List<TaskResult>> getAll(int studentsId) async {
     final response = await http.get(Config.getTaskResultsPath(studentsId));

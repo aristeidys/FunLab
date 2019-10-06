@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:funlab/common/models/task.model.dart';
-import 'package:funlab/common/services/base.service.dart';
+import 'package:funlab/common/services/special/base.service.dart';
 import 'package:http/http.dart' as http;
 
 class TaskService extends HttpService<Task> {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
-import 'package:funlab/common/services/base.service.dart';
+import 'package:funlab/common/services/special/base.service.dart';
 import 'package:http/http.dart' as http;
 
 class LabSessionService extends HttpService<LabSession> {
