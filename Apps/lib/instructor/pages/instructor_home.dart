@@ -6,9 +6,7 @@ import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/find_lab_session_form.dart';
-import 'package:funlab/instructor/components/publish_session_button.dart';
-import 'package:funlab/instructor/components/lab_session_form.dart';
-import 'package:funlab/instructor/components/task_form.dart';
+import 'package:funlab/instructor/pages/new_classroom.page.dart';
 import 'instructor_dashboard.dart';
 import 'instructor_new_session.dart';
 
@@ -35,7 +33,6 @@ class InstructorForms extends StatelessWidget {
         converter: (store) => store.state.currentLabSession,
         builder: (context, labSession) {
           return Column(children: <Widget>[
-
             FindLabSessionForm(buttonCallback: (LabSession session) {
               Navigator.push(
                 context,
@@ -43,11 +40,18 @@ class InstructorForms extends StatelessWidget {
               );
             }),
             CreateButton(
-                'Create Session',
+                'Create new Session',
                 () => Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SessionCreatePage()),
+                    )),
+            CreateButton(
+                'Create new Classroom',
+                () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClassroomCreatePage()),
                     ))
           ]);
         });

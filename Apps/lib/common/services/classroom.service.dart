@@ -3,22 +3,22 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:io';
 
-String endpoint = '10.0.2.2:3000/classrooms';
+String endpoint = 'http://10.0.2.2:3000/classrooms';
 
-class LabSessionService {
+class ClassroomService {
 
-  Future<List<Classroom>> getAllPosts() async {
+  Future<List<Classroom>> getAllClassrooms() async {
     final response = await http.get(endpoint);
     print(response.body);
     return allClassroomsFromJson(response.body);
   }
 
-  Future<Classroom> getPost() async{
+  Future<Classroom> getClassroom() async{
     final response = await http.get('$endpoint/1');
     return postFromJson(response.body);
   }
 
-  Future<http.Response> createPost(Classroom post) async{
+  Future<http.Response> createClassroom(Classroom post) async{
     final response = await http.post('$endpoint',
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',

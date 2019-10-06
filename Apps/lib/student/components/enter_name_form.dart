@@ -21,15 +21,15 @@ class EnterNameForm extends StatelessWidget {
     }, builder: (context, callback) {
       return FormWithButton('Enter your Name', 'Sign in', (studentName) {
         Student student = Student(name: studentName);
-        StudentService().postRequest(student, (success, id, errorMessage) {
-          if (success) {
-            callback(studentName);
-            buttonCallback();
-          } else {
-            CustomToaster().showToast(
-                context, ToasterType.failure, errorMessage == '' ? 'Failure Creating User' : '$errorMessage');
-          }
-        });
+        // StudentService().postRequest(student, (success, id, errorMessage) {
+        //   if (success) {
+        //     callback(studentName);
+        //     buttonCallback();
+        //   } else {
+        //     CustomToaster().showToast(
+        //         context, ToasterType.failure, errorMessage == '' ? 'Failure Creating User' : '$errorMessage');
+        //   }
+        // });
       });
     });
   }
