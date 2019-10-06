@@ -19,18 +19,18 @@ class FindStudentForm extends StatelessWidget {
           store.dispatch(ReplaceUserNameAction(studentName));
     }, builder: (context, callback) {
       return Column(children: <Widget>[
-        FormWithButton('Username', 'Log in', (studentName) async {
+        FormWithButton('Username', 'Log in', (username) async {
           var result =
-              await StudentService().getStudentsByName(context, studentName);
+              await StudentService().getStudentByUsername(username);
 
-          if (result.length > 0) {
-            callback(result.first.name);
+          // if (result.length > 0) {
+          //   callback(result.first.name);
 
-            buttonCallback();
-          } else {
-            CustomToaster().showToast(context, ToasterType.failure,
-                'No Student with name $studentName');
-          }
+          //   buttonCallback();
+          // } else {
+          //   CustomToaster().showToast(context, ToasterType.failure,
+          //       'No Student with name $studentName');
+          // }
         }),
       ]);
     });

@@ -2,7 +2,6 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/services/api.client.config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:io';
 
 class ClassroomService {
 
@@ -16,13 +15,13 @@ class ClassroomService {
 
   Future<Classroom> getClassroom() async{
     final response = await http.get('$endpoint/1');
-    return postFromJson(response.body);
+    return classroomFromJson(response.body);
   }
 
-  Future<http.Response> createClassroom(Classroom post) async{
-    final response = await http.post('$endpoint',
+  Future<http.Response> createClassroom(Classroom classroom, int instructorID) async{
+    final response = await http.post(Config.getClassroomsPath(instructorID),
         headers: Config.headers,
-        body: postToJson(post)
+        body: classroomToJson(classroom)
     );
     return response;
   }

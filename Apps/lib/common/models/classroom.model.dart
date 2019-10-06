@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Classroom postFromJson(String str) {
+Classroom classroomFromJson(String str) {
   final jsonData = json.decode(str);
   return Classroom.fromJson(jsonData);
 }
 
-String postToJson(Classroom data) {
+String classroomToJson(Classroom data) {
   final dyn = data.toJson();
   return json.encode(dyn);
 }

@@ -17,18 +17,18 @@ class InstructorService {
 
   Future<User> getInstructor() async{
     final response = await http.get('$endpoint/1');
-    return postFromJson(response.body);
+    return userFromJson(response.body);
   }
 
   Future<User> getStudentByUsername(String username) async{
     final response = await http.get('$endpoint?usename=$username');
-    return postFromJson(response.body);
+    return userFromJson(response.body);
   }
 
   Future<http.Response> createInstructor(User post) async{
     final response = await http.post('$endpoint',
         headers: Config.headers,
-        body: postToJson(post)
+        body: userToJson(post)
     );
     return response;
   }
