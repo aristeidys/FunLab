@@ -4,7 +4,7 @@ import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/reducers/current_lab_session_Id.dart';
 import 'package:funlab/common/reducers/username_reducer.dart';
-import 'package:funlab/common/services/lab_session.service.dart';
+import 'package:funlab/common/services/special/lab_session.service.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/instructor/pages/instructor_dashboard.dart';
