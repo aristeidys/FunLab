@@ -16,4 +16,7 @@ class Student < ApplicationRecord
 
   has_many :task_results
   has_many :tasks, through: :task_results
+
+  has_many :enrollments
+  has_many :classrooms, through: :enrollments
 end

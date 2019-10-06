@@ -15,17 +15,17 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "classroom_enrollments", force: :cascade do |t|
-    t.bigint "student_id"
-    t.bigint "classroom_id"
-    t.index ["classroom_id"], name: "index_classroom_enrollments_on_classroom_id"
-    t.index ["student_id"], name: "index_classroom_enrollments_on_student_id"
-  end
-
   create_table "classrooms", force: :cascade do |t|
     t.bigint "instructor_id"
     t.string "name"
     t.index ["instructor_id"], name: "index_classrooms_on_instructor_id"
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "classroom_id"
+    t.index ["classroom_id"], name: "index_enrollments_on_classroom_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
 
   create_table "instructors", force: :cascade do |t|

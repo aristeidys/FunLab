@@ -29,9 +29,9 @@ class TaskResultsController < ApplicationController
     
     def update
       if @tr.update(task_params)
-        render json: @task
+        render json: @tr
       else 
-        render json: @task.errors, status: :unprocessable_entity
+        render json: @tr.errors, status: :unprocessable_entity
       end
     end
     

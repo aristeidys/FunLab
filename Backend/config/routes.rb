@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   resources :classrooms, defaults: {format: :json} do 
     resources :sessions
+    resources :enrollments
   end
 
   resources :sessions, defaults: {format: :json} do
