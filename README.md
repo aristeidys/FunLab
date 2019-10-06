@@ -19,7 +19,7 @@ Database Commands
 
 * rails db:migrate                    (After a model or association is created)
 
-s* bundle exec rake db:rollback        (Database goes back one migration)
+* bundle exec rake db:rollback        (Database goes back one migration)
 
 * bundle exec rake db:drop db:create db:migrate. (Creates the DB from scratch)
 
@@ -30,6 +30,9 @@ s* bundle exec rake db:rollback        (Database goes back one migration)
 * rails g migration add_activity_reference_to_lab_sessions activity:references (session has many activities)
 
 * rails generate migration add_email_to_users email:string (+ rails db:migrate)
+
+OR
+* rails generate migration CreateStudentEnrollments (when you want to fill the migration yourself)
 
 * fresh database
   rake db:drop      
