@@ -10,14 +10,14 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      // FindStudentForm(
-      //   buttonCallback: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context) => StudentSessionJoinPage()),
-      //     );
-      //   },
-      // ),
+      FindStudentForm(
+        buttonCallback: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => StudentSessionJoinPage()),
+          );
+        },
+      ),
       Center(
         child: Text('Or create new User...'),
       ),

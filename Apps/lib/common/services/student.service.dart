@@ -1,11 +1,12 @@
 import 'package:funlab/common/models/user.model.dart';
+import 'package:funlab/common/services/api.client.config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:io';
 
-String endpoint = 'http://10.0.2.2:3000/students';
-
 class StudentService {
+
+  String endpoint = Config.host + 'students';
 
   Future<List<User>> getAllStudent() async {
     final response = await http.get(endpoint);
@@ -18,12 +19,14 @@ class StudentService {
     return postFromJson(response.body);
   }
 
+  Future<User> getStudentByUsername(String username) async{
+    final response = await http.get('$endpoint?usename=$username');
+    return postFromJson(response.body);
+  }
+
   Future<http.Response> createStudent(User post) async{
     final response = await http.post('$endpoint',
-        headers: {
-          HttpHeaders.contentTypeHeader: 'application/json',
-          HttpHeaders.authorizationHeader : ''
-        },
+        headers: Config.headers,
         body: postToJson(post)
     );
     return response;
