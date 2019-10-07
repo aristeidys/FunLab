@@ -2,8 +2,8 @@
 import 'package:redux/redux.dart';
 import 'package:redux_logging/redux_logging.dart';
 
-import '../appInstructorState.dart';
-import 'app_reducer.dart';
+import 'appInstructorState.dart';
+import 'reducers/app_reducer.dart';
 
 Store<AppInstructorState> createInstructorStore() {
   return Store(
@@ -14,3 +14,5 @@ Store<AppInstructorState> createInstructorStore() {
     ],
   );
 }
+
+typedef OnStateChanged = Function(dynamic);

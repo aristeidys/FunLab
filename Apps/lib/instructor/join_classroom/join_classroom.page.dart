@@ -8,7 +8,7 @@ class ClassroomJoinPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Styles.instructorColor,
-          title: Text('Create Classroom'),
+          title: Text('Join a Classroom'),
         ),
         body: Column(children: <Widget>[
           JoinClassroomForm()

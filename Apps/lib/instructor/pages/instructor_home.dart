@@ -46,7 +46,7 @@ class OptionsWidget extends StatelessWidget {
                               builder: (context) => ClassroomCreatePage()),
                         )),
                 EditButton(
-                    'Enter Classroom',
+                    'Join a Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(

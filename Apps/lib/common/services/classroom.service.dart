@@ -16,10 +16,10 @@ class ClassroomService {
 
     Future<Response<Classroom>> getByName(String name) async {
     final response = await http.get('$endpoint?name=$name');
-    return responseFromJson(response);
+    return firstClassroomFromJson(response);
   }
 
-    Response<Classroom> responseFromJson(http.Response response) {
+    Response<Classroom> firstClassroomFromJson(http.Response response) {
       if (response.statusCode == 200) {
         List<Classroom> classrooms = allClassroomsFromJson(response.body);
         if (classrooms.length == 0) {

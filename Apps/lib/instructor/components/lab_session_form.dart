@@ -3,8 +3,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/services/special/lab_session.service.dart';
 import 'package:funlab/common/stateManagment/app_state.dart';
-import 'package:funlab/common/stateManagment/reducers/activities_reducer.dart';
 import 'package:funlab/common/stateManagment/reducers/current_lab_session_Id.dart';
+import 'package:funlab/common/stateManagment/store.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
