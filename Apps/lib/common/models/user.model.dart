@@ -25,7 +25,7 @@ class User {
   String username;
   String name;
   String password;
-  String id;
+  int id;
 
   User({
     this.username,

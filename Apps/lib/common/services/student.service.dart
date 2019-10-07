@@ -3,8 +3,14 @@ import 'package:funlab/common/services/special/api.client.config.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-class StudentService {
+class Response<T> {
+  T data;
+  String error;
 
+  Response(this.data, this.error);
+}
+
+class StudentService {
   String endpoint = Config.host + 'students';
 
   Future<List<User>> getAll() async {
@@ -13,16 +19,24 @@ class StudentService {
     return allUsersFromJson(response.body);
   }
 
-  Future<User> getByUsername(String username) async{
-    final response = await http.get('$endpoint?usename=$username');
-    return userFromJson(response.body);
+  Future<Response<User>> getByUsername(String username) async {
+    final response = await http.get('$endpoint?username=$username');
+
+    if (response.statusCode == 200) {
+      List<User> users = allUsersFromJson(response.body);
+      if (users.length == 0) {
+        return Response(null, 'No Students found');
+      } else {
+        return Response(users[0], null);
+      }
+    } else {
+      return Response(null, response.body);
+    }
   }
 
-  Future<http.Response> create(User post) async{
+  Future<http.Response> create(User post) async {
     final response = await http.post('$endpoint',
-        headers: Config.headers,
-        body: userToJson(post)
-    );
+        headers: Config.headers, body: userToJson(post));
     return response;
   }
 }
