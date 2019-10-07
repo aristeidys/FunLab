@@ -3,10 +3,18 @@ class EnrollmentsController < ApplicationController
     
   # CRUD
   
-  def index  
-    render json: Classroom.find(params[:classroom_id]).enrollments.to_json()
+  def active
+    @id = params[:classroom_id]
+    render json: Student.joins(:enrollments).where({ enrollments: { isApproved: true, classroom_id:  @id} }).to_json()
+
   end
-  
+
+  def pending
+    @id = params[:classroom_id]
+    render json: Student.joins(:enrollments).where({ enrollments: { isApproved: false, classroom_id:  @id } }).to_json()
+
+  end
+
   def show
     render json: @enrollment.to_json()
   end

@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
     
+  match 'classrooms/:classroom_id/enrollments/active' => 'enrollments#active', :via => :get
+  match 'classrooms/:classroom_id/enrollments/pending' => 'enrollments#pending', :via => :get
+
   resources :classrooms, defaults: {format: :json} do 
     resources :sessions
     resources :enrollments
