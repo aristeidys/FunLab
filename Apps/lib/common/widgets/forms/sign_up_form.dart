@@ -29,7 +29,7 @@ class SignUpFormState extends State<SignUpForm> {
       padding: EdgeInsets.all(15),
       child: Form(
         key: _formKey,
-        child: ListView(
+        child: Column(
           children: <Widget>[
             CustomForm(nameKey, 'Enter Name', FormValidators.name),
             CustomForm(emailKey, 'Enter Email', FormValidators.email),

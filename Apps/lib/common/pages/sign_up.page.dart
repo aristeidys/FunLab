@@ -13,7 +13,7 @@ class SignUpPage extends StatelessWidget {
           title: Text('Create new User'),
         ),
         body: Center(
-            child: Column(children: <Widget>[
+            child: ListView(shrinkWrap: true, children: <Widget>[
           CreateButton(
               'Create new Student',
               () => Navigator.push(

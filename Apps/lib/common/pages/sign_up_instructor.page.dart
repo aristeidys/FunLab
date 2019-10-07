@@ -13,7 +13,8 @@ class SignUpInstructorPage extends StatelessWidget {
           backgroundColor: Styles.instructorColor,
           title: Text('Create new Instructor'),
         ),
-        body: Column(children: <Widget>[SignUpStudentFormWidget()]));
+        body: ListView(
+            shrinkWrap: true, children: <Widget>[SignUpStudentFormWidget()]));
   }
 }
 
