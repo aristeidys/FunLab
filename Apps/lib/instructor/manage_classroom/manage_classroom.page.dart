@@ -10,39 +10,38 @@ import 'manage_enrollments.page.dart';
 class ManageClassroomPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Styles.instructorColor,
-          title: Text('Manage Classroom'),
-        ),
-        body: OptionsWidget());
+    return StoreConnector<AppInstructorState, Classroom>(
+        converter: (store) => store.state.classroom,
+        builder: (context, classroom) {
+          return Scaffold(
+              appBar: AppBar(
+                backgroundColor: Styles.instructorColor,
+                title: Text('Classroom ${classroom.name}'),
+              ),
+              body: OptionsWidget());
+        });
   }
 }
 
 class OptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Classroom>(
-        converter: (store) => store.state.classroom,
-        builder: (context, user) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('hi ${user.name}, what would you like to do?'),
-                Container(
-                  height: 10,
-                ),
-                EditButton(
-                    'Manage Enrollments',
-                    () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ManageEnrollmentsPage()),
-                        )),
-              ],
-            ),
-          );
-        });
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            height: 10,
+          ),
+          EditButton(
+              'Manage Enrollments',
+              () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ManageEnrollmentsPage()),
+                  )),
+        ],
+      ),
+    );
   }
 }
