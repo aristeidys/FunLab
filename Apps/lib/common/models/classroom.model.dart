@@ -22,9 +22,9 @@ String allClassroomsToJson(List<Classroom> data) {
 }
 
 class Classroom {
-  String id;
+  int id;
   String name;
-  String instructorID;
+  int instructorID;
 
   Classroom({
     this.id,

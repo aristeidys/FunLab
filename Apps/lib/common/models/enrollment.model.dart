@@ -22,9 +22,9 @@ String allEnrollmentsToJson(List<Enrollment> data) {
 }
 
 class Enrollment {
-  String id;
-  String studentID;
-  String classroomID;
+  int id;
+  int studentID;
+  int classroomID;
   
   Enrollment({
     this.id,

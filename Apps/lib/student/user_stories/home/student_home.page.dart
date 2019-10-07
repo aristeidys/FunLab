@@ -5,19 +5,17 @@ import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
-import 'package:funlab/instructor/pages/new_classroom.page.dart';
-import 'instructor_new_session.dart';
+import 'package:funlab/student/user_stories/classroom_enroll/classroom_enroll.page.dart';
 
-class InstructorHomePage extends StatelessWidget {
-
-  InstructorHomePage({Key key}) : super(key: key);
+class StudentHomePage extends StatelessWidget {
+  final pageController = new PageController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Styles.instructorColor,
-          title: Text('Instructor Home'),
+          backgroundColor: Styles.studentMainColor,
+          title: Text('Student Home'),
         ),
         body: OptionsWidget());
   }
@@ -38,18 +36,11 @@ class OptionsWidget extends StatelessWidget {
                   height: 10,
                 ),
                 CreateButton(
-                    'Create new Classroom',
+                    'Enroll in a Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ClassroomCreatePage()),
-                        )),
-                CreateButton(
-                    'Create new Session',
-                    () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SessionCreatePage()),
+                              builder: (context) => ClassroomEnrollPage()),
                         )),
               ],
             ),

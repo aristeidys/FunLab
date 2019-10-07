@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
   create_table "enrollments", force: :cascade do |t|
     t.bigint "student_id"
     t.bigint "classroom_id"
+    t.boolean "isApproved"
     t.index ["classroom_id"], name: "index_enrollments_on_classroom_id"
     t.index ["student_id"], name: "index_enrollments_on_student_id"
   end
