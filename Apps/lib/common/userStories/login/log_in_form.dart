@@ -8,8 +8,8 @@ typedef Null LoginCallback(String email, String password);
 
 class LogInForm extends StatefulWidget {
   final LoginCallback callback;
-
-  LogInForm(this.callback);
+  final String title;
+  LogInForm(this.title, this.callback);
 
   @override
   LogInFormState createState() {
@@ -30,6 +30,9 @@ class LogInFormState extends State<LogInForm> {
         key: _formKey,
         child: Column(
           children: <Widget>[
+            Center(
+              child: Text(widget.title),
+            ),
             CustomForm(emailKey, 'Enter Email', FormValidators.email),
             CustomForm(passwordKey, 'Enter Password', FormValidators.password),
             Center(

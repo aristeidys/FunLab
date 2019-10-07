@@ -4,7 +4,6 @@ import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/reducers/username_reducer.dart';
 import 'package:funlab/common/services/student.service.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
-import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class FindStudentForm extends StatelessWidget {
 
@@ -21,7 +20,7 @@ class FindStudentForm extends StatelessWidget {
       return Column(children: <Widget>[
         FormWithButton('Username', 'Log in', (username) async {
           var result =
-              await StudentService().getByUsername(username);
+              await StudentService().getByEmail(username);
 
           // if (result.length > 0) {
           //   callback(result.first.name);

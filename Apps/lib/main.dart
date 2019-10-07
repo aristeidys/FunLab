@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:funlab/common/services/special/check_connectivity_service.dart';
 import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:funlab/common/pages/login.page.dart';
+import 'common/userStories/login/login.page.dart';
 
 void main() => runApp(MainApp());
 
