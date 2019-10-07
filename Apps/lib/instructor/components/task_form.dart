@@ -4,7 +4,7 @@ import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/services/special/task.service.dart';
-import 'package:funlab/common/widgets/form_with_button.dart';
+import 'package:funlab/common/widgets/forms/form_with_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class TaskForm extends StatelessWidget {

@@ -24,30 +24,33 @@ class SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          children: <Widget>[
-            getNameFormWidget(),
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            getEmailFormWidget(),
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            getPasswordFormWidget(),
-            Padding(
-              padding: EdgeInsets.all(5),
-            ),
-            Center(
-                child: CreateButton('Submit', () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                widget.callback(_name, _email, _password);
-              }
-            })),
-          ],
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              getNameFormWidget(),
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              getEmailFormWidget(),
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              getPasswordFormWidget(),
+              Padding(
+                padding: EdgeInsets.all(5),
+              ),
+              Center(
+                  child: CreateButton('Submit', () {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  widget.callback(_name, _email, _password);
+                }
+              })),
+            ],
+          ),
         ),
       ),
     );

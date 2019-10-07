@@ -4,7 +4,7 @@ import 'package:funlab/common/models/student.model.dart';
 import 'package:funlab/common/reducers/app_state.dart';
 import 'package:funlab/common/reducers/username_reducer.dart';
 import 'package:funlab/common/services/student.service.dart';
-import 'package:funlab/common/widgets/form_with_button.dart';
+import 'package:funlab/common/widgets/forms/form_with_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class EnterNameForm extends StatelessWidget {
