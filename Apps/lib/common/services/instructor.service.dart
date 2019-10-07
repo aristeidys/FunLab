@@ -4,9 +4,7 @@ import 'package:funlab/common/services/special/response.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-
 class InstructorService {
-
   String endpoint = Config.host + 'instructors';
 
   Future<List<User>> getAll() async {
@@ -30,11 +28,9 @@ class InstructorService {
     }
   }
 
-  Future<http.Response> create(User post) async{
+  Future<http.Response> create(User post) async {
     final response = await http.post('$endpoint',
-        headers: Config.headers,
-        body: userToJson(post)
-    );
+        headers: Config.headers, body: userToJson(post));
     return response;
   }
 }

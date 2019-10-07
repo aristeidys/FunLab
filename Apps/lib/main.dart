@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/common/services/special/check_connectivity_service.dart';
-import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/services/special/check_connectivity_service.dart';
+import 'common/stateManagment/reducers/store.dart';
 import 'common/userStories/login/login.page.dart';
 
 void main() => runApp(MainApp());
@@ -11,16 +11,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // Wrap your MaterialApp in a StoreProvider
     return StoreProvider(
-        store: createStore(),
+        store: createInstructorStore(),
         child: MaterialApp(
             title: title,
             home: Scaffold(
                 appBar: AppBar(
                   title: Text(this.title),
                 ),
-                body: Column(children: <Widget>[CheckConnectivityService(), LoginPage()]) )));
+                body: Column(children: <Widget>[
+                  CheckConnectivityService(),
+                  LoginPage()
+                ]))));
   }
 }

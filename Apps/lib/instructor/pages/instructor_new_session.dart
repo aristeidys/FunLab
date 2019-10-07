@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
-import 'package:funlab/common/reducers/app_state.dart';
+import 'package:funlab/common/stateManagment/app_state.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/instructor/components/lab_session_form.dart';
 import 'package:funlab/instructor/components/publish_session_button.dart';
