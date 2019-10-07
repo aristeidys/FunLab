@@ -1,14 +1,8 @@
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/special/api.client.config.dart';
+import 'package:funlab/common/services/special/response.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-
-class Response<T> {
-  T data;
-  String error;
-
-  Response(this.data, this.error);
-}
 
 class StudentService {
   String endpoint = Config.host + 'students';
@@ -19,8 +13,8 @@ class StudentService {
     return allUsersFromJson(response.body);
   }
 
-  Future<Response<User>> getByUsername(String username) async {
-    final response = await http.get('$endpoint?username=$username');
+  Future<Response<User>> getByEmail(String email) async {
+    final response = await http.get('$endpoint?email=$email');
 
     if (response.statusCode == 200) {
       List<User> users = allUsersFromJson(response.body);

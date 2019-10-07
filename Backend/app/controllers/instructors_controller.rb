@@ -4,9 +4,9 @@ class InstructorsController < ApplicationController
     #GET /instructors
     def index
   
-      # GET /instructors?username=helloworld
-      @instructors = if params[:username]
-        Instructor.findByUsername(params[:username])
+      # GET /instructors?email=helloworld
+      @instructors = if params[:email]
+        Instructor.findByEmail(params[:email])
       else
   
       # GET /instructors
@@ -17,7 +17,7 @@ class InstructorsController < ApplicationController
   
     # GET /instructors/1
     def show
-      render json: @instructor.to_json(only: [:id, :name, :username, :password])
+      render json: @instructor.to_json(only: [:id, :name, :email, :password])
     end
   
     # POST /instructors
@@ -51,6 +51,6 @@ class InstructorsController < ApplicationController
     end
     # Only allow a trusted parameter "white list" through.
     def instructor_params
-      params.fetch(:instructor).permit(:name, :username, :password)
+      params.fetch(:instructor).permit(:name, :email, :password)
     end
   end

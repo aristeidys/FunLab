@@ -7,8 +7,8 @@ import 'package:funlab/common/widgets/forms/form_with_button.dart';
 class NewInstructorForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FormWithButton('Enter Instructor Username', 'Create Instructor', (username) {
-      User lecturer = User(username: username);
+    return FormWithButton('Enter Instructor Email', 'Create Instructor', (email) {
+      User lecturer = User(email: email);
       InstructorService().create(lecturer).then((response) {
         if (response.statusCode == 201) {
           CustomToaster().showToast(context, ToasterType.success,

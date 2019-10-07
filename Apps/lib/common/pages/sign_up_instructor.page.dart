@@ -26,7 +26,7 @@ class SignUpStudentFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SignUpForm((name, email, password) {
-      User instructor = User(name: name, username: email, password: password);
+      User instructor = User(name: name, email: email, password: password);
       InstructorService().create(instructor).then((response) {
         if (response.statusCode == 201) {
           CustomToaster()

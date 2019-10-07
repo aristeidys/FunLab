@@ -22,27 +22,27 @@ String allUsersToJson(List<User> data) {
 }
 
 class User {
-  String username;
+  String email;
   String name;
   String password;
   int id;
 
   User({
-    this.username,
+    this.email,
     this.name,
     this.password,
     this.id
   });
 
   factory User.fromJson(Map<String, dynamic> json) => new User(
-    username: json["username"],
+    email: json["email"],
     name: json["name"],
     password: json["password"],
     id: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
-    "username": username,
+    "email": email,
     "name": name,
     "password": password,
     "id": id,

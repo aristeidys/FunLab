@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/pages/sign_up.page.dart';
+import 'package:funlab/common/services/special/response.dart';
 import 'package:funlab/common/services/student.service.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
@@ -37,7 +38,7 @@ class LogInFormStudentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LogInForm((email, password) {
-      StudentService().getByUsername(email).then((Response<User> result) {
+      StudentService().getByEmail(email).then((Response<User> result) {
         if (result.data != null) {
           CustomToaster()
               .showToast(context, ToasterType.success, 'Student Found.');

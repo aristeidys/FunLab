@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "name"
-    t.string "username"
+    t.string "email"
     t.string "password"
   end
 
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.string "username"
+    t.string "email"
     t.string "password"
   end
 
