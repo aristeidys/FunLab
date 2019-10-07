@@ -5,11 +5,12 @@ import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
+import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/instructor/join_classroom/join_classroom.page.dart';
 import 'package:funlab/instructor/pages/new_classroom.page.dart';
 import 'instructor_new_session.dart';
 
 class InstructorHomePage extends StatelessWidget {
-
   InstructorHomePage({Key key}) : super(key: key);
 
   @override
@@ -43,6 +44,13 @@ class OptionsWidget extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) => ClassroomCreatePage()),
+                        )),
+                EditButton(
+                    'Enter Classroom',
+                    () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClassroomJoinPage()),
                         )),
                 CreateButton(
                     'Create new Session',

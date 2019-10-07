@@ -17,8 +17,8 @@ class LoginPage extends StatelessWidget {
       ),
       Center(
           child: EditButton(
-        text: 'New User',
-        callback: () {
+        'New User',
+        () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => SignUpPage()));
         },

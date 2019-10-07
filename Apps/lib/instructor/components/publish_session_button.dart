@@ -23,17 +23,21 @@ class PublishSessionButton extends StatelessWidget {
       return (labSession) =>
           store.dispatch(ReplaceCurrentLabAction(labSession));
     }, builder: (context, callback) {
-      return EditButton(text: 'Publish Lab Session', callback: () {
-        LabSession newSession =
-            LabSession(title: labSession.title, id: labSession.id, draft: false, finished: labSession.finished);
+      return EditButton('Publish Lab Session', () {
+        LabSession newSession = LabSession(
+            title: labSession.title,
+            id: labSession.id,
+            draft: false,
+            finished: labSession.finished);
 
-        LabSessionService().putRequest(newSession, newSession.id, (success, id, errorMessage) {
+        LabSessionService().putRequest(newSession, newSession.id,
+            (success, id, errorMessage) {
           if (success) {
             callback(newSession);
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SessionDashboardPage()),
-              );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SessionDashboardPage()),
+            );
           } else {
             CustomToaster().showToast(
                 context, ToasterType.failure, 'Lab Session publish failed');
