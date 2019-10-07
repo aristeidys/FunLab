@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class CustomForm extends StatelessWidget {
-  String finalValue;
+class CustomForm extends StatefulWidget {
   final String labelText;
   final TextEditingController textFieldController = TextEditingController();
   final Function validator;
 
-  CustomForm( this.labelText, this.validator);
+  CustomForm(Key key, this.labelText, this.validator)
+      : super(key: key);
+
+  CustomFormState createState() => CustomFormState();
+}
+
+class CustomFormState extends State<CustomForm> {
+  String finalValue;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: textFieldController,
+        controller: widget.textFieldController,
         decoration: InputDecoration(
-            labelText: labelText,
+            labelText: widget.labelText,
             filled: true,
             fillColor: Colors.white,
             suffixIcon: IconButton(
                 icon: Icon(Icons.clear),
                 onPressed: () {
-                  textFieldController.clear();
+                  widget.textFieldController.clear();
                 })),
         onSaved: (String value) {
           finalValue = value;
-          textFieldController.clear();
+          widget.textFieldController.clear();
         },
-        validator: validator);
+        validator: widget.validator);
   }
 }
