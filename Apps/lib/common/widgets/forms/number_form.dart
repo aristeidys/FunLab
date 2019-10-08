@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-class CustomForm extends StatefulWidget {
+class NumberForm extends StatefulWidget {
   final String labelText;
   final Function validator;
 
-  CustomForm(Key key, this.labelText, this.validator)
-      : super(key: key);
+  NumberForm(Key key, this.labelText, this.validator) : super(key: key);
 
-  CustomFormState createState() => CustomFormState();
+  NumberFormState createState() => NumberFormState();
 }
 
-class CustomFormState extends State<CustomForm> {
+class NumberFormState extends State<NumberForm> {
   String finalValue;
   TextEditingController textFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+        keyboardType: TextInputType.number,
         controller: textFieldController,
         decoration: InputDecoration(
             labelText: widget.labelText,

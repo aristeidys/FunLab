@@ -1,6 +1,6 @@
 class FormValidators {
   static Function name = (String name) {
-  //  return name.length <= 6 ? 'Name too short.' : null;
+    //  return name.length <= 6 ? 'Name too short.' : null;
   };
   static Function email = (String email) {
     // if (!email.contains('@')) {
@@ -10,6 +10,19 @@ class FormValidators {
     // }
   };
   static Function password = (String password) {
-  //  return password.length <= 8 ? 'Password too short.' : null;
+    //  return password.length <= 8 ? 'Password too short.' : null;
+  };
+}
+
+class TaskValidators {
+  static Function name = (String name) {
+    //  return name.length <= 6 ? 'Name too short.' : null;
+  };
+  static Function difficulty = (String difficulty) {
+    if (int.parse(difficulty) == null) {
+      return 'Should be a number.';
+    } else if (int.parse(difficulty) > 10 || int.parse(difficulty) < 1) {
+      return 'Should be between 1 and 10';
+    }
   };
 }

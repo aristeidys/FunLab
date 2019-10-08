@@ -6,7 +6,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/lab_session.model.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/services/special/task.service.dart';
 import 'package:funlab/common/services/special/googleApi.service.dart';
 import 'package:funlab/common/stateManagment/app_state.dart';
 import 'package:funlab/common/styling.dart';
@@ -40,18 +39,18 @@ class _StudentTaskListState extends State<StudentTaskList> {
   }
 
   Future<List<Task>> updateAndGetList() async {
-    return TaskService()
-        .getTasksWithSessionID(widget.labSession.id)
-        .then((List<Task> values) {
-      values.forEach((value) {
-        viewModels.add(StudentTileViewModel(
-            taskId: value.id,
-            title: value.title,
-            body: '',
-            type: ListTileType.defaultTile));
-      });
-      return values;
-    });
+    // return TaskService()
+    //     .getTasksWithSessionID(widget.labSession.id)
+    //     .then((List<Task> values) {
+    //   values.forEach((value) {
+    //     viewModels.add(StudentTileViewModel(
+    //         taskId: value.id,
+    //         title: value.name,
+    //         body: '',
+    //         type: ListTileType.defaultTile));
+    //   });
+    //   return values;
+    // });
   }
 
   @override
@@ -92,9 +91,9 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                   child: Container(
                                       color: Colors.white,
                                       child: StudentDefaultListTile(
-                                        title: snapshot.data[position].title,
+                                        title: snapshot.data[position].name,
                                         subTitle: snapshot
-                                            .data[position].labSessionId
+                                            .data[position].sessionID
                                             .toString()                                      )),
                                   secondaryActions: <Widget>[
                                     IconSlideAction(
@@ -137,7 +136,7 @@ class _StudentTaskListState extends State<StudentTaskList> {
       BuildContext context, String username, Task task) async {
     return await Messaging().sendToTopic(
         title: 'A Student needs your Help',
-        body: '$username needs help on ${task.title}',
+        body: '$username needs help on ${task.name}',
         type: Messaging.messageTypeStudentHelp,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,
@@ -149,7 +148,7 @@ class _StudentTaskListState extends State<StudentTaskList> {
       BuildContext context, String username, Task task) async {
     return await Messaging().sendToTopic(
         title: 'A Student finished a Task',
-        body: '$username finished ${task.title}',
+        body: '$username finished ${task.name}',
         type: Messaging.messageTypeStudentDone,
         topic: Messaging.instructorChannel,
         senderFCMID: firebaseID,

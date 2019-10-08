@@ -3,24 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/forms/custom_form.dart';
 import 'package:funlab/common/widgets/forms/form_validators.dart';
+import 'package:funlab/common/widgets/forms/number_form.dart';
 
-typedef Null SessionCreateCallback(String title, String description);
+typedef Null TaskCreateCallback(String name, int difficulty);
 
-class SessionCreateForm extends StatefulWidget {
-  final SessionCreateCallback callback;
+class TaskCreateForm extends StatefulWidget {
+  final TaskCreateCallback callback;
 
-  SessionCreateForm(this.callback);
+  TaskCreateForm(this.callback);
 
   @override
-  SessionCreateFormState createState() {
-    return SessionCreateFormState();
+  TaskCreateFormState createState() {
+    return TaskCreateFormState();
   }
 }
 
-class SessionCreateFormState extends State<SessionCreateForm> {
+class TaskCreateFormState extends State<TaskCreateForm> {
   final _formKey = GlobalKey<FormState>();
-  final titleKey = GlobalKey<CustomFormState>();
-  final descriptionKey = GlobalKey<CustomFormState>();
+  final nameKey = GlobalKey<CustomFormState>();
+  final difficultyKey = GlobalKey<NumberFormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +31,17 @@ class SessionCreateFormState extends State<SessionCreateForm> {
         key: _formKey,
         child: Column(
           children: <Widget>[
-            Text('Create new Session'),
-            CustomForm(titleKey, 'Enter Title', FormValidators.name),
-            CustomForm(
-                descriptionKey, 'Enter Description', FormValidators.email),
+            Text('Create new Task'),
+            CustomForm(nameKey, 'Enter Name', TaskValidators.name),
+            NumberForm(difficultyKey, 'Enter Difficulty',
+                TaskValidators.difficulty),
             Center(
                 child: EditButton('Next', () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 widget.callback(
-                  titleKey.currentState.finalValue,
-                  descriptionKey.currentState.finalValue,
+                  nameKey.currentState.finalValue,
+                  int.parse(difficultyKey.currentState.finalValue),
                 );
               }
             })),
