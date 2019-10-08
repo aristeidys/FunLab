@@ -1,5 +1,5 @@
 import 'package:funlab/common/stateManagment/reducers/session_reducer.dart';
-import '../appInstructorState.dart';
+import '../state.dart';
 import 'classroom_reducer.dart';
 import 'user_reducer.dart';
 

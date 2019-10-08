@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/services/session.service.dart';
-import 'package:funlab/common/stateManagment/appInstructorState.dart';
+import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/reducers/session_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
 import 'package:funlab/common/styling.dart';

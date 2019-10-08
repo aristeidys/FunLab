@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/services/classroom.service.dart';
-import 'package:funlab/common/stateManagment/appInstructorState.dart';
+import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/reducers/classroom_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
 import 'package:funlab/common/styling.dart';

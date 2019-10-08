@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/classroom.service.dart';
-import 'package:funlab/common/stateManagment/appInstructorState.dart';
+import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
 

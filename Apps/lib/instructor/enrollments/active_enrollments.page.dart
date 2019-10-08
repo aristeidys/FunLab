@@ -4,7 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/enrollment.service.dart';
-import 'package:funlab/common/stateManagment/appInstructorState.dart';
+import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 

@@ -9,7 +9,7 @@ import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/session.service.dart';
 import 'package:funlab/common/services/special/googleApi.service.dart';
-import 'package:funlab/common/stateManagment/appInstructorState.dart';
+import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
