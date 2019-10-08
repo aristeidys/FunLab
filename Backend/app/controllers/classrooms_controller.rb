@@ -3,18 +3,20 @@ class ClassroomsController < ApplicationController
   before_action :set_classroom, only: [:show, :update, :destroy]
   
   def index
+    if params[:student_id]
 
-    @classrooms = Classroom.all
-    if params[:instructor_id]
+      @classrooms = Student.find(params[:student_id]).classrooms.to_json()
+    elsif params[:instructor_id]
+
       @classrooms = Classroom.findByParentID(params[:instructor_id])
-    end 
-    
-    # FIND
-    if params[:name]
-      @classrooms = @classrooms.findByName(params[:name])
-    end
+    elsif params[:name]
 
-    render json: @classrooms
+      @classrooms = Classroom.findByName(params[:name])
+    else
+
+      @classrooms = Classroom.all
+    end
+      render json: @classrooms
   end
 
   # GET ONE

@@ -6,13 +6,11 @@ class EnrollmentsController < ApplicationController
   def active
     @id = params[:classroom_id]
     render json: Student.joins(:enrollments).where({ enrollments: { isApproved: true, classroom_id:  @id} }).to_json()
-
   end
 
   def pending
     @id = params[:classroom_id]
     render json: Student.joins(:enrollments).where({ enrollments: { isApproved: false, classroom_id:  @id } }).to_json()
-
   end
   
   def create
@@ -37,15 +35,12 @@ class EnrollmentsController < ApplicationController
   end
   
   def destroy
-    @en = @enrollment.first
-    if @en.present?
-      @en.destroy
-    end
+    @enrollment.destroy
   end
   
   private
       def set_enrollment
-        @enrollment = Enrollment.where(classroom_id: params[:classroom_id], student_id: params[:student_id])
+        @enrollment = Enrollment.where(classroom_id: params[:classroom_id], student_id: params[:student_id]).first
       end
       def enrollment_params
         params.require(:enrollment).permit(:classroom_id, :student_id, :isApproved)

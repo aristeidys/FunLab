@@ -17,12 +17,12 @@ class ClassroomForm extends StatelessWidget {
               (name) {
             Classroom classroom = Classroom(name: name);
             ClassroomService().create(classroom, user.id).then((response) {
-              if (response.statusCode == 201) {
+              if (response.data != null) {
                 CustomToaster().showToast(context, ToasterType.success,
                     'Successfully Created Classroom.');
               } else {
                 CustomToaster().showToast(context, ToasterType.failure,
-                    'Failure Creating Classroom. ${response.body}');
+                    'Failure Creating Classroom. ${response.error}');
               }
             });
           });

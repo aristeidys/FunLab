@@ -5,12 +5,6 @@ import 'dart:async';
 
 class SessionResultService {
 
-  Future<List<SessionResult>> getAll(int studentsId) async {
-    final response = await http.get(Config.getSessionResultsPath(studentsId));
-    print(response.body);
-    return allSessionResultsFromJson(response.body);
-  }
-
   Future<http.Response> create(SessionResult sessionResult, int studentsId) async{
     final response = await http.post(Config.getSessionResultsPath(studentsId),
         headers: Config.headers,

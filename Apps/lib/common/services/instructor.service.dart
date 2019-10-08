@@ -7,12 +7,6 @@ import 'dart:async';
 class InstructorService {
   String endpoint = Config.host + 'instructors';
 
-  Future<List<User>> getAll() async {
-    final response = await http.get(endpoint);
-    print(response.body);
-    return allUsersFromJson(response.body);
-  }
-
   Future<Response<User>> getByEmail(String email) async {
     final response = await http.get('$endpoint?email=$email');
 

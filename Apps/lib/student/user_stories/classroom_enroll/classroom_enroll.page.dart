@@ -36,7 +36,7 @@ class ClassroomEnrollForm extends StatelessWidget {
                 var enrollment =
                     Enrollment(classroomID: classroom.id, studentID: user.id);
                 EnrollmentService().create(enrollment).then((response) {
-                  if (response.statusCode == 201) {
+                  if (response.data != null) {
                     CustomToaster().showToast(context, ToasterType.success,
                         'Enrolled on $name, wait for approval.');
                   } else {

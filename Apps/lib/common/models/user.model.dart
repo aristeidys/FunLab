@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 User userFromJson(String str) {
   final jsonData = json.decode(str);
@@ -47,4 +48,18 @@ class User {
     "password": password,
     "id": id,
   };
+
+
+  static List<User> responseUsersFromJson(http.Response response) {
+    if (response.statusCode == 200) {
+      List<User> users = allUsersFromJson(response.body);
+      if (users.length == 0) {
+        return List<User>();
+      } else {
+        return users;
+      }
+    } else {
+      return List<User>();
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/special/api.client.config.dart';
 import 'package:funlab/common/services/special/response.dart';
@@ -7,10 +8,9 @@ import 'dart:async';
 class StudentService {
   String endpoint = Config.host + 'students';
 
-  Future<List<User>> getAll() async {
-    final response = await http.get(endpoint);
-    print(response.body);
-    return allUsersFromJson(response.body);
+  Future<List<Classroom>> getClassrooms(User student) async {
+    final response = await http.get('$endpoint/${student.id}/classrooms');
+    return responseClassroomsFromJson(response);
   }
 
   Future<Response<User>> getByEmail(String email) async {
@@ -32,5 +32,18 @@ class StudentService {
     final response = await http.post('$endpoint',
         headers: Config.headers, body: userToJson(post));
     return response;
+  }
+
+  List<Classroom> responseClassroomsFromJson(http.Response response) {
+    if (response.statusCode == 200) {
+      List<Classroom> users = allClassroomsFromJson(response.body);
+      if (users.length == 0) {
+        return List<Classroom>();
+      } else {
+        return users;
+      }
+    } else {
+      return List<Classroom>();
+    }
   }
 }

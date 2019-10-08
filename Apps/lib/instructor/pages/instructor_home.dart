@@ -6,9 +6,10 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/instructor/components/drawer.dart';
 import 'package:funlab/instructor/join_classroom/join_classroom.page.dart';
 import 'package:funlab/instructor/pages/new_classroom.page.dart';
-import 'instructor_new_session.dart';
+import 'package:funlab/instructor/session_create/instructor_new_session.dart';
 
 class InstructorHomePage extends StatelessWidget {
   InstructorHomePage({Key key}) : super(key: key);
@@ -16,11 +17,13 @@ class InstructorHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Styles.instructorColor,
-          title: Text('Instructor Home'),
-        ),
-        body: OptionsWidget());
+      appBar: AppBar(
+        backgroundColor: Styles.instructorColor,
+        title: Text('Instructor Home'),
+      ),
+      body: OptionsWidget(),
+      drawer: InstructorDrawer(),
+    );
   }
 }
 

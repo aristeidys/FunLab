@@ -5,12 +5,6 @@ import 'dart:async';
 
 class TaskResultService {
 
-  Future<List<TaskResult>> getAll(int studentsId) async {
-    final response = await http.get(Config.getTaskResultsPath(studentsId));
-    print(response.body);
-    return allTaskResultsFromJson(response.body);
-  }
-
   Future<http.Response> create(TaskResult taskResult, int studentsId) async{
     final response = await http.post(Config.getTaskResultsPath(studentsId),
         headers: Config.headers,

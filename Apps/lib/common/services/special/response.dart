@@ -4,3 +4,4 @@ class Response<T> {
 
   Response(this.data, this.error);
 }
+
