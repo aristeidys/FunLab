@@ -6,8 +6,7 @@ import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/instructor/classroom/classroom_join.page.dart';
-import 'package:funlab/instructor/enrollments/manage_enrollments.page.dart';
+import 'classroom_join.page.dart';
 import 'new_classroom.page.dart';
 
 class ManageClassroomPage extends StatelessWidget {

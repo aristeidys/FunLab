@@ -6,8 +6,8 @@ import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/instructor/classroom/classroom_join.page.dart';
 import 'package:funlab/student/classroom_enroll/classroom_enroll.page.dart';
+import 'package:funlab/student/classroom_join/classroom_join.page.dart';
 
 class StudentHomePage extends StatelessWidget {
 
@@ -52,7 +52,7 @@ class OptionsWidget extends StatelessWidget {
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ClassroomJoinPage()),
+                              builder: (context) => StudentClassroomJoinPage()),
                         )),
               ],
             ),

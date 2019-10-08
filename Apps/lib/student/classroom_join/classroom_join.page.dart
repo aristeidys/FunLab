@@ -10,7 +10,7 @@ import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
 import 'package:funlab/student/classroom_join/session_list.page.dart';
 
-class ClassroomJoinPage extends StatelessWidget {
+class StudentClassroomJoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, OnStateChanged>(
