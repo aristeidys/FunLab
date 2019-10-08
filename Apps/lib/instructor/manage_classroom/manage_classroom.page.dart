@@ -4,8 +4,7 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-
-import 'manage_enrollments.page.dart';
+import 'package:funlab/instructor/enrollments/manage_enrollments.page.dart';
 
 class ManageClassroomPage extends StatelessWidget {
   @override
@@ -45,3 +44,4 @@ class OptionsWidget extends StatelessWidget {
     );
   }
 }
+

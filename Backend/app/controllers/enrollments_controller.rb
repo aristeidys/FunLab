@@ -14,10 +14,6 @@ class EnrollmentsController < ApplicationController
     render json: Student.joins(:enrollments).where({ enrollments: { isApproved: false, classroom_id:  @id } }).to_json()
 
   end
-
-  def show
-    render json: @enrollment.to_json()
-  end
   
   def create
       @enrollment = Enrollment.new(enrollment_params)
@@ -31,22 +27,27 @@ class EnrollmentsController < ApplicationController
   end
   
   def update
-    if @enrollment.update(enrollment_params)
+    @enrollment.isApproved = true
+
+    if @enrollment.save
       render json: @enrollment
-    else 
+    else
       render json: @enrollment.errors, status: :unprocessable_entity
     end
   end
   
   def destroy
-    @enrollment.destroy
+    @en = @enrollment.first
+    if @en.present?
+      @en.destroy
+    end
   end
   
   private
       def set_enrollment
-        @enrollment = Enrollment.find(params[:id])
+        @enrollment = Enrollment.where(classroom_id: params[:classroom_id], student_id: params[:student_id])
       end
       def enrollment_params
-        params.require(:enrollment).permit(:classroom_id, :student_id)
+        params.require(:enrollment).permit(:classroom_id, :student_id, :isApproved)
       end
 end

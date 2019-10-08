@@ -12,7 +12,6 @@ class StudentSessionJoinPage extends StatefulWidget {
 }
 
 class _StudentSessionJoinPageState extends State<StudentSessionJoinPage> {
-  final pageController = new PageController();
 
   final List<LabSession> sessions = [];
   bool isSearching = false;

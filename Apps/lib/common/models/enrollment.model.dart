@@ -10,7 +10,6 @@ String enrollmentToJson(Enrollment data) {
   return json.encode(dyn);
 }
 
-
 List<Enrollment> allEnrollmentsFromJson(String str) {
   final jsonData = json.decode(str);
   return new List<Enrollment>.from(jsonData.map((x) => Enrollment.fromJson(x)));
@@ -25,22 +24,20 @@ class Enrollment {
   int id;
   int studentID;
   int classroomID;
-  
-  Enrollment({
-    this.id,
-    this.studentID,
-    this.classroomID
-  });
+  bool isActive;
+  Enrollment({this.id, this.studentID, this.classroomID, this.isActive});
 
   factory Enrollment.fromJson(Map<String, dynamic> json) => new Enrollment(
-    id: json["id"],
-    studentID: json["student_id"],
-    classroomID: json["classroom_id"],
-  );
+        id: json["id"],
+        studentID: json["student_id"],
+        classroomID: json["classroom_id"],
+        isActive: json["isActive"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "student_id": studentID,
-    "classroom_id": classroomID,
-  };
+        "id": id,
+        "student_id": studentID,
+        "classroom_id": classroomID,
+        "isActive": isActive,
+      };
 }

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     
   match 'classrooms/:classroom_id/enrollments/active' => 'enrollments#active', :via => :get
   match 'classrooms/:classroom_id/enrollments/pending' => 'enrollments#pending', :via => :get
+  match 'classrooms/:classroom_id/students/:student_id/enrollment' => 'enrollments#update', :via => :put
+  match 'classrooms/:classroom_id/students/:student_id/enrollment' => 'enrollments#destroy', :via => :delete
 
   resources :classrooms, defaults: {format: :json} do 
     resources :sessions
