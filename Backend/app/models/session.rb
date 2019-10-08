@@ -1,16 +1,15 @@
 class Session < ApplicationRecord
-  
-  # Validations
-  validates :name, uniqueness: true
-  
+    
   after_initialize :init
+  
+  validates :status, inclusion: { in: %w(draft active archived),
 
   def init
-    self.isActive = false if self.isActive.nil?
+    self.status  ||= 'draft'
   end
 
   # Search
-  scope :findByName, -> (name) { where name: name }
+  scope :findBytitle, -> (title) { where title: title }
   scope :findByParentID, -> (classroom_id) { where classroom_id: classroom_id }
 
   # Relations

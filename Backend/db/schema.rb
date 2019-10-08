@@ -46,8 +46,9 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "classroom_id"
-    t.string "name"
-    t.boolean "isActive"
+    t.string "title"
+    t.string "description"
+    t.string "status"
     t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 

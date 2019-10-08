@@ -9,11 +9,6 @@ class SessionsController < ApplicationController
       @sessions = Session.findByParentID(params[:classroom_id])
     end
 
-    # FIND
-    if params[:name]
-      @sessions = @sessions.findByName(params[:name])
-    end
-
     render json: @sessions
   end
   
@@ -52,6 +47,6 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
   end
   def session_params
-    params.require(:session).permit(:name, :isActive, :classroom_id)
+    params.require(:session).permit(:title, :description, :status, :classroom_id)
   end
 end
