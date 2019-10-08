@@ -11,22 +11,19 @@ class NoInternetToaster {
 
 class ServerErrorToaster {
   void show(BuildContext context) {
-    CustomToaster().showToast(
-        context, ToasterType.failure, 'Server not Available');
+    CustomToaster()
+        .showToast(context, ToasterType.failure, 'Server not Available');
   }
 }
 
 class CustomToaster {
-
   void showDefaultToast(Response response, BuildContext context) {
-         if (response.statusCode != 200 && response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       CustomToaster().showToast(
-          context,
-          ToasterType.failure,
-          'Error sending Request. Try again.');
+          context, ToasterType.failure, 'Error sending Request. Try again.');
     } else {
-      CustomToaster().showToast(context,
-          ToasterType.success, 'Sent successfully!');
+      CustomToaster()
+          .showToast(context, ToasterType.success, 'Sent successfully!');
     }
   }
 
@@ -38,8 +35,9 @@ class CustomToaster {
             type == ToasterType.success ? Colors.green : Colors.red,
         content: QuatedText(message),
         action: SnackBarAction(
-          textColor: Colors.white,
-         label: 'Close', onPressed: scaffold.hideCurrentSnackBar),
+            textColor: Colors.white,
+            label: 'Close',
+            onPressed: scaffold.hideCurrentSnackBar),
       ),
     );
   }

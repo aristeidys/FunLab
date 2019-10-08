@@ -12,19 +12,19 @@ describe 'Students API' do
         type: :object,
         properties: {
           name: { type: :string },
-          username: { type: :string },
+          email: { type: :string },
           password: { type: :string }
         },
         required: [ 'name' ]
       }
 
       response '201', 'Student created' do
-        let(:student) { { name: 'Aris', username: 'asdfas3242', password: 'dfssasdsf3242' } }
+        let(:student) { { name: 'Aris', email: 'asdfas3242', password: 'dfssasdsf3242' } }
         run_test!
       end
 
       response '422', 'invalid request' do
-        let(:student) { { username: 'foo' } }
+        let(:student) { { email: 'foo' } }
         run_test!
       end
     end
@@ -42,12 +42,12 @@ describe 'Students API' do
           properties: {
             id: { type: :integer, },
             name: { type: :string },
-            username: { type: :string },
+            email: { type: :string },
             password: { type: :string }
           },
           required: [ 'id', 'name']
 
-        let(:id) { Student.create(name: 'foo', username: 'asdfas3242', password: 'dfssasdsf3242').id }
+        let(:id) { Student.create(name: 'foo', email: 'asdfas3242', password: 'dfssasdsf3242').id }
         run_test!
       end
     end

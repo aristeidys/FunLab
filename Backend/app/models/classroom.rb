@@ -13,4 +13,7 @@ class Classroom < ApplicationRecord
   belongs_to :instructor
     
   has_many :sessions
+
+  has_many :enrollments
+  has_many :students, through: :enrollments
 end

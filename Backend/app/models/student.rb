@@ -1,14 +1,18 @@
 class Student < ApplicationRecord
-  
+      
   # Validations
-  validates :name, :length => { :in => 3..25 }
-  validates :username, :length => { :in => 6..20 }
-  validates :password, :length => { :in => 8..20 }
-  validates :username, uniqueness: true
-  validates :name, :username, :password, presence: true
+  # validates :name, :length => { :in => 6..45 }
+  # validates :email, :length => { :in => 6..40 }
+  # validates :password, :length => { :in => 8..40 }
+  # validates :email, uniqueness: true
+  # validates :name, :email, :password, 
+
+  validates :email, :length => { :in => 3..40 }
+  validates :email, uniqueness: true
+  validates :email, presence: true
 
   # Search
-  scope :findByUsername, -> (username) { where username: username }
+  scope :findByEmail, -> (email) { where email: email }
 
   # Relations
   has_many :session_results
@@ -16,4 +20,7 @@ class Student < ApplicationRecord
 
   has_many :task_results
   has_many :tasks, through: :task_results
+
+  has_many :enrollments
+  has_many :classrooms, through: :enrollments
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_28_162657) do
+ActiveRecord::Schema.define(version: 2019_10_06_142039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,17 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
     t.index ["instructor_id"], name: "index_classrooms_on_instructor_id"
   end
 
+  create_table "enrollments", force: :cascade do |t|
+    t.bigint "student_id"
+    t.bigint "classroom_id"
+    t.boolean "isApproved"
+    t.index ["classroom_id"], name: "index_enrollments_on_classroom_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+  end
+
   create_table "instructors", force: :cascade do |t|
     t.string "name"
-    t.string "username"
+    t.string "email"
     t.string "password"
   end
 
@@ -38,14 +46,15 @@ ActiveRecord::Schema.define(version: 2019_09_28_162657) do
 
   create_table "sessions", force: :cascade do |t|
     t.bigint "classroom_id"
-    t.string "name"
-    t.boolean "isActive"
+    t.string "title"
+    t.string "description"
+    t.string "status"
     t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
   end
 
   create_table "students", force: :cascade do |t|
     t.string "name"
-    t.string "username"
+    t.string "email"
     t.string "password"
   end
 

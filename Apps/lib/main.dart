@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/common/pages/role_selection_page.dart';
-import 'package:funlab/common/services/check_connectivity_service.dart';
-import 'package:funlab/common/store.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/services/special/check_connectivity_service.dart';
+import 'package:funlab/common/stateManagment/store.dart';
+import 'package:funlab/common/userStories/login/login.page.dart';
 
 void main() => runApp(MainApp());
 
@@ -11,7 +11,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     // Wrap your MaterialApp in a StoreProvider
     return StoreProvider(
         store: createStore(),
@@ -21,6 +20,9 @@ class MainApp extends StatelessWidget {
                 appBar: AppBar(
                   title: Text(this.title),
                 ),
-                body: Column(children: <Widget>[CheckConnectivityService(), RoleSelectionPage()]) )));
+                body: Column(children: <Widget>[
+                  CheckConnectivityService(),
+                  LoginPage()
+                ]))));
   }
 }

@@ -1,28 +1,32 @@
-import 'dart:convert';
-
 import 'package:funlab/common/models/task.model.dart';
-import 'package:funlab/common/services/base.service.dart';
+import 'package:funlab/common/services/special/api.client.config.dart';
+import 'package:funlab/common/services/special/response.dart';
 import 'package:http/http.dart' as http;
 
-class TaskService extends HttpService<Task> {
-  
-  @override
-  final endpoint = '/activities/';
+class TaskService {
+  String endpoint = Config.host + 'sessions';
 
-  Future<List<Task>> getAllTasks() async {
-    final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: port, path: endpoint));
-
-    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-    return parsed
-        .map<Task>((json) => Task().fromJson(json))
-        .toList();
+  Future<List<Task>> getTasks(int sessionID) async {
+    final response = await http.get('$endpoint/$sessionID/tasks');
+    return responseTasksFromJson(response);
   }
 
-  Future<List<Task>> getTasksWithSessionID(int sessionId) async {
-    final response = await http.Client().get(new Uri(scheme: scheme, host: url, port: port, path: '/lab_sessions/' + '$sessionId' + endpoint));
-    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
-    return parsed
-        .map<Task>((json) => Task().fromJson(json))
-        .toList();
+  Future<Response<int>> create(Task task) async {
+    final response = await http.post('$endpoint/${task.sessionID}/tasks',
+        headers: Config.headers, body: taskToJson(task));
+    return Config.idFromCreateJson(response);
+  }
+
+  List<Task> responseTasksFromJson(http.Response response) {
+    if (response.statusCode == 200) {
+      List<Task> tasks = allTasksFromJson(response.body);
+      if (tasks.length == 0) {
+        return List<Task>();
+      } else {
+        return tasks;
+      }
+    } else {
+      return List<Task>();
+    }
   }
 }

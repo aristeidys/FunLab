@@ -26,9 +26,9 @@ class SessionResultsController < ApplicationController
     # UPDATE
     def update
       if @sr.update(session_params)
-        render json: @session
+        render json: @sr
       else 
-        render json: @session.errors, status: :unprocessable_entity
+        render json: @sr.errors, status: :unprocessable_entity
       end
     end
     

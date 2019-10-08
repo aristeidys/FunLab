@@ -1,17 +1,15 @@
 class SessionsController < ApplicationController
-  
   before_action :set_session, only: [:show, :update, :destroy]
-
+  
   def index
-
-    @sessions = Session.all
+ 
     if params[:classroom_id]
+
       @sessions = Session.findByParentID(params[:classroom_id])
     end
-
-    # FIND
-    if params[:name]
-      @sessions = @sessions.findByName(params[:name])
+    if params[:status]
+      
+      @sessions = @sessions.where(status: params[:status])
     end
 
     render json: @sessions
@@ -52,6 +50,6 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
   end
   def session_params
-    params.require(:session).permit(:name, :isActive, :classroom_id)
+    params.require(:session).permit(:title, :description, :status, :classroom_id)
   end
 end

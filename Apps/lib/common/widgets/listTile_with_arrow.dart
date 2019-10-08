@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 
-enum ListTileType {
-  helpTile,
-  doneTile,
-  defaultTile
-}
+enum ListTileType { helpTile, doneTile, defaultTile }
 
 class StudentDefaultListTile extends ListTileWithArrow {
   StudentDefaultListTile({
     Key key,
     @required title,
     @required subTitle,
+    onTapCallback,
   }) : super(
             title: title,
             subTitle: subTitle,
             colour: Styles.studentDefaultTileColour,
-            icon: Icons.assignment);
+            icon: Icons.assignment,
+            onTapCallback: onTapCallback);
 }
 
 class StudentRejectedListTile extends ListTileWithArrow {
@@ -89,8 +87,7 @@ class ListTileWithArrow extends StatelessWidget {
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: Container(
-        decoration: BoxDecoration(
-            color: colour),
+        decoration: BoxDecoration(color: colour),
         child: ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
@@ -99,9 +96,7 @@ class ListTileWithArrow extends StatelessWidget {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(
-                icon,
-                color: Colors.white),
+            child: Icon(icon, color: Colors.white),
           ),
           title: Text(
             title,
@@ -109,7 +104,6 @@ class ListTileWithArrow extends StatelessWidget {
           ),
           subtitle: Row(
             children: <Widget>[
-              //  Icon(Icons.linear_scale, color: Colors.yellowAccent),
               Expanded(
                 child: Text(subTitle,
                     maxLines: 2, style: TextStyle(color: Colors.white)),

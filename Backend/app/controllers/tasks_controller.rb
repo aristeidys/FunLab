@@ -4,9 +4,8 @@ class TasksController < ApplicationController
   
   def index
 
-    @tasks = Task.all
     if params[:session_id]
-      @tasks = Task.findByParentID(params[:session_id])
+      @tasks = Task.findBySessionID(params[:session_id])
     end
 
     # FIND

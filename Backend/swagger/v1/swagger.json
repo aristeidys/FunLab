@@ -24,7 +24,7 @@
                 "name": {
                   "type": "string"
                 },
-                "username": {
+                "email": {
                   "type": "string"
                 },
                 "password": {
@@ -76,7 +76,7 @@
                 "name": {
                   "type": "string"
                 },
-                "username": {
+                "email": {
                   "type": "string"
                 },
                 "password": {
