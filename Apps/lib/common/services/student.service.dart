@@ -19,7 +19,7 @@ class StudentService {
     if (response.statusCode == 200) {
       List<User> users = allUsersFromJson(response.body);
       if (users.length == 0) {
-        return Response(null, 'No Students found');
+        return Response(null, 'No students found');
       } else {
         return Response(users[0], null);
       }

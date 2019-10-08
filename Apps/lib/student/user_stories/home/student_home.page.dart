@@ -6,7 +6,7 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/instructor/join_classroom/join_classroom.page.dart';
+import 'package:funlab/student/user_stories/classroom_join/classroom_join.page.dart';
 import 'package:funlab/student/components/drawer.dart';
 import 'package:funlab/student/user_stories/classroom_enroll/classroom_enroll.page.dart';
 

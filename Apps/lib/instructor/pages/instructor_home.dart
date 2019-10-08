@@ -6,10 +6,10 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/instructor/classroom_join/classroom_join.page.dart';
 import 'package:funlab/instructor/components/drawer.dart';
-import 'package:funlab/instructor/join_classroom/join_classroom.page.dart';
 import 'package:funlab/instructor/pages/new_classroom.page.dart';
-import 'package:funlab/instructor/session_create/instructor_new_session.dart';
+import 'package:funlab/instructor/session_create/session_create.page.dart';
 
 class InstructorHomePage extends StatelessWidget {
   InstructorHomePage({Key key}) : super(key: key);

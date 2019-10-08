@@ -10,7 +10,6 @@ String sessionToJson(Session data) {
   return json.encode(dyn);
 }
 
-
 List<Session> allSessionsFromJson(String str) {
   final jsonData = json.decode(str);
   return new List<Session>.from(jsonData.map((x) => Session.fromJson(x)));
@@ -22,24 +21,23 @@ String allSessionsToJson(List<Session> data) {
 }
 
 class Session {
-  String id;
-  String name;
-  String classroomID;
+  int id;
+  String title;
+  String description;
+  int classroomID;
 
-  Session({
-    this.id,
-    this.name,
-    this.classroomID
-  });
+  Session({this.id, this.title, this.description, this.classroomID});
 
   factory Session.fromJson(Map<String, dynamic> json) => new Session(
-    id: json["id"],
-    name: json["name"],
-    classroomID: json["classroom_id"],
-  );
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        classroomID: json["classroom_id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "name": name,
-    "classroom_id": classroomID,
-  };
+        "title": title,
+        "description": description,
+        "classroom_id": classroomID,
+      };
 }

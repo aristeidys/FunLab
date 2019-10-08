@@ -2,10 +2,10 @@ class Session < ApplicationRecord
     
   after_initialize :init
   
-  validates :status, inclusion: { in: %w(draft active archived),
+  validates :status, inclusion: { in: %w(draft active archived)}
 
   def init
-    self.status  ||= 'draft'
+    self.status ||= 'draft'
   end
 
   # Search
