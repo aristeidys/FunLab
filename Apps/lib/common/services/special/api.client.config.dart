@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:funlab/common/models/classroom.model.dart';
+import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/services/special/response.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,6 +47,15 @@ class Config {
     if (response.statusCode == Config.postSuccess) {
       Classroom classroom = classroomFromJson(response.body);
       return Response(classroom.id, null);
+    } else {
+      return Response(null, response.body);
+    }
+  }
+
+    static Response<Session> sessionFromPutJson(http.Response response) {
+    if (response.statusCode == Config.putSuccess) {
+      Session session = sessionFromJson(response.body);
+      return Response(session, null);
     } else {
       return Response(null, response.body);
     }

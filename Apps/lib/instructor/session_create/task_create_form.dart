@@ -1,6 +1,5 @@
-// Create a Form Widget
 import 'package:flutter/material.dart';
-import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/forms/custom_form.dart';
 import 'package:funlab/common/widgets/forms/form_validators.dart';
 import 'package:funlab/common/widgets/forms/number_form.dart';
@@ -36,7 +35,7 @@ class TaskCreateFormState extends State<TaskCreateForm> {
             NumberForm(difficultyKey, 'Enter Difficulty',
                 TaskValidators.difficulty),
             Center(
-                child: EditButton('Next', () {
+                child: CreateButton('Add', () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 widget.callback(

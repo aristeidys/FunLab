@@ -7,7 +7,7 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/stateManagment/reducers/user_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
-import 'package:funlab/instructor/pages/instructor_home.dart';
+import 'package:funlab/instructor/classroom/manage_classroom.page.dart';
 import 'log_in_form.dart';
 
 class InstructorLogInFormWidget extends StatelessWidget {
@@ -27,7 +27,7 @@ class InstructorLogInFormWidget extends StatelessWidget {
             callback(result.data);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => InstructorHomePage()),
+              MaterialPageRoute(builder: (context) => ManageClassroomPage()),
             );
           } else {
             CustomToaster()

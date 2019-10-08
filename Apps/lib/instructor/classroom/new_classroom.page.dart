@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funlab/common/styling.dart';
-import 'package:funlab/instructor/components/classroom_form.dart';
+import 'classroom_form.dart';
 
 class ClassroomCreatePage extends StatelessWidget {
   @override

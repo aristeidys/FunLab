@@ -7,7 +7,7 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/stateManagment/reducers/user_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
-import 'package:funlab/student/user_stories/home/student_home.page.dart';
+import 'package:funlab/student/home/student_home.page.dart';
 import 'log_in_form.dart';
 
 class StudentLogInFormWidget extends StatelessWidget {

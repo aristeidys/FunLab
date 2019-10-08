@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:funlab/common/services/special/api.client.config.dart';
+import 'package:funlab/common/services/special/response.dart';
 
 Task taskFromJson(String str) {
   final jsonData = json.decode(str);
@@ -41,4 +44,18 @@ class Task {
         "difficulty": difficulty,
         "session_id": sessionID,
       };
+
+  static List<Task> tasksResponseFromJson(
+      http.Response response) {
+    if (response.statusCode == Config.getSuccess) {
+      List<Task> tasks = allTasksFromJson(response.body);
+      if (tasks.length == 0) {
+        return List<Task>();
+      } else {
+        return tasks;
+      }
+    } else {
+      return List<Task>();
+    }
+  }
 }

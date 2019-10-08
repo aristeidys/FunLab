@@ -5,7 +5,10 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
+import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/instructor/enrollments/manage_enrollments.page.dart';
 import 'package:funlab/instructor/session_create/session_create.page.dart';
+import 'package:funlab/instructor/session_manage/sessions.page.dart';
 
 class ClassroomDashboardPage extends StatelessWidget {
   @override
@@ -25,7 +28,22 @@ class ClassroomDashboardPage extends StatelessWidget {
                     Container(
                       height: 10,
                     ),
-                    CreateButton(
+                    EditButton(
+                        'See all Sessions',
+                        () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SessionsPage()),
+                            )),
+                    EditButton(
+                        'Manage Enrollments',
+                        () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ManageEnrollmentsPage()),
+                            )),
+                    EditButton(
                         'Create new Session',
                         () => Navigator.push(
                               context,

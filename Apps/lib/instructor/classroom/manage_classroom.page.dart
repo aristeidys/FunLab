@@ -6,21 +6,21 @@ import 'package:funlab/common/stateManagment/appInstructorState.dart';
 import 'package:funlab/common/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/student/user_stories/classroom_join/classroom_join.page.dart';
-import 'package:funlab/student/components/drawer.dart';
-import 'package:funlab/student/user_stories/classroom_enroll/classroom_enroll.page.dart';
+import 'package:funlab/instructor/classroom/classroom_join.page.dart';
+import 'package:funlab/instructor/enrollments/manage_enrollments.page.dart';
+import 'new_classroom.page.dart';
 
-class StudentHomePage extends StatelessWidget {
+class ManageClassroomPage extends StatelessWidget {
+  ManageClassroomPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Styles.studentMainColor,
-        title: Text('Student Home'),
+        backgroundColor: Styles.instructorColor,
+        title: Text('Instructor Home'),
       ),
       body: OptionsWidget(),
-      drawer: StudentDrawer(),
     );
   }
 }
@@ -40,17 +40,14 @@ class OptionsWidget extends StatelessWidget {
                   height: 10,
                 ),
                 CreateButton(
-                    'Enroll in a Classroom',
+                    'Create new Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ClassroomEnrollPage()),
+                              builder: (context) => ClassroomCreatePage()),
                         )),
-                Container(
-                  height: 10,
-                ),
                 EditButton(
-                    'Join in a Classroom',
+                    'Join a Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(

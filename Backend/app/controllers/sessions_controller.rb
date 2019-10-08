@@ -1,12 +1,15 @@
 class SessionsController < ApplicationController
-  
   before_action :set_session, only: [:show, :update, :destroy]
-
+  
   def index
-
-    @sessions = Session.all
+ 
     if params[:classroom_id]
+
       @sessions = Session.findByParentID(params[:classroom_id])
+    end
+    if params[:status]
+      
+      @sessions = @sessions.where(status: params[:status])
     end
 
     render json: @sessions

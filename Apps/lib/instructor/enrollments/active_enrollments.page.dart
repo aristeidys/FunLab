@@ -48,7 +48,12 @@ class ActiveEnrollmentsPage extends StatelessWidget {
                                               .toString())),
                                 );
                               })
-                          : Center(child: CircularProgressIndicator());
+                          : Container(
+                              margin: EdgeInsets.only(top: 30),
+                              child: Center(
+                                child: Text(
+                                    'Student active enrollments will appear here'),
+                              ));
                     }
                   }));
         });

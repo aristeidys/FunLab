@@ -61,7 +61,7 @@ class PendingEnrollmentWidgetState extends State<PendingEnrollmentWidget> {
           ? Container(
               margin: EdgeInsets.only(top: 30),
               child: Center(
-                child: Text('Student enrollments will appear here'),
+                child: Text('Student pending enrollments will appear here'),
               ))
           : Expanded(
               child: ListView.builder(
