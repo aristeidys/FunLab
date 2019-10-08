@@ -1,7 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:funlab/common/services/special/googleApi.service.dart';

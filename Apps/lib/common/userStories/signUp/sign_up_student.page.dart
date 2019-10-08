@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/student.service.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/sign_up_form.dart';
 

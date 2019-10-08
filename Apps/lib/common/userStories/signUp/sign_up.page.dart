@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'sign_up_instructor.page.dart';
 import 'sign_up_student.page.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 
 class SignUpPage extends StatelessWidget {

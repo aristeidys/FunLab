@@ -2,16 +2,16 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/user.model.dart';
 
-class AppInstructorState {
+class AppState {
   final User user;
   final Classroom classroom;
   final Session session;
 
-  AppInstructorState({this.user, this.classroom, this.session});
+  AppState({this.user, this.classroom, this.session});
 
-  AppInstructorState copyWith(
+  AppState copyWith(
       {User user, Classroom classroom, Session session}) {
-    return AppInstructorState(
+    return AppState(
         user: user ?? this.user,
         classroom: classroom ?? this.classroom,
         session: session ?? this.session);

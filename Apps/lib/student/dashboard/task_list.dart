@@ -10,7 +10,7 @@ import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/session.service.dart';
 import 'package:funlab/common/services/special/googleApi.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 import 'package:http/http.dart';
@@ -37,7 +37,7 @@ class _StudentTaskListState extends State<StudentTaskList> {
       firebaseID = token;
     });
 
-    return StoreConnector<AppInstructorState, Session>(
+    return StoreConnector<AppState, Session>(
         converter: (store) => store.state.session,
         builder: (context, session) {
           localSession = session;
@@ -46,7 +46,7 @@ class _StudentTaskListState extends State<StudentTaskList> {
                 backgroundColor: Styles.studentMainColor,
                 title: Text('Session: ${session.title}'),
               ),
-              body: StoreConnector<AppInstructorState, User>(
+              body: StoreConnector<AppState, User>(
                   converter: (store) => store.state.user,
                   builder: (context, user) {
                     return FutureBuilder<List<Task>>(

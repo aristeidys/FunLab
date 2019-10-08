@@ -10,7 +10,7 @@ import 'package:funlab/common/widgets/forms/form_with_button.dart';
 class ClassroomForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, User>(
+    return StoreConnector<AppState, User>(
         converter: (store) => store.state.user,
         builder: (context, user) {
           return FormWithButton('Enter Classroom Name', 'Create',

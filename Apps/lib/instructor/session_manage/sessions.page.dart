@@ -7,17 +7,17 @@ import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/reducers/session_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 
 class SessionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Classroom>(
+    return StoreConnector<AppState, Classroom>(
         converter: (store) => store.state.classroom,
         builder: (context, classroom) {
-          return StoreConnector<AppInstructorState, OnStateChanged>(
+          return StoreConnector<AppState, OnStateChanged>(
               converter: (store) {
             return (session) => store.dispatch(SetSessionAction(session));
           }, builder: (context, callback) {

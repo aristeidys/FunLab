@@ -5,7 +5,7 @@ import 'package:funlab/common/services/session.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/reducers/session_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/instructor/session_create/task_form_controller.dart';
@@ -13,10 +13,10 @@ import 'package:funlab/instructor/session_create/task_form_controller.dart';
 class TasksCreatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Session>(
+    return StoreConnector<AppState, Session>(
         converter: (store) => store.state.session,
         builder: (context, session) {
-          return StoreConnector<AppInstructorState, OnStateChanged>(
+          return StoreConnector<AppState, OnStateChanged>(
               converter: (store) {
             return (session) => store.dispatch(SetSessionAction(session));
           }, builder: (context, callback) {
@@ -46,10 +46,10 @@ class ActivateSeasonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Session>(
+    return StoreConnector<AppState, Session>(
         converter: (store) => store.state.session,
         builder: (context, session) {
-          return StoreConnector<AppInstructorState, OnStateChanged>(
+          return StoreConnector<AppState, OnStateChanged>(
         converter: (store) {
       return (session) => store.dispatch(SetSessionAction(session));
     }, builder: (context, callback) {

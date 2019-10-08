@@ -5,7 +5,7 @@ import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/reducers/classroom_reducer.dart';
 import 'package:funlab/common/stateManagment/store.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
 import 'package:funlab/student/classroom_join/session_list.page.dart';
@@ -13,7 +13,7 @@ import 'package:funlab/student/classroom_join/session_list.page.dart';
 class ClassroomJoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, OnStateChanged>(
+    return StoreConnector<AppState, OnStateChanged>(
         converter: (store) {
       return (session) => store.dispatch(SetClassroomAction(session));
     }, builder: (context, callback) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 
 enum ListTileType { helpTile, doneTile, defaultTile }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/instructor/enrollments/pending_enrollments.page.dart';
 

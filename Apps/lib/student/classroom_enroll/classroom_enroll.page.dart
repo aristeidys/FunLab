@@ -7,7 +7,7 @@ import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/services/enrollment.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';
 
@@ -26,7 +26,7 @@ class ClassroomEnrollPage extends StatelessWidget {
 class ClassroomEnrollForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, User>(
+    return StoreConnector<AppState, User>(
         converter: (store) => store.state.user,
         builder: (context, user) {
           return FormWithButton('Enter Classroom Name', 'Enroll', (name) {

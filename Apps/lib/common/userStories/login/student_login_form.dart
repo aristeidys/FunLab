@@ -17,7 +17,7 @@ class StudentLogInFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, OnStateChanged>(
+    return StoreConnector<AppState, OnStateChanged>(
         converter: (store) {
       return (user) => store.dispatch(SetUserAction(user));
     }, builder: (context, callback) {

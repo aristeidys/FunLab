@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/stateManagment/state.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/instructor/classroom/classroom_join.page.dart';
@@ -28,7 +28,7 @@ class ManageClassroomPage extends StatelessWidget {
 class OptionsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, User>(
+    return StoreConnector<AppState, User>(
         converter: (store) => store.state.user,
         builder: (context, user) {
           return Center(

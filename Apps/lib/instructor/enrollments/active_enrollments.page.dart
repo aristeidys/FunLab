@@ -5,13 +5,13 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/enrollment.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
-import 'package:funlab/common/styling.dart';
+import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 
 class ActiveEnrollmentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Classroom>(
+    return StoreConnector<AppState, Classroom>(
         converter: (store) => store.state.classroom,
         builder: (context, classroom) {
           return Scaffold(

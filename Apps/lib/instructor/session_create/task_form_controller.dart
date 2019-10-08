@@ -10,7 +10,7 @@ import 'package:funlab/instructor/session_create/task_create_form.dart';
 class TaskFormController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppInstructorState, Session>(
+    return StoreConnector<AppState, Session>(
         converter: (store) => store.state.session,
         builder: (context, session) {
           return TaskCreateForm((name, difficulty) {
