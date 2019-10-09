@@ -4,7 +4,7 @@ import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
-import 'package:funlab/common/services/special/googleApi.service.dart';
+import 'package:funlab/common/services/special/firebase.service.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:http/http.dart';
 

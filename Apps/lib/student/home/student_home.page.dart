@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
@@ -8,9 +9,9 @@ import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/student/classroom_enroll/classroom_enroll.page.dart';
 import 'package:funlab/student/classroom_join/classroom_join.page.dart';
+import 'package:funlab/common/services/special/firebase.service.dart';
 
 class StudentHomePage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +55,19 @@ class OptionsWidget extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => StudentClassroomJoinPage()),
                         )),
+                EditButton('Send Message', () {
+                  FirebaseMessage message = FirebaseMessage(
+                      title: 'my Title',
+                      body: 'my Body',
+                      type: 'ACCEPT',
+                      senderToken: '4234324',
+                      taskID: 3,
+                      senderID: 5,
+                      recipient: '/topics/testing');
+                  FireBaseService().send(message: message).then((response) {
+                    print(response.statusCode);
+                  });
+                }),
               ],
             ),
           );

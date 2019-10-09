@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/helpers/firebase_widget.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
@@ -25,6 +26,7 @@ class ClassroomDashboardPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
+                    FireBaseWidget('testing'),
                     Container(
                       height: 10,
                     ),

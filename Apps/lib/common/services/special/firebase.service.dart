@@ -5,20 +5,12 @@ import 'package:funlab/common/models/message.model.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class Messaging {
+class FireBaseService {
   final String serverKey =
       'AAAAJ9-AIHc:APA91bHDQHh9ymEKv2vzivi2dYB9Dl6ij5UmgG1uRt9MK99Cr7TpRK7WPWcPbqC5uLu2ozYrkAoacHkzuom1ckpHBC8ye-mUuDzYHGBerMX9I09DCfruyDmX8IEihPz5ToRTzuQxJI_a';
   final String endpoint = 'https://fcm.googleapis.com/fcm/send';
 
-  Future<Response> sendToToken({FirebaseMessage message}) {
-    return send(message: message);
-  }
-
-  Future<Response> sendToChannel({@required FirebaseMessage message}) {
-    return send(message: message);
-  }
-
-  Future<Response> send({FirebaseMessage message}) {
+  Future<Response> send({@required FirebaseMessage message}) {
     print('Post to Google Maps');
     return http.Client().post(endpoint,
         body: jsonEncode({

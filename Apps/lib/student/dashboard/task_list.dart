@@ -7,7 +7,7 @@ import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/session.service.dart';
-import 'package:funlab/common/services/special/googleApi.service.dart';
+import 'package:funlab/common/services/special/firebase.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';

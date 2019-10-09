@@ -2,7 +2,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/services/special/googleApi.service.dart';
 import 'package:funlab/common/stateManagment/reducers/messages_reducer.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/stateManagment/store.dart';
@@ -69,17 +68,16 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
       alert: true,
     ));
     firebaseMessaging.onIosSettingsRegistered
-        .listen((IosNotificationSettings settings) {
-      print('Hello');
-    });
+        .listen((IosNotificationSettings settings) {});
   }
 
   void handleMessage(Map<String, dynamic> message) {
-    print('onMessage called with message: $message');
-
     FirebaseMessage messageModel = FirebaseMessage.fromJson(message);
+    print('onMessage called: $message');
+    print('Message Model: $messageModel');
 
     messages.add(messageModel);
+    print('All Messages : $messages');
 
     callback(messages);
   }
