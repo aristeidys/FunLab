@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/user.model.dart';
-import 'package:funlab/common/stateManagment/state.dart';
+import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';

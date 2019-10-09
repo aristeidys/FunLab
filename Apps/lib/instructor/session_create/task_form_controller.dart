@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/services/task.service.dart';
-import 'package:funlab/common/stateManagment/state.dart';
+import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/instructor/session_create/task_create_form.dart';
 

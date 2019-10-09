@@ -2,9 +2,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/stateManagment/reducers/messages_reducer.dart';
-import 'package:funlab/common/stateManagment/state.dart';
-import 'package:funlab/common/stateManagment/store.dart';
+import 'package:funlab/common/state/reducers/messages_reducer.dart';
+import 'package:funlab/common/state/state.dart';
+import 'package:funlab/common/state/store.dart';
 
 class FireBaseWidget extends StatefulWidget {
   final String channel;
@@ -37,17 +37,18 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, List<FirebaseMessage>>(
-        converter: (store) => store.state.messages,
-        builder: (context, stateMessages) {
-          messages = stateMessages;
-          return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-            return (messages) => store.dispatch(SetMessagesAction(messages));
-          }, builder: (context, stateCallback) {
-            callback = stateCallback;
+    return StoreConnector<AppState, OnStateChanged>(converter: (store) {
+      return (messages) => store.dispatch(SetMessagesAction(messages));
+    }, builder: (context, stateCallback) {
+      stateCallback(List<FirebaseMessage>());
+      callback = stateCallback;
+      return StoreConnector<AppState, List<FirebaseMessage>>(
+          converter: (store) => store.state.messages,
+          builder: (context, stateMessages) {
+            messages = stateMessages;
             return Container();
           });
-        });
+    });
   }
 
   void configureFirebase() {

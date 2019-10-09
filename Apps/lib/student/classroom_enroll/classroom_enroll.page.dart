@@ -6,7 +6,7 @@ import 'package:funlab/common/models/enrollment.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/services/enrollment.service.dart';
-import 'package:funlab/common/stateManagment/state.dart';
+import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/forms/form_with_button.dart';

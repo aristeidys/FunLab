@@ -1,8 +1,8 @@
-import 'package:funlab/common/stateManagment/reducers/classroom_reducer.dart';
-import 'package:funlab/common/stateManagment/reducers/messages_reducer.dart';
-import 'package:funlab/common/stateManagment/reducers/session_reducer.dart';
-import 'package:funlab/common/stateManagment/reducers/user_reducer.dart';
-import 'package:funlab/common/stateManagment/state.dart';
+import 'package:funlab/common/state/reducers/classroom_reducer.dart';
+import 'package:funlab/common/state/reducers/messages_reducer.dart';
+import 'package:funlab/common/state/reducers/session_reducer.dart';
+import 'package:funlab/common/state/reducers/user_reducer.dart';
+import 'package:funlab/common/state/state.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
