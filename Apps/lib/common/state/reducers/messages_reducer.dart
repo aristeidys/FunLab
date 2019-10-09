@@ -12,7 +12,7 @@ List<FirebaseMessage> messagesReducer(List<FirebaseMessage> messages, action) {
   if (action is SetMessagesAction) {
     return action.messages;
   } else if (action is DeleteMessagesAction) {
-    return null;
+    return List<FirebaseMessage>();
   } else {
     return messages;
   }

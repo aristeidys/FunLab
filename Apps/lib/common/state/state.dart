@@ -8,9 +8,15 @@ class AppState {
   final Classroom classroom;
   final Session session;
   final List<FirebaseMessage> messages;
-
   AppState({this.user, this.classroom, this.session, this.messages});
 
+  factory AppState.initial() {
+    return AppState(
+        user: User(),
+        classroom: Classroom(),
+        session: Session(),
+        messages: List<FirebaseMessage>());
+  }
   AppState copyWith(
       {User user,
       Classroom classroom,

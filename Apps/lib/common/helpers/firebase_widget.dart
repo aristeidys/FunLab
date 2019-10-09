@@ -20,7 +20,8 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
 
   List<FirebaseMessage> messages;
 
-  Function callback;
+  Function setMessagesStateCallback;
+  Function deleteMessagesStateCallback;
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
 
   @override
   void dispose() {
+    deleteMessagesStateCallback('');
     firebaseMessaging.unsubscribeFromTopic(widget.channel);
     super.dispose();
   }
@@ -40,14 +42,18 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
     return StoreConnector<AppState, OnStateChanged>(converter: (store) {
       return (messages) => store.dispatch(SetMessagesAction(messages));
     }, builder: (context, stateCallback) {
-      stateCallback(List<FirebaseMessage>());
-      callback = stateCallback;
-      return StoreConnector<AppState, List<FirebaseMessage>>(
-          converter: (store) => store.state.messages,
-          builder: (context, stateMessages) {
-            messages = stateMessages;
-            return Container();
-          });
+      setMessagesStateCallback = stateCallback;
+      return StoreConnector<AppState, OnStateChanged>(converter: (store) {
+        return (messages) => store.dispatch(DeleteMessagesAction());
+      }, builder: (context, stateDeleteCallback) {
+        deleteMessagesStateCallback = stateDeleteCallback;
+        return StoreConnector<AppState, List<FirebaseMessage>>(
+            converter: (store) => store.state.messages,
+            builder: (context, stateMessages) {
+              messages = stateMessages;
+              return Container();
+            });
+      });
     });
   }
 
@@ -79,7 +85,6 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
 
     messages.add(messageModel);
     print('All Messages : $messages');
-
-    callback(messages);
+    setMessagesStateCallback(messages);
   }
 }

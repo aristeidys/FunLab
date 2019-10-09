@@ -26,7 +26,7 @@ class ClassroomDashboardPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    FireBaseWidget('testing'),
+                    FireBaseWidget(classroom.name),
                     Container(
                       height: 10,
                     ),

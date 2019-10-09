@@ -6,7 +6,7 @@ import 'package:redux_logging/redux_logging.dart';
 Store<AppState> createStore() {
   return Store(
     appReducer,
-    initialState: AppState(),
+    initialState: AppState.initial(),
     middleware: [
       LoggingMiddleware.printer(),
     ],
