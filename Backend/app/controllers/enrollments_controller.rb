@@ -3,12 +3,10 @@ class EnrollmentsController < ApplicationController
 
   def index
     if params[:isApproved] && params[:classroom_id]
-      @enrollments = Enrollment.where(isApproved: params[:isApproved],classroom_id: params[:classroom_id])
-    elsif
-      @enrollments = Enrollment.all
+      @students = Student.joins(:enrollments).where({ enrollments: { isApproved: params[:isApproved], classroom_id:  params[:classroom_id]} })
     end
 
-    render json: @enrollments
+    render json: @students
   end
   
   def create
@@ -36,6 +34,7 @@ class EnrollmentsController < ApplicationController
       def set_enrollment
         @enrollment = Enrollment.where(classroom_id: params[:classroom_id], student_id: params[:student_id]).first
       end
+
       def enrollment_params
         params.require(:enrollment).permit(:classroom_id, :student_id, :isApproved)
       end

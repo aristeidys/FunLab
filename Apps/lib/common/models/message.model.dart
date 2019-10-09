@@ -1,31 +1,38 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:funlab/common/widgets/listTile_with_arrow.dart';
 
 @immutable
-class StudentMessage {
+class FirebaseMessage {
   final String title;
   final String body;
-  final String studentToken;
-  final ListTileType type;
-  final int taskId;
+  final String type;
+  final int senderID;
+  final String senderToken;
+  final String recipient;
+  final int taskID;
 
-  StudentMessage(
-      {@required this.title,
-      @required this.body,
-      @required this.studentToken,
-      @required this.type,
-      @required this.taskId});
-}
-
-class StudentTileViewModel {
-  final String title;
-  final String body;
-  final ListTileType type;
-  final int taskId;
-
-  StudentTileViewModel(
+  FirebaseMessage(
       {@required this.title,
       @required this.body,
       @required this.type,
-      @required this.taskId});
+      this.senderID,
+      this.senderToken,
+      this.recipient,
+      @required this.taskID});
+
+  FirebaseMessage enrollmentFromJson(String str) {
+    final jsonData = json.decode(str);
+    return FirebaseMessage.fromJson(jsonData);
+  }
+
+  factory FirebaseMessage.fromJson(Map<String, dynamic> json) =>
+      FirebaseMessage(
+        title: json['notification']['title'],
+        body: json['notification']['body'],
+        type: json['data']['type'],
+        senderToken: json['data']['senderToken'],
+        senderID: json['data']['senderID'],
+        taskID: json['data']['taskID'],
+      );
 }

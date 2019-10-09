@@ -92,12 +92,12 @@ class AllSessionsListState extends State<AllSessionsList> {
                               title: session.title,
                               subTitle: session.description,
                               onTapCallback: () {
-                                callback(session);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            StudentTaskList(localSessionID: session.id,)));
+                                // callback(session);
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) =>
+                                //             StudentTaskList(localSessionID: session.id,)));
                               },
                             )),
                       );

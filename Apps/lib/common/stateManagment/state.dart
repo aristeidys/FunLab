@@ -1,4 +1,5 @@
 import 'package:funlab/common/models/classroom.model.dart';
+import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/user.model.dart';
 
@@ -6,14 +7,19 @@ class AppState {
   final User user;
   final Classroom classroom;
   final Session session;
+  final List<FirebaseMessage> messages;
 
-  AppState({this.user, this.classroom, this.session});
+  AppState({this.user, this.classroom, this.session, this.messages});
 
   AppState copyWith(
-      {User user, Classroom classroom, Session session}) {
+      {User user,
+      Classroom classroom,
+      Session session,
+      List<FirebaseMessage> messages}) {
     return AppState(
         user: user ?? this.user,
         classroom: classroom ?? this.classroom,
-        session: session ?? this.session);
+        session: session ?? this.session,
+        messages: messages ?? this.messages);
   }
 }
