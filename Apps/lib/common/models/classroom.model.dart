@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:funlab/common/services/special/api.client.config.dart';
+import 'package:funlab/common/services/special/response.dart';
 
 Classroom classroomFromJson(String str) {
   final jsonData = json.decode(str);
@@ -43,4 +46,18 @@ class Classroom {
     "name": name,
     "instructor_id": instructorID,
   };
+
+
+  static Response<Classroom> firstClassroomFromJson(http.Response response) {
+    if (response.statusCode == Config.getSuccess) {
+      List<Classroom> classrooms = allClassroomsFromJson(response.body);
+      if (classrooms.length == 0) {
+        return Response(null, 'No Classrooms found');
+      } else {
+        return Response(classrooms[0], null);
+      }
+    } else {
+      return Response(null, response.body);
+    }
+  }
 }

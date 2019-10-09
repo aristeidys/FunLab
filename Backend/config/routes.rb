@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  match 'classrooms/:classroom_id/students/:student_id/enrollment' => 'enrollments#update', :via => :put
-  match 'classrooms/:classroom_id/students/:student_id/enrollment' => 'enrollments#destroy', :via => :delete
 
   resources :classrooms, defaults: {format: :json} do 
     resources :sessions
     resources :enrollments
   end
+  
+  resource :enrollments, only: [:show, :update, :destroy, :create]
 
   resources :sessions, defaults: {format: :json} do
     resources :tasks

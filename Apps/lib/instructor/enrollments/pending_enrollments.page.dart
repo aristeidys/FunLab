@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/enrollment.model.dart';
 import 'package:funlab/common/models/user.model.dart';
+import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/services/enrollment.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
@@ -41,7 +42,7 @@ class PendingEnrollmentWidgetState extends State<PendingEnrollmentWidget> {
   @override
   void initState() {
     super.initState();
-    EnrollmentService().getAllPending(widget.classroomID).then((fetchedUsers) {
+    ClassroomService().getAllPending(widget.classroomID).then((fetchedUsers) {
       setState(() {
         users = fetchedUsers;
       });
@@ -106,7 +107,9 @@ class PendingEnrollmentWidgetState extends State<PendingEnrollmentWidget> {
 
   void handleConfirm(
       Enrollment enrollment, User student, int index, BuildContext context) {
-    EnrollmentService().setActive(enrollment).then((response) {
+        
+    enrollment.isApproved = true;
+    EnrollmentService().set(enrollment).then((response) {
       if (response.data != null) {
         removeAtIndex(index);
         CustomToaster().showToast(context, ToasterType.success,

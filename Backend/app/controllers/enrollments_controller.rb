@@ -13,8 +13,6 @@ class EnrollmentsController < ApplicationController
   
   def create
       @enrollment = Enrollment.new(enrollment_params)
-      @enrollment.classroom_id = params[:classroom_id]
-      @enrollment.student_id = params[:student_id]
     if @enrollment.save
       render json: @enrollment.to_json(), status: :created
     else
@@ -23,15 +21,13 @@ class EnrollmentsController < ApplicationController
   end
   
   def update
-    @enrollment.isApproved = true
-
-    if @enrollment.save
+    if @enrollment.update(enrollment_params)
       render json: @enrollment
-    else
+    else 
       render json: @enrollment.errors, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     @enrollment.destroy
   end

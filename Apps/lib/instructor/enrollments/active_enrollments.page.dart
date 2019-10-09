@@ -3,7 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/user.model.dart';
-import 'package:funlab/common/services/enrollment.service.dart';
+import 'package:funlab/common/services/classroom.service.dart';
 import 'package:funlab/common/stateManagment/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
@@ -20,7 +20,7 @@ class ActiveEnrollmentsPage extends StatelessWidget {
                 title: Text('Active Enrollments'),
               ),
               body: FutureBuilder<List<User>>(
-                  future: EnrollmentService().getAllApproved(classroom.id),
+                  future: ClassroomService().getAllApproved(classroom.id),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return new Center(
