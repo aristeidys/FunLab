@@ -12,11 +12,15 @@ class HelpWidget extends StatelessWidget {
     @required this.task,
     @required this.user,
     @required this.token,
+    @required this.myContext,
+    @required this.recipient,
   }) : super(key: key);
 
   final Task task;
   final User user;
   final String token;
+  final BuildContext myContext;
+  final String recipient;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +35,14 @@ class HelpWidget extends StatelessWidget {
               taskID: task.id,
               senderID: user.id,
               senderToken: token,
-              type: FirebaseMessage.help);
+              type: FirebaseMessage.help,
+              recipient: recipient);
           FirebaseService().send(message: message).then((response) {
             if (response.statusCode == 200) {
-              CustomToaster().showToast(
-                  context, ToasterType.success, 'Successful sent help request');
+              CustomToaster().showToast(myContext, ToasterType.success,
+                  'Successful sent help request');
             } else {
-              CustomToaster().showToast(context, ToasterType.failure,
+              CustomToaster().showToast(myContext, ToasterType.failure,
                   'Failure sending help request ${response.body}');
             }
           });

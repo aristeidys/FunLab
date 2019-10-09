@@ -95,9 +95,8 @@ class AllSessionsListState extends State<AllSessionsList> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => StudentTaskList(
-                                              localSessionID: session.id,
-                                            )));
+                                        builder: (context) =>
+                                            StudentTaskList()));
                               },
                             )),
                       );
