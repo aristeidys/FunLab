@@ -64,7 +64,7 @@ class OptionsWidget extends StatelessWidget {
                       taskID: 3,
                       senderID: 5,
                       recipient: '/topics/testing');
-                  FireBaseService().send(message: message).then((response) {
+                  FirebaseService().send(message: message).then((response) {
                     print(response.statusCode);
                   });
                 }),

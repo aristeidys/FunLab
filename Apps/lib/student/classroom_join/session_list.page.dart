@@ -10,7 +10,7 @@ import 'package:funlab/common/state/store.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
-import 'package:funlab/student/dashboard/task_list.dart';
+import 'package:funlab/student/task_list/task_list.dart';
 
 class SessionListPage extends StatelessWidget {
   @override
@@ -65,8 +65,7 @@ class AllSessionsListState extends State<AllSessionsList> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, OnStateChanged>(
-        converter: (store) {
+    return StoreConnector<AppState, OnStateChanged>(converter: (store) {
       return (session) => store.dispatch(SetSessionAction(session));
     }, builder: (context, callback) {
       return Column(children: <Widget>[
@@ -92,12 +91,13 @@ class AllSessionsListState extends State<AllSessionsList> {
                               title: session.title,
                               subTitle: session.description,
                               onTapCallback: () {
-                                // callback(session);
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             StudentTaskList(localSessionID: session.id,)));
+                                callback(session);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => StudentTaskList(
+                                              localSessionID: session.id,
+                                            )));
                               },
                             )),
                       );

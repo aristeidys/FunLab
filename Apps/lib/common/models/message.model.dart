@@ -3,6 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class FirebaseMessage {
+  static const String help = 'HELP';
+  static const String done = 'DONE';
+  static const String reject = 'REJECT';
+  static const String allow = 'ALLOW';
+
   final String title;
   final String body;
   final String type;

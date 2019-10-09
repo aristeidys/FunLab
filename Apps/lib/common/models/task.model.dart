@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:funlab/common/services/special/api.client.config.dart';
-import 'package:funlab/common/services/special/response.dart';
 
 Task taskFromJson(String str) {
   final jsonData = json.decode(str);

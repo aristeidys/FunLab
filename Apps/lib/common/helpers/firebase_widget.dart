@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/state/reducers/messages_reducer.dart';
+import 'package:funlab/common/state/reducers/token_reducer.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/state/store.dart';
 
@@ -22,6 +23,7 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
 
   Function setMessagesStateCallback;
   Function deleteMessagesStateCallback;
+  Function setTokenStateCallback;
 
   @override
   void initState() {
@@ -40,19 +42,24 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-      return (messages) => store.dispatch(SetMessagesAction(messages));
-    }, builder: (context, stateCallback) {
-      setMessagesStateCallback = stateCallback;
+      return (token) => store.dispatch(SetTokenAction(token));
+    }, builder: (context, setStateCallback) {
+      setTokenStateCallback = setStateCallback;
       return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-        return (messages) => store.dispatch(DeleteMessagesAction());
-      }, builder: (context, stateDeleteCallback) {
-        deleteMessagesStateCallback = stateDeleteCallback;
-        return StoreConnector<AppState, List<FirebaseMessage>>(
-            converter: (store) => store.state.messages,
-            builder: (context, stateMessages) {
-              messages = stateMessages;
-              return Container();
-            });
+        return (messages) => store.dispatch(SetMessagesAction(messages));
+      }, builder: (context, stateSetCallback) {
+        setMessagesStateCallback = stateSetCallback;
+        return StoreConnector<AppState, OnStateChanged>(converter: (store) {
+          return (messages) => store.dispatch(DeleteMessagesAction());
+        }, builder: (context, stateDeleteCallback) {
+          deleteMessagesStateCallback = stateDeleteCallback;
+          return StoreConnector<AppState, List<FirebaseMessage>>(
+              converter: (store) => store.state.messages,
+              builder: (context, stateMessages) {
+                messages = stateMessages;
+                return Container();
+              });
+        });
       });
     });
   }
@@ -76,6 +83,11 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
     ));
     firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {});
+
+    firebaseMessaging.getToken().then((token) {
+      print('FCM Token is $token');
+      setTokenStateCallback(token);
+    });
   }
 
   void handleMessage(Map<String, dynamic> message) {
