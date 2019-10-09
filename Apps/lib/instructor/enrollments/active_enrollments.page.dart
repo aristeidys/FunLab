@@ -20,7 +20,7 @@ class ActiveEnrollmentsPage extends StatelessWidget {
                 title: Text('Active Enrollments'),
               ),
               body: FutureBuilder<List<User>>(
-                  future: EnrollmentService().getAllActive(classroom.id),
+                  future: EnrollmentService().getAllApproved(classroom.id),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return new Center(

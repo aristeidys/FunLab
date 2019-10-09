@@ -1,16 +1,14 @@
 class EnrollmentsController < ApplicationController
   before_action :set_enrollment, only: [:show, :update, :destroy]
-    
-  # CRUD
-  
-  def active
-    @id = params[:classroom_id]
-    render json: Student.joins(:enrollments).where({ enrollments: { isApproved: true, classroom_id:  @id} }).to_json()
-  end
 
-  def pending
-    @id = params[:classroom_id]
-    render json: Student.joins(:enrollments).where({ enrollments: { isApproved: false, classroom_id:  @id } }).to_json()
+  def index
+    if params[:isApproved] && params[:classroom_id]
+      @enrollments = Enrollment.where(isApproved: params[:isApproved],classroom_id: params[:classroom_id])
+    elsif
+      @enrollments = Enrollment.all
+    end
+
+    render json: @enrollments
   end
   
   def create

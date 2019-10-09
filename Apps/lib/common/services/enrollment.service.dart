@@ -8,20 +8,20 @@ import 'dart:async';
 class EnrollmentService {
   String endpoint = Config.host + 'classrooms';
 
-  Future<List<User>> getAllActive(int classroomID) async {
+  Future<List<User>> getAllApproved(int classroomID) async {
     final response =
-        await http.get(endpoint + '/$classroomID/enrollments/active');
+        await http.get(endpoint + '/$classroomID/enrollments?isApproved=true');
     return User.responseUsersFromJson(response);
   }
 
   Future<List<User>> getAllPending(int classroomID) async {
     final response =
-        await http.get(endpoint + '/$classroomID/enrollments/pending');
+        await http.get(endpoint + '/$classroomID/enrollments?isApproved=false');
     return User.responseUsersFromJson(response);
   }
 
   Future<Response<int>> setActive(Enrollment enrollment) async {
-    enrollment.isActive = true;
+    enrollment.isApproved = true;
     final response = await http.put(
         endpoint +
             '/${enrollment.classroomID}/students/${enrollment.studentID}/enrollment',
