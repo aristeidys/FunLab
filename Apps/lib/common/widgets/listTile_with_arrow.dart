@@ -112,7 +112,9 @@ class ListTileWithArrow extends StatelessWidget {
           ),
           trailing: Icon(Icons.arrow_back, color: Colors.white, size: 30.0),
           onTap: () {
-            onTapCallback();
+            if (onTapCallback != null) {
+              onTapCallback();
+            }
           },
         ),
       ),

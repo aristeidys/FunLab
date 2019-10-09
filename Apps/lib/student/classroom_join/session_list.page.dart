@@ -65,43 +65,39 @@ class AllSessionsListState extends State<AllSessionsList> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, OnStateChanged>(converter: (store) {
-      return (session) => store.dispatch(SetSessionAction(session));
-    }, builder: (context, callback) {
-      return Column(children: <Widget>[
-        sessions.length == 0
-            ? Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Center(
-                  child: Text('Sessions will appear here'),
-                ))
-            : Expanded(
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: sessions.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      Session session = sessions[index];
-                      return Slidable(
-                        actionPane: SlidableDrawerActionPane(),
-                        actionExtentRatio: 0.25,
-                        child: Container(
-                            color: Colors.white,
-                            child: StudentDefaultListTile(
-                              title: session.title,
-                              subTitle: session.description,
-                              onTapCallback: () {
-                                callback(session);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            StudentTaskList()));
-                              },
-                            )),
-                      );
-                    }))
-      ]);
-    });
+    return Column(children: <Widget>[
+      sessions.length == 0
+          ? Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Center(
+                child: Text('Sessions will appear here'),
+              ))
+          : Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: sessions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Session session = sessions[index];
+                    return Slidable(
+                      actionPane: SlidableDrawerActionPane(),
+                      actionExtentRatio: 0.25,
+                      child: Container(
+                          color: Colors.white,
+                          child: StudentDefaultListTile(
+                            title: session.title,
+                            subTitle: session.description,
+                            onTapCallback: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => StudentTaskList(
+                                            session: session,
+                                          )));
+                            },
+                          )),
+                    );
+                  }))
+    ]);
   }
 }
