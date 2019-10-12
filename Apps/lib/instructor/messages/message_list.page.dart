@@ -94,15 +94,12 @@ class MessageListPage extends StatelessWidget {
                                                       ]
                                                     : <Widget>[
                                                         PassWidget(
+                                                            oldMessage: message,
                                                             myContext: context,
-                                                            taskName: message
-                                                                .taskName,
                                                             user: instructor,
                                                             token: token,
                                                             recipient:
                                                                 '${message.senderToken}',
-                                                            taskID:
-                                                                message.taskID,
                                                             callback: () {
                                                               deleteMessage(
                                                                   callback,

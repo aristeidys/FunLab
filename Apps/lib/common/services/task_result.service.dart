@@ -4,12 +4,11 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 class TaskResultService {
+  String endpoint = Config.host + 'task_results';
 
-  Future<http.Response> create(TaskResult taskResult, int studentsId) async{
-    final response = await http.post(Config.getTaskResultsPath(studentsId),
-        headers: Config.headers,
-        body: taskResultToJson(taskResult)
-    );
+  Future<http.Response> edit(TaskResult taskResult) async {
+    final response = await http.put(endpoint,
+        headers: Config.headers, body: taskResultToJson(taskResult));
     return response;
   }
 }

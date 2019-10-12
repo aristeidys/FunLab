@@ -10,7 +10,6 @@ String taskResultToJson(TaskResult data) {
   return json.encode(dyn);
 }
 
-
 List<TaskResult> allTaskResultsFromJson(String str) {
   final jsonData = json.decode(str);
   return new List<TaskResult>.from(jsonData.map((x) => TaskResult.fromJson(x)));
@@ -22,25 +21,23 @@ String allTaskResultsToJson(List<TaskResult> data) {
 }
 
 class TaskResult {
-  String id;
-  String studentID;
-  String taskID;
-  
-  TaskResult({
-    this.id,
-    this.studentID,
-    this.taskID
-  });
+  int id;
+  int studentID;
+  int taskID;
+  bool completed;
+  TaskResult({this.id, this.studentID, this.taskID, this.completed});
 
   factory TaskResult.fromJson(Map<String, dynamic> json) => new TaskResult(
-    id: json["id"],
-    studentID: json["student_id"],
-    taskID: json["task_id"],
-  );
+        id: json["id"],
+        studentID: json["student_id"],
+        taskID: json["task_id"],
+        completed: json["completed"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "student_id": studentID,
-    "task_id": taskID,
-  };
+        "id": id,
+        "student_id": studentID,
+        "task_id": taskID,
+        "completed": completed,
+      };
 }

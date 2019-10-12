@@ -9,6 +9,9 @@ class TaskResult < ApplicationRecord
     self.numberOfBadHelp ||= 0
   end
 
+  scope :findByStudentTaskID, -> (student_id, task_id) { where student_id: student_id, task_id: task_id }
+
+
   belongs_to :student
   belongs_to :task
   validates :student_id, uniqueness: { scope: :task_id,

@@ -28,7 +28,7 @@ class TaskResultsController < ApplicationController
     # UPDATE
     
     def update
-      if @tr.update(task_params)
+      if @tr.update(task_result_params)
         render json: @tr
       else 
         render json: @tr.errors, status: :unprocessable_entity
@@ -42,10 +42,10 @@ class TaskResultsController < ApplicationController
     
     private
         def set_task_result
-          @tr = TaskResult.find(params[:id])
+          @tr = TaskResult.findByStudentTaskID(params[:student_id], params[:task_id]).first
         end
         def task_result_params
-          params.require(:task_result).permit(:task_id, :student_id)
+          params.require(:task_result).permit(:task_id, :student_id, :completed)
         end
   end
   

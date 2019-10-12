@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   
   resource :enrollments, only: [:show, :update, :destroy, :create]
+  resource :task_results, only: [:update]
 
   resources :sessions, defaults: {format: :json} do
     resources :tasks
