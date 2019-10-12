@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   end
   
   resource :enrollments, only: [:show, :update, :destroy, :create]
-  resource :task_results, only: [:update]
+  resource :task_results, defaults: {format: :json}, only: [:update, :show]
 
   resources :sessions, defaults: {format: :json} do
     resources :tasks
   end
-  
+
   resources :students, defaults: {format: :json} do
     resources :tasks
     resources :session_results

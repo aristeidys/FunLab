@@ -96,7 +96,12 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
     print('Message Model: $messageModel');
 
     messages.add(messageModel);
-    print('All Messages : $messages');
+    print('Start of messages:');
+    messages.forEach((f) {
+      print('Message type: ' + f.type);
+    });
+    print('End of messages:');
+
     setMessagesStateCallback(messages);
   }
 }

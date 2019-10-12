@@ -29,7 +29,7 @@ class HelpGivenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconSlideAction(
-        caption: 'Help Given',
+        caption: 'Helped',
         color: Colors.blue,
         icon: Icons.live_help,
         onTap: () async {
