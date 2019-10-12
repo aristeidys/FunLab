@@ -5,8 +5,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/task.model.dart';
+import 'package:funlab/common/models/task_result.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/task.service.dart';
+import 'package:funlab/common/services/task_result.service.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
@@ -19,6 +21,13 @@ class StudentTaskList extends StatefulWidget {
 
   @override
   _StudentTaskListState createState() => _StudentTaskListState();
+}
+
+class Merged {
+  final List<Task> tasks;
+  final List<TaskResult> taskResults;
+
+  Merged({this.tasks, this.taskResults});
 }
 
 class _StudentTaskListState extends State<StudentTaskList> {
@@ -41,12 +50,18 @@ class _StudentTaskListState extends State<StudentTaskList> {
                     body: StoreConnector<AppState, User>(
                         converter: (store) => store.state.user,
                         builder: (context, student) {
-                          return FutureBuilder<List<Task>>(
-                              future: TaskService()
-                                  .getTaskAndCreateTaskResultsIfNotExist(
-                                      widget.session.id, student.id)
-                                  .then((values) => tasks = values),
-                              builder: (context, snapshot) {
+                          return FutureBuilder(
+                              future: Future.wait([
+                                TaskService()
+                                    .getTaskAndCreateTaskResultsIfNotExist(
+                                        widget.session.id, student.id),
+                                TaskResultService()
+                                    .get(student.id, widget.session.id)
+                              ]).then((response) => new Merged(
+                                  tasks: response[0],
+                                  taskResults: response[1])),
+                              builder:
+                                  (context, AsyncSnapshot<Merged> snapshot) {
                                 if (snapshot.hasError) {
                                   return new Text('Error: ${snapshot.error}');
                                 } else {
@@ -54,20 +69,25 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                       ? ListView.builder(
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
-                                          itemCount: snapshot.data.length,
+                                          itemCount:
+                                              snapshot.data.taskResults.length,
                                           padding: const EdgeInsets.all(15.0),
                                           itemBuilder: (context, position) {
-                                            Task task = snapshot.data[position];
+                                            TaskResult taskResult = snapshot
+                                                .data.taskResults[position];
+                                            Task task =
+                                                snapshot.data.tasks[position];
+
                                             return Slidable(
                                               actionPane:
                                                   SlidableDrawerActionPane(),
                                               actionExtentRatio: 0.25,
                                               child: Container(
                                                   color: Colors.white,
-                                                  child:
-                                                      StudentCompletedListTile(
-                                                          title: task.name,
-                                                          subTitle: '')),
+                                                  child: StudentCompletedListTile(
+                                                      title: task.name,
+                                                      subTitle:
+                                                          '${taskResult.completed}')),
                                               secondaryActions: <Widget>[
                                                 HelpWidget(
                                                     myContext: context,

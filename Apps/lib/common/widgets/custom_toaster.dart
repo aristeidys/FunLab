@@ -31,8 +31,7 @@ class CustomToaster {
     final scaffold = Scaffold.of(context);
     scaffold.showSnackBar(
       SnackBar(
-        backgroundColor:
-            type == ToasterType.success ? Colors.green : Colors.red,
+        backgroundColor: getColor(type),
         content: QuatedText(message),
         action: SnackBarAction(
             textColor: Colors.white,
@@ -41,6 +40,16 @@ class CustomToaster {
       ),
     );
   }
+
+  Color getColor(ToasterType type) {
+    if (type == ToasterType.success) {
+      return Colors.green;
+    } else if (type == ToasterType.failure) {
+      return Colors.red;
+    } else {
+      return Colors.blue;
+    }
+  }
 }
 
-enum ToasterType { success, failure }
+enum ToasterType { success, failure, message }

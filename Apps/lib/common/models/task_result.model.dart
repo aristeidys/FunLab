@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:funlab/common/services/special/api.client.config.dart';
+import 'package:funlab/common/services/special/response.dart';
+import 'package:http/http.dart' as http;
 
 TaskResult taskResultFromJson(String str) {
   final jsonData = json.decode(str);
@@ -26,6 +29,20 @@ class TaskResult {
   int taskID;
   bool completed;
   TaskResult({this.id, this.studentID, this.taskID, this.completed});
+
+  static Response<List<TaskResult>> taskResultsFromJson(
+      http.Response response) {
+    if (response.statusCode == Config.getSuccess) {
+      List<TaskResult> sessions = allTaskResultsFromJson(response.body);
+      if (sessions.length == 0) {
+        return Response(null, 'No Task Results found');
+      } else {
+        return Response(sessions, null);
+      }
+    } else {
+      return Response(null, response.body);
+    }
+  }
 
   factory TaskResult.fromJson(Map<String, dynamic> json) => new TaskResult(
         id: json["id"],

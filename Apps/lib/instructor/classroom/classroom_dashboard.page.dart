@@ -6,6 +6,7 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
+import 'package:funlab/common/widgets/message_toaster_widget.dart';
 import 'package:funlab/instructor/enrollments/active_enrollments.page.dart';
 import 'package:funlab/instructor/enrollments/pending_enrollments.page.dart';
 import 'package:funlab/instructor/messages/message_list.page.dart';
@@ -27,7 +28,8 @@ class ClassroomDashboardPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    FireBaseWidget(classroom.name),
+                    FireBaseWidget(channel: classroom.name,),
+                    MessageObserverWidget(),
                     Container(
                       height: 10,
                     ),

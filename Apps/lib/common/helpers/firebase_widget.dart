@@ -10,7 +10,7 @@ import 'package:funlab/common/state/store.dart';
 class FireBaseWidget extends StatefulWidget {
   final String channel;
 
-  FireBaseWidget(this.channel);
+  FireBaseWidget({this.channel});
 
   @override
   _FireBaseWidgetState createState() => _FireBaseWidgetState();
@@ -24,11 +24,12 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
   Function setMessagesStateCallback;
   Function deleteMessagesStateCallback;
   Function setTokenStateCallback;
-
   @override
   void initState() {
     super.initState();
-    firebaseMessaging.subscribeToTopic(widget.channel);
+    if (widget.channel != null) {
+      firebaseMessaging.subscribeToTopic(widget.channel);
+    }
     this.configureFirebase();
   }
 
@@ -101,7 +102,6 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
       print('Message type: ' + f.type);
     });
     print('End of messages:');
-
     setMessagesStateCallback(messages);
   }
 }
