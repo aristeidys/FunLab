@@ -4,7 +4,7 @@ class CreateTaskResults < ActiveRecord::Migration[5.2]
       t.belongs_to :student
       t.belongs_to :task
       t.boolean :completed
-      t.boolean :succeeded
+      t.boolean :locked
       t.integer :numberOfGoodHelp
       t.integer :numberOfBadHelp
     end

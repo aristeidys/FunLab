@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
     t.bigint "student_id"
     t.bigint "task_id"
     t.boolean "completed"
-    t.boolean "succeeded"
+    t.boolean "locked"
     t.integer "numberOfGoodHelp"
     t.integer "numberOfBadHelp"
     t.index ["student_id"], name: "index_task_results_on_student_id"

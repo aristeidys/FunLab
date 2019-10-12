@@ -4,15 +4,24 @@ class TasksController < ApplicationController
   
   def index
 
-    if params[:session_id]
+    if params[:session_id] && params[:student_id]
+      @tasks = Task.where(session_id: params[:session_id])
+      @taskResults = @tasks.joins(:task_results).where({ task_results: {student_id: params[:student_id]}})
+      #@taskResults = TaskResult.where(student_id: params[:student_id]).joins(:tasks).where(session_id: params[:session_id])
+ #     if @taskResults.count < @tasks.count
+  #      @tasks.each do |n|
+    #      @tr = TaskResult.new()
+    #      @tr.task_id = n.id
+    #      @tr.student_id = params[:student_id]
+    #      @tr.save
+    #    end
+ #       @taskResults = TaskResult.where(student_id: params[:student_id]).joins(@tasks)
+  #    end
+      render json: @taskResults
+    elsif params[:session_id]
       @tasks = Task.findBySessionID(params[:session_id])
+      render json: @tasks
     end
-
-    # FIND
-    if params[:name]
-      @tasks = @tasks.findByName(params[:name])
-    end
-    render json: @tasks
   end
   
   # GET ONE

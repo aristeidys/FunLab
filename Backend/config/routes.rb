@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :students, defaults: {format: :json} do
-    resources :task_results
+    resources :tasks
     resources :session_results
     resources :classrooms
   end
