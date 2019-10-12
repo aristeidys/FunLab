@@ -8,7 +8,6 @@ import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/create_button.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
-import 'package:funlab/common/widgets/message_toaster_widget.dart';
 import 'package:funlab/student/classroom_enroll/classroom_enroll.page.dart';
 import 'package:funlab/student/classroom_join/classroom_join.page.dart';
 import 'package:funlab/common/services/special/firebase.service.dart';
@@ -37,7 +36,6 @@ class OptionsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FireBaseWidget(),
-                MessageObserverWidget(),
                 Text('hi ${user.name}, what would you like to do?'),
                 Container(
                   height: 10,

@@ -9,9 +9,11 @@ class Styles {
 
   static final instructorNeedsConfirmTileColour = Colors.green;
 
-  static final studentDefaultTileColour = Colors.indigo;
+  static final studentDefaultTileColour = Colors.blue;
 
   static final studentDoneTileColour = Colors.green;
+
+  static final studentHiddenTileColour = Colors.grey;
 
   static final studentRejectedTileColour = Colors.yellow;
 }

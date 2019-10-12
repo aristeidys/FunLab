@@ -6,6 +6,7 @@ import 'package:funlab/common/state/reducers/messages_reducer.dart';
 import 'package:funlab/common/state/reducers/token_reducer.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/state/store.dart';
+import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class FireBaseWidget extends StatefulWidget {
   final String channel;
@@ -95,6 +96,8 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
     FirebaseMessage messageModel = FirebaseMessage.fromJson(message);
     print('onMessage called: $message');
     print('Message Model: $messageModel');
+
+
 
     messages.add(messageModel);
     print('Start of messages:');

@@ -31,8 +31,7 @@ class Merged {
 }
 
 class _StudentTaskListState extends State<StudentTaskList> {
-  List<Task> tasks = [];
-  String firebaseID;
+  int lastCompletedIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -79,32 +78,38 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                                 snapshot.data.tasks[position];
 
                                             return Slidable(
-                                              actionPane:
-                                                  SlidableDrawerActionPane(),
-                                              actionExtentRatio: 0.25,
-                                              child: Container(
-                                                  color: Colors.white,
-                                                  child: StudentCompletedListTile(
-                                                      title: task.name,
-                                                      subTitle:
-                                                          '${taskResult.completed}')),
-                                              secondaryActions: <Widget>[
-                                                HelpWidget(
-                                                    myContext: context,
-                                                    task: task,
-                                                    user: student,
-                                                    token: token,
-                                                    recipient:
-                                                        '/topics/${classroom.name}'),
-                                                DoneWidget(
-                                                    myContext: context,
-                                                    task: task,
-                                                    user: student,
-                                                    token: token,
-                                                    recipient:
-                                                        '/topics/${classroom.name}'),
-                                              ],
-                                            );
+                                                actionPane:
+                                                    SlidableDrawerActionPane(),
+                                                actionExtentRatio: 0.25,
+                                                child: Container(
+                                                    color: Colors.white,
+                                                    child: buildListTile(
+                                                        task,
+                                                        taskResult,
+                                                        position,
+                                                        snapshot
+                                                            .data
+                                                            .taskResults
+                                                            .length)),
+                                                secondaryActions: position ==
+                                                        lastCompletedIndex + 1
+                                                    ? <Widget>[
+                                                        HelpWidget(
+                                                            myContext: context,
+                                                            task: task,
+                                                            user: student,
+                                                            token: token,
+                                                            recipient:
+                                                                '/topics/${classroom.name}'),
+                                                        DoneWidget(
+                                                            myContext: context,
+                                                            task: task,
+                                                            user: student,
+                                                            token: token,
+                                                            recipient:
+                                                                '/topics/${classroom.name}'),
+                                                      ]
+                                                    : <Widget>[]);
                                           })
                                       : Center(
                                           child: CircularProgressIndicator());
@@ -113,5 +118,19 @@ class _StudentTaskListState extends State<StudentTaskList> {
                         }));
               });
         });
+  }
+
+  ListTileWithArrow buildListTile(
+      Task task, TaskResult taskResult, int index, int allTasks) {
+    if (taskResult.completed) {
+      lastCompletedIndex = index;
+      return StudentCompletedListTile(
+          title: task.name, subTitle: "Difficulty ${task.difficulty}");
+    } else if (lastCompletedIndex + 1 == index) {
+      return StudentReadyListTile(
+          title: task.name, subTitle: "Difficulty ${task.difficulty}");
+    } else {
+      return StudentLockedListTile();
+    }
   }
 }

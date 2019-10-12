@@ -17,8 +17,7 @@ class SessionsPage extends StatelessWidget {
     return StoreConnector<AppState, Classroom>(
         converter: (store) => store.state.classroom,
         builder: (context, classroom) {
-          return StoreConnector<AppState, OnStateChanged>(
-              converter: (store) {
+          return StoreConnector<AppState, OnStateChanged>(converter: (store) {
             return (session) => store.dispatch(SetSessionAction(session));
           }, builder: (context, callback) {
             return Scaffold(
@@ -81,8 +80,6 @@ class AllSessionsListState extends State<AllSessionsList> {
                   itemCount: sessions.length,
                   itemBuilder: (BuildContext context, int index) {
                     Session session = sessions[index];
-                    // Enrollment enrollment = Enrollment(
-                    //     classroomID: widget.classroomID, studentID: session.id);
                     return Slidable(
                       actionPane: SlidableDrawerActionPane(),
                       actionExtentRatio: 0.25,
@@ -90,55 +87,8 @@ class AllSessionsListState extends State<AllSessionsList> {
                           color: Colors.white,
                           child: StudentDefaultListTile(
                               title: session.title, subTitle: session.status)),
-                      actions: <Widget>[
-                        // IconSlideAction(
-                        //     caption: 'Reject',
-                        //     color: Colors.red,
-                        //     icon: Icons.assignment_turned_in,
-                        //     onTap: () async {
-                        //       handleReject(enrollment, session, index, context);
-                        //     }),
-                      ],
-                      secondaryActions: <Widget>[
-                        // IconSlideAction(
-                        //   caption: 'Confirm',
-                        //   color: Colors.green,
-                        //   icon: Icons.assignment,
-                        //   onTap: () async {
-                        //     handleConfirm(enrollment, student, index, context);
-                        //   },
-                        // ),
-                      ],
                     );
                   }))
     ]);
   }
-
-  // void handleConfirm(
-  //     Enrollment enrollment, User student, int index, BuildContext context) {
-  //   EnrollmentService().setActive(enrollment).then((response) {
-  //     if (response.data != null) {
-  //       removeAtIndex(index);
-  //       CustomToaster().showToast(context, ToasterType.success,
-  //           'Successfully confirmed ${student.name}');
-  //     } else {
-  //       CustomToaster().showToast(
-  //           context, ToasterType.success, 'Failed to confirm Enrollment');
-  //     }
-  //   });
-  // }
-
-  // void handleReject(
-  //     Enrollment enrollment, User student, int index, BuildContext context) {
-  //   EnrollmentService().delete(enrollment).then((response) {
-  //     if (response.data != null) {
-  //       removeAtIndex(index);
-  //       CustomToaster().showToast(context, ToasterType.success,
-  //           'Successfully rejected ${student.name}');
-  //     } else {
-  //       CustomToaster().showToast(
-  //           context, ToasterType.success, 'Failed to reject Enrollment');
-  //     }
-  //   });
-  // }
 }

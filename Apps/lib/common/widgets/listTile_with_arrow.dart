@@ -38,7 +38,32 @@ class StudentCompletedListTile extends ListTileWithArrow {
             title: title,
             subTitle: subTitle,
             colour: Styles.studentDoneTileColour,
-            icon: Icons.assignment_turned_in);
+            icon: Icons.assignment_turned_in,
+            iconText: 'Done');
+}
+
+class StudentLockedListTile extends ListTileWithArrow {
+  StudentLockedListTile({
+    Key key,
+  }) : super(
+            title: 'Hidden',
+            subTitle: 'Solve previous Task to see this',
+            colour: Styles.studentHiddenTileColour,
+            icon: Icons.content_paste,
+            iconText: 'Hidden');
+}
+
+class StudentReadyListTile extends ListTileWithArrow {
+  StudentReadyListTile({
+    Key key,
+    @required title,
+    @required subTitle,
+  }) : super(
+            title: title,
+            subTitle: subTitle,
+            colour: Styles.studentDefaultTileColour,
+            icon: Icons.assignment,
+            iconText: 'Open');
 }
 
 class InstructorDoneListTile extends ListTileWithArrow {
@@ -71,15 +96,17 @@ class ListTileWithArrow extends StatelessWidget {
   final Function onTapCallback;
   final Color colour;
   final IconData icon;
+  final String iconText;
 
-  const ListTileWithArrow({
-    Key key,
-    @required this.title,
-    @required this.subTitle,
-    this.onTapCallback,
-    @required this.colour,
-    @required this.icon,
-  }) : super(key: key);
+  const ListTileWithArrow(
+      {Key key,
+      @required this.title,
+      @required this.subTitle,
+      this.onTapCallback,
+      @required this.colour,
+      @required this.icon,
+      this.iconText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +123,21 @@ class ListTileWithArrow extends StatelessWidget {
             decoration: new BoxDecoration(
                 border: new Border(
                     right: new BorderSide(width: 1.0, color: Colors.white24))),
-            child: Icon(icon, color: Colors.white),
+            child: Column(
+              children: <Widget>[
+                Icon(icon, color: Colors.white),
+                Container(
+                  height: 10,
+                  width: 45,
+                ),
+                iconText != null
+                    ? Text(
+                        iconText,
+                        style: TextStyle(color: Colors.white),
+                      )
+                    : Text(''),
+              ],
+            ),
           ),
           title: Text(
             title,
