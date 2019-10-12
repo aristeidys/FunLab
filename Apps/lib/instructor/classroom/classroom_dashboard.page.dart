@@ -8,6 +8,7 @@ import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/buttons/edit_button.dart';
 import 'package:funlab/instructor/enrollments/active_enrollments.page.dart';
 import 'package:funlab/instructor/enrollments/pending_enrollments.page.dart';
+import 'package:funlab/instructor/messages/message_list.page.dart';
 import 'package:funlab/instructor/session_create/session_create.page.dart';
 import 'package:funlab/instructor/session_manage/sessions.page.dart';
 
@@ -30,6 +31,14 @@ class ClassroomDashboardPage extends StatelessWidget {
                     Container(
                       height: 10,
                     ),
+                    EditButton(
+                        'See all Messages',
+                        () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MessageListPage()),
+                            )),
                     EditButton(
                         'See all Sessions',
                         () => Navigator.push(

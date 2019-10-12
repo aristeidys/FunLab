@@ -1,50 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/special/firebase.service.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
 
-class DoneWidget extends StatelessWidget {
-  const DoneWidget({
+class RejectWidget extends StatelessWidget {
+  const RejectWidget({
     Key key,
-    @required this.task,
+    @required this.taskID,
+    @required this.taskName,
     @required this.user,
     @required this.token,
     @required this.myContext,
     @required this.recipient,
+    @required this.callback,
   }) : super(key: key);
 
-  final Task task;
+  final int taskID;
+  final String taskName;
+
   final User user;
   final String token;
   final BuildContext myContext;
   final String recipient;
-
+  final Function callback;
   @override
   Widget build(BuildContext context) {
     return IconSlideAction(
-        caption: 'I am done',
-        color: Colors.blue,
-        icon: Icons.assignment_turned_in,
+        caption: 'Reject',
+        color: Colors.red,
+        icon: Icons.cancel,
         onTap: () async {
           FirebaseMessage message = FirebaseMessage(
-              title: 'A Student is finished',
-              body: 'Student ${user.name} needs a check on task ${task.name}',
-              taskID: task.id,
-              taskName: task.name,
+              title: 'Task not passed',
+              body:
+                  'Instructor ${user.name} did not passed you on $taskName :(',
+              taskID: taskID,
+              taskName: taskName,
               senderID: user.id,
               senderToken: token,
-              type: FirebaseMessage.done,
+              type: FirebaseMessage.reject,
               recipient: recipient);
           FirebaseService().send(message: message).then((response) {
             if (response.statusCode == 200) {
               CustomToaster().showToast(myContext, ToasterType.success,
-                  'Successful sent done message');
+                  'Successful sent not pass message');
+              callback();
             } else {
               CustomToaster().showToast(myContext, ToasterType.failure,
-                  'Failure sending done message ${response.body}');
+                  'Failure sending not pass message ${response.body}');
             }
           });
         });

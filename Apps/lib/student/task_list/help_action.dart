@@ -33,6 +33,7 @@ class HelpWidget extends StatelessWidget {
               title: 'Help needed',
               body: 'Student ${user.name} needs help with ${task.name}',
               taskID: task.id,
+              taskName: task.name,
               senderID: user.id,
               senderToken: token,
               type: FirebaseMessage.help,
@@ -40,10 +41,10 @@ class HelpWidget extends StatelessWidget {
           FirebaseService().send(message: message).then((response) {
             if (response.statusCode == 200) {
               CustomToaster().showToast(myContext, ToasterType.success,
-                  'Successful sent help request');
+                  'Successful sent help message');
             } else {
               CustomToaster().showToast(myContext, ToasterType.failure,
-                  'Failure sending help request ${response.body}');
+                  'Failure sending help message ${response.body}');
             }
           });
         });

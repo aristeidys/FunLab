@@ -69,14 +69,14 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                                           title: task.name,
                                                           subTitle: '')),
                                               secondaryActions: <Widget>[
-                                                new HelpWidget(
+                                                HelpWidget(
                                                     myContext: context,
                                                     task: task,
                                                     user: student,
                                                     token: token,
                                                     recipient:
                                                         '/topics/${classroom.name}'),
-                                                new DoneWidget(
+                                                DoneWidget(
                                                     myContext: context,
                                                     task: task,
                                                     user: student,

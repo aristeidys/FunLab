@@ -28,7 +28,8 @@ class FirebaseService {
             'type': message.type,
             'senderID': message.senderID,
             'senderToken': message.senderToken,
-            'taskID': message.taskID
+            'taskID': message.taskID,
+            'taskName': message.taskName
           },
           'to': message.recipient,
         }),

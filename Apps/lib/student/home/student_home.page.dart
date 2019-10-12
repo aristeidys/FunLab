@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:funlab/common/helpers/firebase_widget.dart';
 import 'package:funlab/common/models/message.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/state/state.dart';
@@ -34,6 +35,7 @@ class OptionsWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                FireBaseWidget(''),
                 Text('hi ${user.name}, what would you like to do?'),
                 Container(
                   height: 10,
@@ -62,6 +64,7 @@ class OptionsWidget extends StatelessWidget {
                       type: 'ACCEPT',
                       senderToken: '4234324',
                       taskID: 3,
+                      taskName: 'A task',
                       senderID: 5,
                       recipient: '/topics/testing');
                   FirebaseService().send(message: message).then((response) {
