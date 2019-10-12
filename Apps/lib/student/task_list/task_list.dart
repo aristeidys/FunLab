@@ -6,7 +6,7 @@ import 'package:funlab/common/models/classroom.model.dart';
 import 'package:funlab/common/models/session.dart';
 import 'package:funlab/common/models/task.model.dart';
 import 'package:funlab/common/models/user.model.dart';
-import 'package:funlab/common/services/session.service.dart';
+import 'package:funlab/common/services/task.service.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/helpers/styling.dart';
 import 'package:funlab/common/widgets/listTile_with_arrow.dart';
@@ -40,10 +40,11 @@ class _StudentTaskListState extends State<StudentTaskList> {
                     ),
                     body: StoreConnector<AppState, User>(
                         converter: (store) => store.state.user,
-                        builder: (context, user) {
+                        builder: (context, student) {
                           return FutureBuilder<List<Task>>(
-                              future: SessionService()
-                                  .getTasks(widget.session.id)
+                              future: TaskService()
+                                  .getTaskAndCreateTaskResultsIfNotExist(
+                                      widget.session.id, student.id)
                                   .then((values) => tasks = values),
                               builder: (context, snapshot) {
                                 if (snapshot.hasError) {
@@ -71,14 +72,14 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                                 new HelpWidget(
                                                     myContext: context,
                                                     task: task,
-                                                    user: user,
+                                                    user: student,
                                                     token: token,
                                                     recipient:
                                                         '/topics/${classroom.name}'),
                                                 new DoneWidget(
                                                     myContext: context,
                                                     task: task,
-                                                    user: user,
+                                                    user: student,
                                                     token: token,
                                                     recipient:
                                                         '/topics/${classroom.name}'),

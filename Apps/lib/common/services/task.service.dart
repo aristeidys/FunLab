@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 class TaskService {
   String endpoint = Config.host + 'sessions';
 
-  Future<List<Task>> getTasks(int sessionID) async {
-    final response = await http.get('$endpoint/$sessionID/tasks');
+  Future<List<Task>> getTaskAndCreateTaskResultsIfNotExist(int sessionID, int studentID) async {
+    final response = await http.get('$endpoint/$sessionID/tasks?student_id=$studentID');
     return responseTasksFromJson(response);
   }
 
