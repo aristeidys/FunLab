@@ -14,6 +14,8 @@ class Config {
   static final deleteSuccess = 204;
   static final notFound = 404; // DELETE
 
+  static final unauthorized = 401;
+
   static String getEnrollmentsPath(int classroomId) {
     return Config.host + 'classrooms/$classroomId/enrollments';
   }

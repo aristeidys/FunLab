@@ -14,6 +14,11 @@ class ClassroomService {
     return Classroom.firstClassroomFromJson(response);
   }
 
+  Future<Response<Classroom>> getByNameAndStudentID(String name, int studentID) async {
+    final response = await http.get('$endpoint?name=$name&student_id=$studentID');
+    return Classroom.firstClassroomFromJson(response);
+  }
+
   Future<List<User>> getAllApproved(int classroomID) async {
     final response =
         await http.get(endpoint + '/$classroomID/enrollments?isApproved=true');

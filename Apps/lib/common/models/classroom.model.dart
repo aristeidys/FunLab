@@ -13,7 +13,6 @@ String classroomToJson(Classroom data) {
   return json.encode(dyn);
 }
 
-
 List<Classroom> allClassroomsFromJson(String str) {
   final jsonData = json.decode(str);
   return new List<Classroom>.from(jsonData.map((x) => Classroom.fromJson(x)));
@@ -29,33 +28,29 @@ class Classroom {
   String name;
   int instructorID;
 
-  Classroom({
-    this.id,
-    this.name,
-    this.instructorID
-  });
+  Classroom({this.id, this.name, this.instructorID});
 
   factory Classroom.fromJson(Map<String, dynamic> json) => new Classroom(
-    id: json["id"],
-    name: json["name"],
-    instructorID: json["instructor_id"],
-  );
+        id: json["id"],
+        name: json["name"],
+        instructorID: json["instructor_id"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "instructor_id": instructorID,
-  };
-
+        "id": id,
+        "name": name,
+        "instructor_id": instructorID,
+      };
 
   static Response<Classroom> firstClassroomFromJson(http.Response response) {
-    if (response.statusCode == Config.getSuccess) {
-      List<Classroom> classrooms = allClassroomsFromJson(response.body);
-      if (classrooms.length == 0) {
-        return Response(null, 'No Classrooms found');
-      } else {
-        return Response(classrooms[0], null);
-      }
+    if (response.statusCode == Config.notFound) {
+      return Response(null, 'No Classrooms found');
+    } else if (response.statusCode == Config.unauthorized) {
+      return Response(null, 'You are not enrolled');
+    } else if (response.statusCode == Config.getSuccess) {
+      Classroom classroom = classroomFromJson(response.body);
+
+      return Response(classroom, null);
     } else {
       return Response(null, response.body);
     }
