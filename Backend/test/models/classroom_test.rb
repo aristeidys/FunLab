@@ -79,6 +79,7 @@ class ClassroomTest < ActiveSupport::TestCase
   private
 
   def validClassroom
+    
     classroom = Classroom.new
     classroom.name = "valid Name"
     classroom.instructor_id = instructors(:sneip).id

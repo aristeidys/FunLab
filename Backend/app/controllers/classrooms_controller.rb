@@ -13,7 +13,7 @@ class ClassroomsController < ApplicationController
       return
     end
 
-    @enrollment = Enrollment.findByStudentClassroomID(params[:student_id], @classroom.id).first
+    @enrollment = Enrollment.findByStudentClassroom(params[:student_id], @classroom.id).first
 
       if @enrollment != nil
         if @enrollment.isApproved == true

@@ -5,7 +5,7 @@ class Enrollment < ApplicationRecord
       message: "Each enrollment should be unique" }
     after_initialize :init
 
-    scope :findByStudentClassroomID, -> (student_id, classroom_id) { where student_id: student_id, classroom_id: classroom_id }
+    scope :findByStudentClassroom, -> (student_id, classroom_id) { where student_id: student_id, classroom_id: classroom_id }
 
     def init
       self.isApproved  ||= false
