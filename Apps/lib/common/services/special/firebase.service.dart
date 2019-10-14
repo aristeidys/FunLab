@@ -31,7 +31,7 @@ class FirebaseService {
             'taskID': message.taskID,
             'taskName': message.taskName
           },
-          'to': message.recipient,
+          'to': message.recipient.replaceAll(RegExp(' +'), '_'),
         }),
         headers: {
           'Content-Type': 'application/json',

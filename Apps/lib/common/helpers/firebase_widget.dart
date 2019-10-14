@@ -28,7 +28,7 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
   void initState() {
     super.initState();
     if (widget.channel != null) {
-      firebaseMessaging.subscribeToTopic(widget.channel);
+      firebaseMessaging.subscribeToTopic(widget.channel.replaceAll(RegExp(' +'), '_'));
     }
     this.configureFirebase();
   }
