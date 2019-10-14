@@ -41,36 +41,22 @@ class OptionsWidget extends StatelessWidget {
                   height: 10,
                 ),
                 CreateButton(
-                    'Enroll in a Classroom',
-                    () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ClassroomEnrollPage()),
-                        )),
-                Container(
-                  height: 10,
-                ),
-                EditButton(
                     'Join a Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => StudentClassroomJoinPage()),
                         )),
-                EditButton('Send Message', () {
-                  FirebaseMessage message = FirebaseMessage(
-                      title: 'my Title',
-                      body: 'my Body',
-                      type: 'ACCEPT',
-                      senderToken: '4234324',
-                      taskID: 3,
-                      taskName: 'A task',
-                      senderID: 5,
-                      recipient: '/topics/testing');
-                  FirebaseService().send(message: message).then((response) {
-                    print(response.statusCode);
-                  });
-                }),
+                Container(
+                  height: 10,
+                ),
+                EditButton(
+                    'Enroll in a Classroom',
+                    () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClassroomEnrollPage()),
+                        )),
               ],
             ),
           );

@@ -39,18 +39,18 @@ class OptionsWidget extends StatelessWidget {
                   height: 10,
                 ),
                 CreateButton(
-                    'Create new Classroom',
-                    () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ClassroomCreatePage()),
-                        )),
-                EditButton(
                     'Join a Classroom',
                     () => Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ClassroomJoinPage()),
+                        )),
+                EditButton(
+                    'Create new Classroom',
+                    () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClassroomCreatePage()),
                         )),
               ],
             ),
