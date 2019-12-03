@@ -7,6 +7,8 @@ Deployment
 2. cd Backend
 2. rails db:migrate (to create the database tables)
 3. rails server
+4. Download Postgres Database
+5. configure .env root file to have correct user, password, host and database name
 
 Rails Command Line
 
