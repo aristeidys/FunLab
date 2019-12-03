@@ -12,9 +12,10 @@ Backend
 5. configure .env root file to have correct user, password, host and database name
 
 FrontEnd
-1. cd Apps
-2. at the bottom click on "No Device" and select "Start Flutter Emulator" from the options given
-3. flutter run -d all  -t lib/common/helpers/main.dart
+1. Download Visual Studio Code
+2. cd Apps
+3. at the bottom click on "No Device" and select "Start Flutter Emulator" from the options given
+4. flutter run -d all  -t lib/common/helpers/main.dart
 
 
 Rails Command Line
