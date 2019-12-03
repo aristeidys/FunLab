@@ -3,12 +3,19 @@
 
 Deployment
 
+Backend
 1. Change to develop Branch
 2. cd Backend
 2. rails db:migrate (to create the database tables)
 3. rails server
-4. Download Postgres Database
+4. Download a Postgres Database
 5. configure .env root file to have correct user, password, host and database name
+
+FrontEnd
+1. cd Apps
+2. at the bottom click on "No Device" and select "Start Flutter Emulator" from the options given
+3. flutter run -d all  -t lib/common/helpers/main.dart
+
 
 Rails Command Line
 
