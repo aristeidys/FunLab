@@ -4,8 +4,9 @@
 Deployment
 
 1. Change to develop Branch
-2. run rails db:migrate to create the database tables
-3. run rails server
+2. cd Backend
+2. rails db:migrate (to create the database tables)
+3. rails server
 
 Rails Command Line
 
