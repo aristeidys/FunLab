@@ -6,7 +6,6 @@ import 'package:funlab/common/state/reducers/messages_reducer.dart';
 import 'package:funlab/common/state/reducers/token_reducer.dart';
 import 'package:funlab/common/state/state.dart';
 import 'package:funlab/common/state/store.dart';
-import 'package:funlab/common/widgets/custom_toaster.dart';
 
 class FireBaseWidget extends StatefulWidget {
   final String channel;
@@ -29,7 +28,7 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
   void initState() {
     super.initState();
     if (widget.channel != null) {
-      firebaseMessaging.subscribeToTopic(widget.channel);
+      firebaseMessaging.subscribeToTopic(widget.channel.replaceAll(RegExp(' +'), '_'));
     }
     this.configureFirebase();
   }
@@ -87,24 +86,15 @@ class _FireBaseWidgetState extends State<FireBaseWidget> {
         .listen((IosNotificationSettings settings) {});
 
     firebaseMessaging.getToken().then((token) {
-      print('FCM Token is $token');
       setTokenStateCallback(token);
     });
   }
 
   void handleMessage(Map<String, dynamic> message) {
     FirebaseMessage messageModel = FirebaseMessage.fromJson(message);
-    print('onMessage called: $message');
-    print('Message Model: $messageModel');
-
-
+    print('onMessage called: ${messageModel.body}');
 
     messages.add(messageModel);
-    print('Start of messages:');
-    messages.forEach((f) {
-      print('Message type: ' + f.type);
-    });
-    print('End of messages:');
     setMessagesStateCallback(messages);
   }
 }
