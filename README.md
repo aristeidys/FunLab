@@ -2,9 +2,9 @@
 
 Backend
 1. Change to develop Branch
-2. cd Backend (Command)
-2. rails db:migrate (Command)
-3. rails server (Command)
+2. (Command) cd Backend
+2. (Command) rails db:migrate
+3. (Command) rails server
 4. Download a Postgres Database (https://www.postgresql.org/download/)
 5. Install and run the Database.
 6. Save user, password, host and database name selected.
@@ -12,6 +12,6 @@ Backend
 
 FrontEnd
 1. Download Visual Studio Code
-2. cd Apps (Command)
+2. (Command) cd Apps 
 3. at the bottom click on "No Device" and select "Start Flutter Emulator" from the options given
-4. flutter run -d all  -t lib/common/helpers/main.dart (Command)
+4. (Command) flutter run -d all  -t lib/common/helpers/main.dart
