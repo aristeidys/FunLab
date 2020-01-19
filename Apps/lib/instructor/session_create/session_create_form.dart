@@ -32,15 +32,13 @@ class SessionCreateFormState extends State<SessionCreateForm> {
           children: <Widget>[
             Text('Create new Session'),
             CustomForm(titleKey, 'Enter Title', FormValidators.name),
-            CustomForm(
-                descriptionKey, 'Enter Description', FormValidators.email),
             Center(
                 child: EditButton('Next', () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 widget.callback(
                   titleKey.currentState.finalValue,
-                  descriptionKey.currentState.finalValue,
+                  "placeholder",
                 );
               }
             })),
