@@ -32,15 +32,13 @@ class TaskCreateFormState extends State<TaskCreateForm> {
           children: <Widget>[
             Text('Create new Task'),
             CustomForm(nameKey, 'Enter Name', TaskValidators.name),
-            NumberForm(difficultyKey, 'Enter Difficulty',
-                TaskValidators.difficulty),
             Center(
                 child: CreateButton('Add', () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 widget.callback(
                   nameKey.currentState.finalValue,
-                  int.parse(difficultyKey.currentState.finalValue),
+                  1,
                 );
               }
             })),

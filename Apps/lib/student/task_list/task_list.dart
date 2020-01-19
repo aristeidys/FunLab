@@ -125,10 +125,10 @@ class _StudentTaskListState extends State<StudentTaskList> {
     if (taskResult.completed) {
       lastCompletedIndex = index;
       return StudentCompletedListTile(
-          title: task.name, subTitle: "Difficulty ${task.difficulty}");
+          title: task.name, subTitle: "");
     } else if (lastCompletedIndex + 1 == index) {
       return StudentReadyListTile(
-          title: task.name, subTitle: "Difficulty ${task.difficulty}");
+          title: task.name, subTitle: "");
     } else {
       return StudentLockedListTile();
     }
