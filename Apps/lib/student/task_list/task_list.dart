@@ -49,18 +49,18 @@ class _StudentTaskListState extends State<StudentTaskList> {
                     body: StoreConnector<AppState, User>(
                         converter: (store) => store.state.user,
                         builder: (context, student) {
-                          return FutureBuilder(
-                              future: Future.wait([
-                                TaskService()
+
+              // body: FutureBuilder<List<User>>(
+              //     future: ClassroomService().getAllApproved(classroom.id),
+              //     builder: (context, snapshot) {
+
+                          return FutureBuilder<List<TaskResult>>(
+                              future: TaskService()
                                     .getTaskAndCreateTaskResultsIfNotExist(
                                         widget.session.id, student.id),
-                                TaskResultService()
-                                    .get(student.id, widget.session.id)
-                              ]).then((response) => new Merged(
-                                  tasks: response[0],
-                                  taskResults: response[1])),
+                  
                               builder:
-                                  (context, AsyncSnapshot<Merged> snapshot) {
+                                  (context, snapshot) {
                                 if (snapshot.hasError) {
                                   return new Text('Error: ${snapshot.error}');
                                 } else {
@@ -69,13 +69,11 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                           scrollDirection: Axis.vertical,
                                           shrinkWrap: true,
                                           itemCount:
-                                              snapshot.data.taskResults.length,
+                                              snapshot.data.length,
                                           padding: const EdgeInsets.all(15.0),
                                           itemBuilder: (context, position) {
                                             TaskResult taskResult = snapshot
-                                                .data.taskResults[position];
-                                            Task task =
-                                                snapshot.data.tasks[position];
+                                                .data[position];
 
                                             return Slidable(
                                                 actionPane:
@@ -84,26 +82,24 @@ class _StudentTaskListState extends State<StudentTaskList> {
                                                 child: Container(
                                                     color: Colors.white,
                                                     child: buildListTile(
-                                                        task,
                                                         taskResult,
                                                         position,
                                                         snapshot
                                                             .data
-                                                            .taskResults
                                                             .length)),
                                                 secondaryActions: position ==
                                                         lastCompletedIndex + 1
                                                     ? <Widget>[
                                                         HelpWidget(
                                                             myContext: context,
-                                                            task: task,
+                                                            taskResult: taskResult,
                                                             user: student,
                                                             token: token,
                                                             recipient:
                                                                 '/topics/${classroom.name}'),
                                                         DoneWidget(
                                                             myContext: context,
-                                                            task: task,
+                                                            taskResult: taskResult,
                                                             user: student,
                                                             token: token,
                                                             recipient:
@@ -121,14 +117,14 @@ class _StudentTaskListState extends State<StudentTaskList> {
   }
 
   ListTileWithArrow buildListTile(
-      Task task, TaskResult taskResult, int index, int allTasks) {
+      TaskResult taskResult, int index, int allTasks) {
     if (taskResult.completed) {
       lastCompletedIndex = index;
       return StudentCompletedListTile(
-          title: task.name, subTitle: "");
+          title: taskResult.taskName, subTitle: "");
     } else if (lastCompletedIndex + 1 == index) {
       return StudentReadyListTile(
-          title: task.name, subTitle: "");
+          title: taskResult.taskName, subTitle: "");
     } else {
       return StudentLockedListTile();
     }

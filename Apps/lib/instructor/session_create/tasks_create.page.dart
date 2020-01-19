@@ -53,7 +53,7 @@ class ActivateSeasonButton extends StatelessWidget {
         converter: (store) {
       return (session) => store.dispatch(SetSessionAction(session));
     }, builder: (context, callback) {
-      return EditButton('Activate Session', () {
+      return EditButton('Publish Session', () {
         Session localSession = session;
         localSession.status = 'active';
         SessionService().put(localSession).then((response) {
@@ -63,7 +63,7 @@ class ActivateSeasonButton extends StatelessWidget {
           } else {
             callback(response.data);
             CustomToaster().showToast(context, ToasterType.success,
-                'Task status updated Successfully');
+                'Session published successfully');
           }
         });
       });

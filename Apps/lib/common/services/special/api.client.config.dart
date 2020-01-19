@@ -15,23 +15,7 @@ class Config {
   static final notFound = 404; // DELETE
 
   static final unauthorized = 401;
-
-  static String getEnrollmentsPath(int classroomId) {
-    return Config.host + 'classrooms/$classroomId/enrollments';
-  }
-
-  static String getSessionsPath(int classroomId) {
-    return Config.host + 'classrooms/$classroomId/sessions';
-  }
-
-  static String getTaskPath(int sessionId) {
-    return Config.host + 'sessions/$sessionId/tasks';
-  }
-
-  static String getTaskResultsPath(int studentsId) {
-    return Config.host + 'students/$studentsId/task_results';
-  }
-
+  
   static String getSessionResultsPath(int studentsId) {
     return Config.host + 'students/$studentsId/session_results';
   }

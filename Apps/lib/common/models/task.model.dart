@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:funlab/common/models/task_result.model.dart';
 import 'package:http/http.dart' as http;
 import 'package:funlab/common/services/special/api.client.config.dart';
 
@@ -17,6 +18,10 @@ List<Task> allTasksFromJson(String str) {
   return new List<Task>.from(jsonData.map((x) => Task.fromJson(x)));
 }
 
+List<TaskResult> allTasksResultsFromJson(String str) {
+  List<dynamic> jsonData = json.decode(str);
+  return new List<TaskResult>.from(jsonData.map((x) => TaskResult.fromJson(x[0])));
+}
 String allTasksToJson(List<Task> data) {
   final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
   return json.encode(dyn);

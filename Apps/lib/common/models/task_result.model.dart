@@ -25,10 +25,11 @@ String allTaskResultsToJson(List<TaskResult> data) {
 
 class TaskResult {
   int id;
+  String taskName;
   int studentID;
   int taskID;
   bool completed;
-  TaskResult({this.id, this.studentID, this.taskID, this.completed});
+  TaskResult({this.id, this.taskName, this.studentID, this.taskID, this.completed});
 
   static Response<List<TaskResult>> taskResultsFromJson(
       http.Response response) {
@@ -47,6 +48,7 @@ class TaskResult {
   factory TaskResult.fromJson(Map<String, dynamic> json) => new TaskResult(
         id: json["id"],
         studentID: json["student_id"],
+        taskName: json["task_name"],
         taskID: json["task_id"],
         completed: json["completed"],
       );
@@ -54,6 +56,7 @@ class TaskResult {
   Map<String, dynamic> toJson() => {
         "id": id,
         "student_id": studentID,
+        "task_name": taskName,
         "task_id": taskID,
         "completed": completed,
       };

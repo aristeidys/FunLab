@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:funlab/common/models/message.model.dart';
-import 'package:funlab/common/models/task.model.dart';
+import 'package:funlab/common/models/task_result.model.dart';
 import 'package:funlab/common/models/user.model.dart';
 import 'package:funlab/common/services/special/firebase.service.dart';
 import 'package:funlab/common/widgets/custom_toaster.dart';
@@ -9,14 +9,14 @@ import 'package:funlab/common/widgets/custom_toaster.dart';
 class HelpWidget extends StatelessWidget {
   const HelpWidget({
     Key key,
-    @required this.task,
+    @required this.taskResult,
     @required this.user,
     @required this.token,
     @required this.myContext,
     @required this.recipient,
   }) : super(key: key);
 
-  final Task task;
+  final TaskResult taskResult;
   final User user;
   final String token;
   final BuildContext myContext;
@@ -31,9 +31,9 @@ class HelpWidget extends StatelessWidget {
         onTap: () async {
           FirebaseMessage message = FirebaseMessage(
               title: 'Help needed',
-              body: 'Student ${user.name} needs help with ${task.name}',
-              taskID: task.id,
-              taskName: task.name,
+              body: 'Student ${user.name} needs help with ${taskResult.taskName}',
+              taskID: taskResult.taskID,
+              taskName: taskResult.taskName,
               senderID: user.id,
               senderToken: token,
               type: FirebaseMessage.help,

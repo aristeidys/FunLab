@@ -6,8 +6,8 @@ class Student < ApplicationRecord
   # validates :password, :length => { :in => 8..40 }
   # validates :email, uniqueness: true
   # validates :name, :email, :password, 
-
-  validates :email, :length => { :in => 3..40 }
+  # validates :email, :length => { :in => 3..40 }
+  
   validates :email, uniqueness: true
   validates :email, presence: true
 

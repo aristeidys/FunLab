@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_142039) do
   create_table "task_results", force: :cascade do |t|
     t.bigint "student_id"
     t.bigint "task_id"
+    t.string "task_name"
     t.boolean "completed"
     t.boolean "locked"
     t.integer "numberOfGoodHelp"

@@ -15,10 +15,20 @@ class TasksController < ApplicationController
           @tr = TaskResult.new()
           @tr.task_id = n.id
           @tr.student_id = params[:student_id]
+          @tr.task_name = n.name
           @tr.save
         end
       end
-      render json: @tasksWithTaskResult
+      
+      @task_results_to_return = []    
+      @tasks.each do |task|
+        @task_results_to_return << TaskResult.where(student_id: params[:student_id], task_id: task.id)     
+      end
+
+      logger.debug @task_results_to_return.count
+      logger.debug @tasks.count
+
+      render json: @task_results_to_return
     elsif params[:session_id]
       
       @tasks = Task.findBySessionID(params[:session_id])
