@@ -21,7 +21,7 @@ class SessionListPage extends StatelessWidget {
           return Scaffold(
               appBar: AppBar(
                 backgroundColor: Styles.studentMainColor,
-                title: Text('All Active Sessions in ${classroom.name}'),
+                title: Text('Sessions in ${classroom.name}'),
               ),
               body: AllSessionsList(classroom.id));
         });
